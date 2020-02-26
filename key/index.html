@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
     <title>YongTeng</title>
     <style>
         h2 {
@@ -242,9 +245,6 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
     <script>
         var lxkey =
             `海阔视界规则分享，当前分享的是：首页频道￥home_rule￥{"title":"龙轩导航","url":"http://api.ilxdh.com/navig/classify/list?fid=fyclass;post","col_type":"text_3","class_name":"生活&影视&搜索&软件工具&设计素材&音乐读物&学习提升","class_url":"167&171&172&173&174&176&177","area_name":"","area_url":"","year_name":"","year_url":"","find_rule":"js: var json = JSON.parse(getResCode());\\r\\nvar list = json.data;\\r\\nvar res = {};\\r\\nvar d = [];\\r\\nfor (var i = 0; i < list.length; i++) {\\r\\n    try {\\r\\n        var r = {};\\r\\n        var j = list[i];\\r\\n        r.title = j.name;\\r\\n        r.col_type = 'text_1';\\r\\n        d.push(r);\\r\\n        var items = j.web.map(data => ({\\r\\n            title: data.name,\\r\\n            url: data.url\\r\\n        }));\\r\\n        d.push.apply(d,items);\\r\\n    } catch (e) {}\\r\\n}\\r\\nres.data = d;\\r\\nsetHomeResult(res);","search_url":"","titleColor":"","group":"①常用","searchFind":""}`;
