@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <title>YongTeng</title>
+    <style>
+        h2 {
+            margin: 2em 0em;
+        }
+
+        .ui.container {
+            padding-top: 5em;
+            padding-bottom: 5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ui container">
+        <h1 class="ui center aligned icon header"><i class="circular icon"><img
+                    src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg" style="width: 50%;"></i> 🙊视界规则分享 </h1>
+        <div class="ui divider"></div>
+        <div class="ui raised very padded text container segment">
+            <h2 class="ui header">
+                <i class="bookmark outline icon"></i>
+                <div class="content">导航 <div class="sub header">一些关于导航的视界首页规则</div>
+                </div>
+            </h2>
+            <div class="ui divider"></div>
+            <div class="ui middle aligned animated list">
+                <div class="item" id="lx">
+                    <img class="ui avatar image" src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg">
+                    <div class="content">
+                        <div class="header">龙轩导航</div>
+                    </div>
+                </div>
+                <div class="item" id="jbt">
+                    <img class="ui avatar image" src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg">
+                    <div class="content">
+                        <div class="header">聚BT</div>
+                    </div>
+                </div>
+                <div class="item" id="lm">
+                    <img class="ui avatar image" src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg">
+                    <div class="content">
+                        <div class="header">龙喵网</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var lxkey =
+            `海阔视界规则分享，当前分享的是：首页频道￥home_rule￥{"title":"龙轩导航","url":"http://api.ilxdh.com/navig/classify/list?fid=fyclass;post","col_type":"text_3","class_name":"生活&影视&搜索&软件工具&设计素材&音乐读物&学习提升","class_url":"167&171&172&173&174&176&177","area_name":"","area_url":"","year_name":"","year_url":"","find_rule":"js: var json = JSON.parse(getResCode());\r\nvar list = json.data;\r\nvar res = {};\r\nvar d = [];\r\nfor (var i = 0; i < list.length; i++) {\r\n    try {\r\n        var r = {};\r\n        var j = list[i];\r\n        r.title = j.name;\r\n        r.col_type = 'text_1';\r\n        d.push(r);\r\n        var items = j.web.map(data => ({\r\n            title: data.name,\r\n            url: data.url\r\n        }));\r\n        d.push.apply(d,items);\r\n    } catch (e) {}\r\n}\r\nres.data = d;\r\nsetHomeResult(res);","search_url":"","titleColor":"","group":"①常用","searchFind":""}`;
+        var jbtkey =
+            `海阔视界规则分享，当前分享的是：首页频道￥home_rule￥{"title":"聚BT","url":"https://www.jubt.net/cn/index.html#fyclass","col_type":"text_3","class_name":"在线影视站&磁力搜索引擎&磁力影视站&影视APP&磁力APP&磁力软件&云盘搜索&磁力离线下载&浏览器扩展&油猴脚本","class_url":"在线影视站&磁力搜索引擎&磁力影视站&影视APP&磁力APP&磁力软件&云盘搜索&磁力离线下载&浏览器扩展&油猴脚本","area_name":"","area_url":"","year_name":"","year_url":"","find_rule":"js: var html = getResCode();\r\nvar json = JSON.parse(getRule());\r\nvar list = html.split('<!-- ' + json.class_url + ' -->')[1].split('<!-- END ' + json.class_url + ' -->')[0].split('</strong>');\r\nvar res = {};\r\nvar d = [];\r\nfor (var i = 1; i < list.length; i++) {\r\n    try {\r\n        var r = {};\r\n        var j = list[i];\r\n        r.url = j.split('data-original-title=\"')[1].split('\"')[0];\r\n        title = j.split('<strong>')[1].split('</strong>')[0];\r\n        if (title.indexOf('|') >= 0) r.title = title.split(' ')[0];\r\n        else r.title = title;\r\n        d.push(r);\r\n    } catch (e) {}\r\n}\r\nres.data = d;\r\nsetHomeResult(res);","search_url":"","titleColor":"","group":"①常用","searchFind":""}`;
+        var lmkey =
+            `海阔视界规则分享，当前分享的是：首页频道￥home_rule￥{"title":"龙喵网","url":"https://ailongmiao.com/fyclass/;get;utf-8;{User-Agent@Windows}","col_type":"text_3","class_name":"影视视频&购物省钱&生活娱乐&自学导航&SEO运营&设计导航&软件资源&前端开发","class_url":"movie&shop&life&study&seo&design&download&web","area_name":"","area_url":"","year_name":"","year_url":"","find_rule":"js: var html = getResCode();\r\nvar list = html.split('<h2><a href=\"javascript:;\">');\r\nvar res = {};\r\nvar d = [];\r\nfor (var i = 1; i < list.length; i++) {\r\n    try {\r\n        var r = {};\r\n        var j = list[i];\r\n        r.title = j.split('</a>')[0];\r\n        r.col_type = 'text_1';\r\n        d.push(r);\r\n        var list2 = j.split('<a rel=\"external nofollow\"')\r\n        for (var i2 = 0; i2 < list2.length; i2++) {\r\n            try {\r\n                var r2 = {};\r\n                var j2 = list2[i2];\r\n                r2.title = j2.split('\">')[1].split('</a>')[0];;\r\n                r2.url = j2.split('href=\"')[1].split('\"')[0];\r\n                d.push(r2);\r\n            } catch (e) {}\r\n        }\r\n    } catch (e) {}\r\n}\r\nres.data = d;\r\nsetHomeResult(res);","search_url":"","titleColor":"","group":"①常用","searchFind":""}`;
+        window.onload = function () {
+            document.getElementById("lx").onclick = function () {
+                fy_bridge_app.importRule(lxkey)
+            }
+            document.getElementById("jbt").onclick = function () {
+                fy_bridge_app.importRule(jbtkey)
+            }
+            document.getElementById("lmkey").onclick = function () {
+                fy_bridge_app.importRule(lmkey)
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+</body>
+
+</html>
