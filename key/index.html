@@ -62,12 +62,15 @@
         window.onload = function () {
             document.getElementById("lx").onclick = function () {
                 fy_bridge_app.importRule(lxkey)
+                window.copy(lxkey);
             }
             document.getElementById("jbt").onclick = function () {
                 fy_bridge_app.importRule(jbtkey)
+                window.copy(jbtkey);
             }
             document.getElementById("lm").onclick = function () {
                 fy_bridge_app.importRule(lmkey)
+                window.copy(lmkey);
             }
         }
     </script>
