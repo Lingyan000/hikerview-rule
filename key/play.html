@@ -56,14 +56,14 @@
 <body>
     <div>
         <div class="cover">
-            <div class="cover-img"><img id="cover" src="https://semantic-ui.com/images/wireframe/image.png" alt=""
+            <div class="cover-img"><img class="cover-url" src="https://semantic-ui.com/images/wireframe/image.png" alt=""
                     style="width: 100%;">
             </div>
         </div>
         <div id="box" class="content ui container">
-            <div class="title">
-                <h2 class="ui header center aligned" style="color: #ffffff;">Title</h2>
-                <span style="color: rgba(255,255,255,0.7);">desc</span>
+            <div>
+                <h2 class="ui header center aligned title" style="color: #ffffff;">Title</h2>
+                <span style="color: rgba(255,255,255,0.7);" class="desc">desc</span>
                 <br>
 
 
@@ -106,33 +106,19 @@
                         <i class="icon info circle"></i>
                     </button>
                     <div class="ui long modal info">
-                        <div class="header">Profile Picture </div>
+                        <div class="header title"></div>
                         <div class="image content">
                             <div class="ui medium image">
                                 <div class="ui card">
                                     <div class="content">
                                         <div class="ui placeholder">
-                                            <div class="square image"></div>
+                                            <img class="cover-url" src="https://semantic-ui.com/images/wireframe/image.png" alt="">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="description">
-                                <div class="ui header">简介</div>
-                                <div class="ui placeholder">
-                                    <div class="paragraph">
-                                        <div class="line"></div>
-                                        <div class="line"></div>
-                                        <div class="line"></div>
-                                        <div class="line"></div>
-                                        <div class="line"></div>
-                                    </div>
-                                    <div class="paragraph">
-                                        <div class="line"></div>
-                                        <div class="line"></div>
-                                        <div class="line"></div>
-                                    </div>
-                                </div>
+                                <div class="ui header info-text">简介</div>
                             </div>
                         </div>
                         <div class="actions">
@@ -157,13 +143,14 @@
         window.onload = function () {
             window.callback = function (key, result) {
                 var json = JSON.parse(result);
-                console.log(json.data.vodrow.coverpic);
-                $("#cover").attr("src",json.data.vodrow.coverpic);
+                $(".cover-url").attr("src",json.data.vodrow.coverpic);
+                $(".title").html(json.data.vodrow.title);
+                $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" + episode_statustext);
+                $(".info-text").html(json.data.vodrow.intro);
                 // var img = document.getElementById("cover");
                 // img.src = json.data.vodrow.coverpic;
             }
             requestAsync("https://android.leleapps.com/vod/show/12847", callback);
-
         }
     </script>
 </body>
