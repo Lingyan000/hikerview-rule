@@ -154,8 +154,10 @@
             })
         })
         window.callback = function (key, result) {
-            var jsonObj = JSON.parse(result);
-            $("#cover").attr("src",jsonObj.data.vodrow.coverpic);
+            var json = JSON.parse(result);
+            console.log(json.data.vodrow.coverpic);
+            var img=document.getElementById("cover");
+            img.src=json.data.vodrow.coverpic;
         }
         requestAsync("https://android.leleapps.com/vod/show/12847", callback);
     </script>
