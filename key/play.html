@@ -145,7 +145,7 @@
                 var json = JSON.parse(result);
                 $(".cover-url").attr("src",json.data.vodrow.coverpic);
                 $(".title").html(json.data.vodrow.title);
-                $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" + episode_statustext);
+                $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" + json.data.vodrow.episode_statustext);
                 $(".info-text").html(json.data.vodrow.intro);
                 // var img = document.getElementById("cover");
                 // img.src = json.data.vodrow.coverpic;
