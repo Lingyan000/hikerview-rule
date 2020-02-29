@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YongTengPlay</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+    <style>
+        body {
+            background-color: rgb(23, 23, 23);
+            color: #ffffff;
+        }
+
+        #box {
+            margin-top: -150px;
+            text-align: center;
+            position: relative;
+        }
+
+        .cover {
+            position: relative;
+            width: 100%;
+        }
+
+        .cover-img {
+            position: relative;
+            width: 100%;
+        }
+
+        .cover-img::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 101%;
+            background: linear-gradient(to top, #171717 0%, rgba(23, 23, 23, 0.987) 6.48%, rgba(23, 23, 23, 0.951) 12.4%, rgba(23, 23, 23, 0.896) 18%, rgba(23, 23, 23, 0.825) 23.2%, rgba(23, 23, 23, 0.741) 28.24%, rgba(23, 23, 23, 0.648) 32.96%, rgba(23, 23, 23, 0.55) 37.68%, rgba(23, 23, 23, 0.45) 42.32%, rgba(23, 23, 23, 0.352) 47.04%, rgba(23, 23, 23, 0.259) 51.76%, rgba(23, 23, 23, 0.175) 56.8%, rgba(23, 23, 23, 0.104) 62%, rgba(23, 23, 23, 0.049) 67.6%, rgba(23, 23, 23, 0.013) 73.52%, rgba(23, 23, 23, 0) 80%);
+            /* background: linear-gradient(to top, #171717 0%, rgba(23, 23, 23, 0.987) 1.62%, rgba(23, 23, 23, 0.951) 3.1%, rgba(23, 23, 23, 0.896) 4.5%, rgba(23, 23, 23, 0.825) 5.8%, rgba(23, 23, 23, 0.741) 7.06%, rgba(23, 23, 23, 0.648) 8.24%, rgba(23, 23, 23, 0.55) 9.42%, rgba(23, 23, 23, 0.45) 10.58%, rgba(23, 23, 23, 0.352) 11.76%, rgba(23, 23, 23, 0.259) 12.94%, rgba(23, 23, 23, 0.175) 14.2%, rgba(23, 23, 23, 0.104) 15.5%, rgba(23, 23, 23, 0.049) 16.9%, rgba(23, 23, 23, 0.013) 18.38%, rgba(23, 23, 23, 0) 20%); */
+        }
+
+        .playslist {
+            text-align: center;
+        }
+
+        .playslist .button {
+            width: 80%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="cover">
+            <div class="cover-img"><img id="cover" src="https://semantic-ui.com/images/wireframe/image.png" alt=""
+                    style="width: 100%;">
+            </div>
+        </div>
+        <div id="box" class="content ui container">
+            <div class="title">
+                <h2 class="ui header center aligned" style="color: #ffffff;">Title</h2>
+                <span style="color: rgba(255,255,255,0.7);">desc</span>
+                <br>
+
+
+                <div style="margin-top: 20px;">
+
+                    <button class="ui icon button" data-tooltip="🙊规则" style="margin-right: 10px;">
+                        <i class="icon home"></i>
+                    </button>
+
+                    <button id="plays" class="ui button" style="margin: 0px;"><i class="play icon"></i> 播放
+                    </button>
+                    <div class="ui long modal plays">
+                        <div class="header">选集 </div>
+                        <div class="content">
+                            <div class="ui grid">
+                                <div class="doubling eight column row playslist">
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                    <div class="column"><button class="ui button">第一集</button></div>
+
+                                    <div class="column"><button class="ui button">第一集</button></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="actions">
+                            <div class="ui negative  button">关闭 <i class="right times icon"></i> </div>
+                        </div>
+                    </div>
+                    <button id="info" class="ui icon button" data-tooltip="详情" style="margin-left: 10px;">
+                        <i class="icon info circle"></i>
+                    </button>
+                    <div class="ui long modal info">
+                        <div class="header">Profile Picture </div>
+                        <div class="image content">
+                            <div class="ui medium image">
+                                <div class="ui card">
+                                    <div class="content">
+                                        <div class="ui placeholder">
+                                            <div class="square image"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="description">
+                                <div class="ui header">简介</div>
+                                <div class="ui placeholder">
+                                    <div class="paragraph">
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                    </div>
+                                    <div class="paragraph">
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <div class="ui negative  button">关闭 <i class="right times icon"></i> </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("#info").on("click", function () {
+                $(".ui.modal.info").modal("show");
+            })
+            $("#plays").on("click", function () {
+                $(".ui.modal.plays").modal("show");
+            })
+        })
+        window.callback = function (key, result) {
+            var jsonObj = JSON.parse(result);
+            $("#cover").attr("src",jsonObj.data.vodrow.coverpic);
+        }
+        requestAsync("https://android.leleapps.com/vod/show/12847", callback);
+    </script>
+</body>
+
+</html>
