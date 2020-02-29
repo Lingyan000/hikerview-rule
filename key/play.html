@@ -117,7 +117,8 @@
                                 </div>
                             </div>
                             <div class="description">
-                                <div class="ui header info-text">简介</div>
+                                <div class="ui header">简介</div>
+                                <p class="info-text"></p>
                             </div>
                         </div>
                         <div class="actions">
@@ -139,7 +140,7 @@
             })
         })
 
-        $(window).load(function(){
+        window.onload = function () {
             window.callback = function (key, result) {
                 var json = JSON.parse(result);
                 $(".cover-url").attr("src",json.data.vodrow.coverpic);
@@ -150,7 +151,7 @@
                 // img.src = json.data.vodrow.coverpic;
             }
             requestAsync("https://android.leleapps.com/vod/show/12847", callback);
-        })
+        }
     </script>
 </body>
 
