@@ -152,14 +152,14 @@
             $("#plays").on("click", function () {
                 $(".ui.modal.plays").modal("show");
             })
+            window.callback = function (key, result) {
+                var json = JSON.parse(result);
+                console.log(json.data.vodrow.coverpic);
+                var img = document.getElementById("cover");
+                img.src = json.data.vodrow.coverpic;
+            }
+            requestAsync("https://android.leleapps.com/vod/show/12847", callback);
         })
-        window.callback = function (key, result) {
-            var json = JSON.parse(result);
-            console.log(json.data.vodrow.coverpic);
-            var img=document.getElementById("cover");
-            img.src=json.data.vodrow.coverpic;
-        }
-        requestAsync("https://android.leleapps.com/vod/show/12847", callback);
     </script>
 </body>
 
