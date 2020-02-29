@@ -146,39 +146,24 @@
     </div>
     <script>
         $(function () {
-                $("#info").on("click", function () {
-                    $(".ui.modal.info").modal("show");
-                })
-                $("#plays").on("click", function () {
-                    $(".ui.modal.plays").modal("show");
-                })
-                window.callback = function (key, result) {
-                    var json = JSON.parse(result);
-                    console.log(json.data.vodrow.coverpic);
-                    var img = document.getElementById("cover");
-                    img.src = json.data.vodrow.coverpic;
-                }
-                requestAsync("https://android.leleapps.com/vod/show/12847", callback);
-            }) 
-
-            window.onload = function () {
-                alert("页面加载完成====》onload");
-            }
-
-        $(window).load(function () {
-            alert("jquery===》window load");
+            $("#info").on("click", function () {
+                $(".ui.modal.info").modal("show");
+            })
+            $("#plays").on("click", function () {
+                $(".ui.modal.plays").modal("show");
+            })
         })
 
-        $(document).ready(function () {
-            alert("jquery====》document ready");
-        });
+        window.onload = function () {
+            alert("页面加载完成====》onload");
+            window.callback = function (key, result) {
+                var json = JSON.parse(result);
+                console.log(json.data.vodrow.coverpic);
+                var img = document.getElementById("cover");
+                img.src = json.data.vodrow.coverpic;
+            }
+            requestAsync("https://android.leleapps.com/vod/show/12847", callback);
 
-        $(function () {
-            alert("jquery====》document onload");
-        });
-
-        function aaa() {
-            alert("静态标签====》onload");
         }
     </script>
 </body>
