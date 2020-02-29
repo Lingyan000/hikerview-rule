@@ -137,6 +137,9 @@
             $("#plays").on("click", function () {
                 $(".ui.modal.plays").modal("show");
             })
+        })
+
+        $(window).load(function(){
             window.callback = function (key, result) {
                 var json = JSON.parse(result);
                 $(".cover-url").attr("src",json.data.vodrow.coverpic);
@@ -148,19 +151,6 @@
             }
             requestAsync("https://android.leleapps.com/vod/show/12847", callback);
         })
-
-        window.onload = function () {
-            window.callback = function (key, result) {
-                var json = JSON.parse(result);
-                $(".cover-url").attr("src",json.data.vodrow.coverpic);
-                $(".title").html(json.data.vodrow.title);
-                $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" + json.data.vodrow.episode_statustext);
-                $(".info-text").html(json.data.vodrow.intro);
-                // var img = document.getElementById("cover");
-                // img.src = json.data.vodrow.coverpic;
-            }
-            requestAsync("https://android.leleapps.com/vod/show/12847", callback);
-        }
     </script>
 </body>
 
