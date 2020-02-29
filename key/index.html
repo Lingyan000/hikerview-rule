@@ -248,6 +248,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="item" id="fk">
+                    <img class="ui avatar image" src="http://m.ifkdy.com/favicon.ico"
+                        onerror=src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg">
+                    <div class="content">
+                        <div class="header">疯狂影视搜索</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -286,6 +293,9 @@
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"五号站·在线","find_rule":".s-box&&ul&&.m_list;a&&Text;a&&href;span&&Text","search_url":"http://www.baike567.com/s/**/","titleColor":"#673AB7","group":"②影搜"}`;
         var whzxzkey =
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"五号站·下载","find_rule":".s-box&&ul,1&&.m_list;a&&Text;a&&href;span&&Text","search_url":"http://www.baike567.com/s/**/","titleColor":"#4CAF50","group":"⑤下载"}`;
+        var fkkey =
+            `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"疯狂影视","find_rule":"body&&li;span,1&&Text;a&&href;span&&Text","search_url":"http://ifkdy.com/?p=fypage&q=**;get;utf-8;{User-Agent@Windows}","titleColor":"","group":"②影搜"}`;
+
         window.onload = function () {
             document.getElementById("lx").onclick = function () {
                 fy_bridge_app.importRule(lxkey);
@@ -337,6 +347,9 @@
             }
             document.getElementById("whzxz").onclick = function () {
                 fy_bridge_app.importRule(whzxzkey);
+            }
+            document.getElementById("fk").onclick = function () {
+                fy_bridge_app.importRule(fkkey);
             }
         }
         $(function () {
