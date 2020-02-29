@@ -155,12 +155,12 @@
         })
 
         window.onload = function () {
-            alert("页面加载完成====》onload");
             window.callback = function (key, result) {
                 var json = JSON.parse(result);
                 console.log(json.data.vodrow.coverpic);
-                var img = document.getElementById("cover");
-                img.src = json.data.vodrow.coverpic;
+                $("#cover").attr("src",json.data.vodrow.coverpic);
+                // var img = document.getElementById("cover");
+                // img.src = json.data.vodrow.coverpic;
             }
             requestAsync("https://android.leleapps.com/vod/show/12847", callback);
 
