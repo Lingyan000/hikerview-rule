@@ -44,7 +44,10 @@
         }
 
         .playslist .button {
-            width: 80%;
+            height: 40px;
+            padding: 2px;
+            font-size: 14px;
+            width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -54,13 +57,15 @@
             padding-top: 0.5rem;
             padding-bottom: 0.5rem;
         }
+
+        .four.wide.mobile.two.wide.computer.column {
+            padding-left: 0.2em;
+            padding-right: 0.2em;
+        }
     </style>
 </head>
 
 <body>
-    <div id="pageload" class="ui active dimmer">
-        <div class="ui text loader">加载</div>
-    </div>
     <div>
         <div class="cover">
             <div class="cover-img"><img class="cover-url" src="https://semantic-ui.com/images/wireframe/image.png"
@@ -86,6 +91,38 @@
                         <div class="header">选集 </div>
                         <div class="content">
                             <div class="ui grid playslist">
+                                <div class="four wide mobile two wide computer column"><button
+                                        class="ui button play">第一集</button></div>
+                                <div class="four wide mobile two wide computer column"><button
+                                        class="ui button play' + i + '">第一集</button></div>
+                                <div class="four wide mobile two wide computer column"><button
+                                        class="ui button play' + i + '">第一集</button></div>
+                                <div class="four wide mobile two wide computer column"><button
+                                        class="ui button play' + i + '">第一集</button></div>
+                                <div class="four wide mobile two wide computer column"><button
+                                        class="ui button play' + i + '">第一集</button></div>
+
+                                <div class="four wide mobile two wide computer column"><button
+                                        class="ui button play' + i + '">第一集</button></div>
+                                <div class="four wide mobile two wide computer column"><button
+                                        class="ui button play' + i + '">第一集</button></div>
+                                <div class="four wide mobile two wide computer column"><button
+                                        class="ui button play' + i + '">第一集</button></div>
+
+                                <!-- <div class="doubling eight column row playslist">
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+
+                                    <div class="column"><button class="ui button play' + i + '">fdsafdsa</button></div>
+                                </div> -->
                             </div>
 
                         </div>
@@ -150,7 +187,7 @@
                         let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
                             "?playindex=" + j.playindex;
                         playlistbtn +=
-                            '<div class="five wide mobile two wide computer column"><button onclick="play(\'' + url +
+                            '<div class="column"><button onclick="play(\'' + url +
                             '\',' + i + ');" class="ui button play' + i + '">' +
                             j.play_name + '</button></div>';
                     }
