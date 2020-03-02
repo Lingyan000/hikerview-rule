@@ -53,10 +53,13 @@
 </head>
 
 <body>
+    <div id="pageload" class="ui active dimmer">
+        <div class="ui text loader">加载</div>
+    </div>
     <div>
         <div class="cover">
-            <div class="cover-img"><img class="cover-url" src="https://semantic-ui.com/images/wireframe/image.png" alt=""
-                    style="width: 100%;">
+            <div class="cover-img"><img class="cover-url" src="https://semantic-ui.com/images/wireframe/image.png"
+                    alt="" style="width: 100%;">
             </div>
         </div>
         <div id="box" class="content ui container">
@@ -111,7 +114,8 @@
                                 <div class="ui card">
                                     <div class="content">
                                         <div class="ui placeholder">
-                                            <img class="cover-url" src="https://semantic-ui.com/images/wireframe/image.png" alt="">
+                                            <img class="cover-url"
+                                                src="https://semantic-ui.com/images/wireframe/image.png" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -141,12 +145,19 @@
         })
 
         window.onload = function () {
-                window.callback = function (key, result) {
-                var json = JSON.parse(result.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));
-                $(".cover-url").attr("src",json.data.vodrow.coverpic);
-                $(".title").html(json.data.vodrow.title);
-                $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" + json.data.vodrow.episode_statustext);
-                $(".info-text").html(json.data.vodrow.intro);
+            window.callback = function (key, result) {
+                $("#pageload").removeClass("active").addClass("disabled");
+                try {
+                    var json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
+                    $(".cover-url").attr("src", json.data.vodrow.coverpic);
+                    $(".title").html(json.data.vodrow.title);
+                    $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
+                        json.data.vodrow.episode_statustext);
+                    $(".info-text").html(json.data.vodrow.intro);
+                } catch (e) {
+                    alert(e);
+                }
+
             }
             requestAsync("https://android.leleapps.com/vod/show/51424", callback);
         }
