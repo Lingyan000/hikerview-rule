@@ -82,20 +82,6 @@
                         <div class="content">
                             <div class="ui grid">
                                 <div class="doubling eight column row playslist">
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-                                    <div class="column"><button class="ui button">第一集</button></div>
-
-                                    <div class="column"><button class="ui button">第一集</button></div>
                                 </div>
                             </div>
 
@@ -154,6 +140,13 @@
                     $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
                         json.data.vodrow.episode_statustext);
                     $(".info-text").html(json.data.vodrow.intro);
+                    var playlist = json.data.vodrow.playlist;
+                    var playlistbtn = "";
+                    for (i = 0; i < playlist.length; i++) {
+                        var j = playlist[i];
+                        playlistbtn += "<div class=\"column\"><button class=\"ui button\">"+j.play_name+"</button></div>";
+                    }
+                    $(".playslist").html(playlistbtn);
                 } catch (e) {
                     alert(e);
                 }
