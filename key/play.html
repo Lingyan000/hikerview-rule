@@ -118,7 +118,7 @@
                             </div>
                             <div class="description">
                                 <div class="ui header">简介</div>
-                                <p class="info-text" style="color: black;">gggg</p>
+                                <p class="info-text" style="color: black;"></p>
                             </div>
                         </div>
                         <div class="actions">
@@ -141,16 +141,12 @@
         })
 
         window.onload = function () {
-            window.callback = function (key, result) {
-                var json = JSON.parse(result);
-                $(".cover-url").attr("src",json.data.vodrow.coverpic);
-                $(".title").html(json.data.vodrow.title);
-                $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" + json.data.vodrow.episode_statustext);
-                $(".info-text").html(json.data.vodrow.intro);
-                // var img = document.getElementById("cover");
-                // img.src = json.data.vodrow.coverpic;
+                window.callback = function (key, result) {
+                var json = JSON.parse(result.replace("/\n/g","\\n").result("/\r/g","\\r"));
+                console.log(json.data.vodrow.coverpic);
+
             }
-            requestAsync("https://android.leleapps.com/vod/show/12847", callback);
+            requestAsync("https://android.leleapps.com/vod/show/51424", callback);
         }
     </script>
 </body>
