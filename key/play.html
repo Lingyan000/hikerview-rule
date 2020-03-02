@@ -49,6 +49,11 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        
+        .ui.grid>.column:not(.row) {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
     </style>
 </head>
 
@@ -80,9 +85,7 @@
                     <div class="ui long modal plays">
                         <div class="header">选集 </div>
                         <div class="content">
-                            <div class="ui grid">
-                                <div class="doubling eight column row playslist">
-                                </div>
+                            <div class="ui grid centered playslist">
                             </div>
 
                         </div>
@@ -147,7 +150,7 @@
                         let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
                             "?playindex=" + j.playindex;
                         playlistbtn +=
-                            '<div class="column"><button onclick="play(\'' + url +
+                            '<div class="five wide mobile two wide computer column"><button onclick="play(\'' + url +
                             '\',' + i + ');" class="ui button play' + i + '">' +
                             j.play_name + '</button></div>';
                     }
