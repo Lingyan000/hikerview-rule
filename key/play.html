@@ -161,17 +161,18 @@
 
         function play(url) {
             window.callbackplay = function (key, result) {
+                $("#pageload").removeClass("disabled").addClass("active");
                 try {
                     let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
                     if (json.retcode == 3)
                         url = json.data.httpurl_preview.replace("?300", "");
                     else
                         url = json.data.httpurl;
-                    alert(url);
                     fy_bridge_app.playVideo(url);
                 } catch (e) {
                     alert(e);
                 }
+                $("#pageload").removeClass("active").addClass("disabled");
             }
             requestAsync(url, callbackplay);
         }
