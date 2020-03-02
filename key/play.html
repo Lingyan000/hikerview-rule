@@ -144,8 +144,7 @@
                     let playlistbtn = "";
                     for (i = 0; i < playlist.length; i++) {
                         let j = playlist[i];
-                        let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
-                            "?playindex=" + j.playindex;
+                        let url = "https://android.leleapps.com/vod/reqplay/";
                         playlistbtn +=
                             "<div onclick=\"window.play(\"" + url +
                             "\");\" class=\"column\"><button class=\"ui button\">" +
