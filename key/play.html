@@ -142,7 +142,7 @@
 
         window.onload = function () {
                 window.callback = function (key, result) {
-                var json = JSON.parse(result.replace(/\n/g,"\\n").result(/\r/g,"\\r"));
+                var json = JSON.parse(result.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));
                 console.log(json.data.vodrow.coverpic);
 
             }
