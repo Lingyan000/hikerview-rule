@@ -163,7 +163,6 @@
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
-                var playbtnclass = ".play" + playbtn;
                 try {
                     let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
                     if (json.retcode == 3)
@@ -174,7 +173,7 @@
                 } catch (e) {
                     alert(e);
                 }
-                $(playbtnclass).removeClass("loading");
+                $(".loading").removeClass("loading");
             }
             requestAsync(url, callbackplay);
         }
