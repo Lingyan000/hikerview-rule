@@ -146,6 +146,7 @@
                         let j = playlist[i];
                         let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
                             "?playindex=" + j.playindex;
+                        url = url.replace("\"", "");
                         playlistbtn +=
                             "<div onclick=\"play(\"" + url +
                             "\"); class=\"column\"><button class=\"ui button\">" +
@@ -157,6 +158,23 @@
                 }
             }
             requestAsync("https://android.leleapps.com/vod/show/51424", callback);
+        }
+
+        function play(url) {
+            window.callbackplay = function (key, result) {
+                try {
+                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
+                    if (josn.retcode == 3)
+                        url = json.data.httpurl_preview.replace("?300", "");
+                    else
+                        url = json.data.httpurl;
+                    alert(url);
+                    fy_bridge_app.playVideo(url);
+                } catch (e) {
+                    alert(e);
+                }
+            }
+            requestAsync(url, callbackplay);
         }
     </script>
 </body>
