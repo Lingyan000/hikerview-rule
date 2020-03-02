@@ -132,6 +132,8 @@
         </div>
     </div>
     <script>
+        var integrityurl = window.location.href;
+        var url = integrityurl.split("#")[1];
         $(function () {
             $("#info").on("click", function () {
                 $(".ui.modal.info").modal("show");
@@ -168,7 +170,7 @@
                     alert(e);
                 }
             }
-            requestAsync("https://android.leleapps.com/vod/show/51424", callback);
+            requestAsync(url, callback);
         }
 
         function play(url, playbtn) {
