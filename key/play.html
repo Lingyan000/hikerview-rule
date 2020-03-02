@@ -169,13 +169,14 @@
                         url = json.data.httpurl_preview.replace("?300", "");
                     else
                         url = json.data.httpurl;
+                    $(playbtnclass).removeClass("loading");
                     fy_bridge_app.playVideo(url);
                 } catch (e) {
+                    $(playbtnclass).removeClass("loading");
                     alert(e);
                 }
-                $(playbtnclass).removeClass("loading");
             }
-            requestAsync(url, callbackplay);            
+            requestAsync(url, callbackplay);
         }
     </script>
 </body>
