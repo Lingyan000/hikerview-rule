@@ -143,8 +143,10 @@
         window.onload = function () {
                 window.callback = function (key, result) {
                 var json = JSON.parse(result.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));
-                console.log(json.data.vodrow.coverpic);
-
+                $(".cover-url").attr("src",json.data.vodrow.coverpic);
+                $(".title").html(json.data.vodrow.title);
+                $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" + json.data.vodrow.episode_statustext);
+                $(".info-text").html(json.data.vodrow.intro);
             }
             requestAsync("https://android.leleapps.com/vod/show/51424", callback);
         }
