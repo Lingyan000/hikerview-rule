@@ -146,11 +146,10 @@
                         let j = playlist[i];
                         let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
                             "?playindex=" + j.playindex;
-                        url = url.replace("\"", "");
                         playlistbtn +=
-                            "<div onclick=\"play(\"" + url +
-                            "\"); class=\"column\"><button class=\"ui button\">" +
-                            j.play_name + "</button></div>";
+                            '<div onclick="play(\'' + url +
+                            '\'); class="column"><button class="ui button">' +
+                            j.play_name + '</button></div>';
                     }
                     $(".playslist").html(playlistbtn);
                 } catch (e) {
