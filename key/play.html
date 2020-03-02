@@ -134,22 +134,6 @@
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
-                    function play(url) {
-                        window.callbackplay = function (key, result) {
-                            try {
-                                let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
-                                if (josn.retcode == 3)
-                                    url = json.data.httpurl_preview.replace("?300", "");
-                                else
-                                    url = json.data.httpurl;
-                                alert(url);
-                                fy_bridge_app.playVideo(url);
-                            } catch (e) {
-                                alert(e);
-                            }
-                        }
-                        requestAsync(url, callbackplay);
-                    }
                     let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
                     $(".cover-url").attr("src", json.data.vodrow.coverpic);
                     $(".title").html(json.data.vodrow.title);
