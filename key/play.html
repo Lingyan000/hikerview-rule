@@ -160,7 +160,8 @@
         }
 
         function play(url, playbtn) {
-            $(".play" + playbtn).addClass("loading");
+            var playbtnclass = ".play" + playbtn;
+            $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
                     let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
@@ -172,9 +173,9 @@
                 } catch (e) {
                     alert(e);
                 }
+                $(playbtnclass).removeClass("loading");
             }
-            requestAsync(url, callbackplay);
-            $(".play" + playbtn).removeClass("loading");
+            requestAsync(url, callbackplay);            
         }
     </script>
 </body>
