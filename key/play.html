@@ -170,11 +170,11 @@
                         url = json.data.httpurl_preview.replace("?300", "");
                     else
                         url = json.data.httpurl;
-                    $(playbtnclass).removeClass("loading");
                     fy_bridge_app.playVideo(url);
                 } catch (e) {
                     alert(e);
                 }
+                $(playbtnclass).removeClass("loading");
             }
             requestAsync(url, callbackplay);
         }
