@@ -148,7 +148,7 @@
                             "?playindex=" + j.playindex;
                         playlistbtn +=
                             '<div class="column"><button onclick="play(\'' + url +
-                            '\');" class="ui button">' +
+                            '\',' + i + ');" class="ui button play' + i + '">' +
                             j.play_name + '</button></div>';
                     }
                     $(".playslist").html(playlistbtn);
@@ -159,9 +159,10 @@
             requestAsync("https://android.leleapps.com/vod/show/51424", callback);
         }
 
-        function play(url) {
+        function play(url, playbtn) {
+            playbtn = ".play" + playbtn;
             window.callbackplay = function (key, result) {
-                $("#pageload").removeClass("disabled").addClass("active");
+                $(playbtn).addClass("loading");
                 try {
                     let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
                     if (json.retcode == 3)
@@ -172,7 +173,7 @@
                 } catch (e) {
                     alert(e);
                 }
-                $("#pageload").removeClass("active").addClass("disabled");
+                $(playbtn).removeClass("loading");
             }
             requestAsync(url, callbackplay);
         }
