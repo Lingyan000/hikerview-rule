@@ -147,8 +147,8 @@
                         let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
                             "?playindex=" + j.playindex;
                         playlistbtn +=
-                            '<div onclick="play(\'' + url +
-                            '\');" class="column"><button class="ui button">' +
+                            '<div class="column"><button onclick="play(\'' + url +
+                            '\');" class="ui button">' +
                             j.play_name + '</button></div>';
                     }
                     $(".playslist").html(playlistbtn);
@@ -163,7 +163,7 @@
             window.callbackplay = function (key, result) {
                 try {
                     let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
-                    if (josn.retcode == 3)
+                    if (json.retcode == 3)
                         url = json.data.httpurl_preview.replace("?300", "");
                     else
                         url = json.data.httpurl;
