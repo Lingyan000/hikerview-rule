@@ -172,9 +172,9 @@
                 } catch (e) {
                     alert(e);
                 }
-                $(".play" + playbtn).removeClass("loading");
             }
             requestAsync(url, callbackplay);
+            $(".play" + playbtn).removeClass("loading");
         }
     </script>
 </body>
