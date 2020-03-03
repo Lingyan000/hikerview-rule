@@ -147,8 +147,6 @@
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
-                    console.log(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\\"/g,"").replace(
-                        /<(?:.|\s)*?>/g, ''));
                     let json = JSON.parse(result);
                     $(".cover-url").attr("src", json.data.vodrow.coverpic);
                     $(".title").html(json.data.vodrow.title);
