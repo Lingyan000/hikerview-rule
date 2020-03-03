@@ -148,7 +148,7 @@
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
                     console.log(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(
-                        /<(?:.|\s)*?>/g, '').replace(/\"/g,'\\"'));
+                        /<(?:.|\s)*?>/g, '').replace(/\\"/g,'\\\"'));
                     let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(
                         /<(?:.|\s)*?>/g, ''));
                     $(".cover-url").attr("src", json.data.vodrow.coverpic);
