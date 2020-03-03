@@ -178,7 +178,9 @@
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/<(?:.|\s)*?>/g, ''));
+                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\&/g, "&amp;")
+                        .replace(/\"/g, "&quot;").replace(/\'/g, "&#39;").replace(/\</g, "&lt;").replace(/\>/g,
+                            "&gt;"));
                     if (json.retcode == 3)
                         url = json.data.httpurl_preview.replace("?300", "");
                     else
