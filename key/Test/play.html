@@ -147,7 +147,9 @@
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
-                    let json = JSON.parse(result.replace(/\n/g, "").replace(/\r/g, ""));
+                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(">",
+                            "&gt;").replace("<", "&lt;").replace(" ", "&nbsp;").replace("\"", "&quot;")
+                        .replace("\'", "&#39;").replace("\\", "\\\\"));
                     $(".cover-url").attr("src", json.data.vodrow.coverpic);
                     $(".title").html(json.data.vodrow.title);
                     $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
@@ -178,7 +180,7 @@
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-                    let json = JSON.parse(result.replace(/\n/g, "").replace(/\r/g, ""));
+                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
                     if (json.retcode == 3)
                         url = json.data.httpurl_preview.replace("?300", "");
                     else
