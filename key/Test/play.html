@@ -149,8 +149,7 @@
                 try {
                     console.log(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\\"/g,"").replace(
                         /<(?:.|\s)*?>/g, ''));
-                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(
-                        /<(?:.|\s)*?>/g, '').replace(/\\"/g,""));
+                    let json = JSON.parse(result);
                     $(".cover-url").attr("src", json.data.vodrow.coverpic);
                     $(".title").html(json.data.vodrow.title);
                     $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
@@ -181,7 +180,7 @@
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
+                    let json = JSON.parse(result);
                     if (json.retcode == 3)
                         url = json.data.httpurl_preview.replace("?300", "");
                     else
