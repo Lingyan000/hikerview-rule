@@ -150,7 +150,7 @@
                     console.log(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(
                         /<(?:.|\s)*?>/g, '').replace(/\\"/g,'\\\"'));
                     let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(
-                        /<(?:.|\s)*?>/g, ''));
+                        /<(?:.|\s)*?>/g, '').replace(/\\"/g,'\\\"'));
                     $(".cover-url").attr("src", json.data.vodrow.coverpic);
                     $(".title").html(json.data.vodrow.title);
                     $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
