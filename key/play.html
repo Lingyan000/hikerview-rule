@@ -147,7 +147,11 @@
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
-                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r"));
+                    let json = JSON.parse(result.replace(/\n/g, "\\n").replace(/\r/g, "\\r").replace(/\&/g,
+                            "&amp;")
+                        .replace(/\"/g, "&quot;").replace(/\'/g, "&#39;").replace(/\</g, "&lt;").replace(
+                            /\>/g,
+                            "&gt;"));
                     $(".cover-url").attr("src", json.data.vodrow.coverpic);
                     $(".title").html(json.data.vodrow.title);
                     $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
