@@ -150,7 +150,6 @@
 
                     function xiaoxiao() {
                         $("title").html(json.data.vodrow.title + '-小小影视');
-                        console.log($("title").html())
                         fy_bridge_app.setWebTitle(json.data.vodrow.title + "-小小影视");
                         $(".cover-url").attr("src", json.data.vodrow.coverpic);
                         $(".title").html(json.data.vodrow.title);
@@ -172,7 +171,36 @@
                         }
                         $(".playslist").html(playlistbtn);
                     }
+
+                    function juhui() {
+                        $("title").html(json.data.programme.title + '-剧汇TV');
+                        fy_bridge_app.setWebTitle(json.data.programme.title + "-剧汇TV");
+                        $(".cover-url").attr("src", json.data.programme.verticalCover);
+                        $(".title").html(json.data.programme.title);
+                        let episodes = '';
+                        if (json.data.programme.episodesCount != json.data.programme.resourceCount)
+                            episodes = "更新至" + json.data.programme.resourceCount + "集/共" + json.data.programme.episodesCount + "集";
+                        else
+                            episodes = "全" + json.data.programme.episodesCount + "集";
+                        $(".desc").html(json.data.programme.location + "•" + json.data.programme.category
+                            .name +
+                            "•" +
+                            episodes);
+                        $(".info-text").html(json.data.programme.summary);
+                        let playlist = json.data.programme.resources;
+                        let playlistbtn = "";
+                        for (i = 0; i < playlist.length; i++) {
+                            let j = playlist[i];
+                            let url = "";
+                            playlistbtn +=
+                                '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
+                                url +
+                                '\',' + i + ');" class="ui button play' + i + '">' +
+                                j.episode + '</button></div>';
+                        }
+                    }
                     if (url.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
+                    else if (url.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
                 } catch (e) {
                     alert(e);
                 }
