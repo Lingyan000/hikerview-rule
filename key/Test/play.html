@@ -150,6 +150,7 @@
 
                     function xiaoxiao() {
                         $("title").html(json.data.vodrow.title + '-小小影视');
+                        console.log($("title").html())
                         fy_bridge_app.setWebTitle(json.data.vodrow.title + "-小小影视");
                         $(".cover-url").attr("src", json.data.vodrow.coverpic);
                         $(".title").html(json.data.vodrow.title);
