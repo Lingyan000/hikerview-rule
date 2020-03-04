@@ -131,6 +131,8 @@
         </div>
     </div>
     <script>
+        var integrityurl = window.location.href;
+        var url = integrityurl.split("#")[1];
         $(function () {
             $("#info").on("click", function () {
                 $(".ui.modal.info").modal("show");
@@ -139,7 +141,6 @@
                 $(".ui.modal.plays").modal("show");
             })
         })
-
 
         $(function () {
             window.callback = function (key, result) {
