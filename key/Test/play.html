@@ -84,9 +84,10 @@
 
                 <div style="margin-top: 20px;">
 
-                    <button class="ui icon button" data-tooltip="🙊规则" style="margin-right: 10px;">
+                    <a href="https://qingbailingyan.gitee.io/plays" class="ui icon button" data-tooltip="🙊规则"
+                        style="margin-right: 10px;">
                         <i class="icon home"></i>
-                    </button>
+                    </a>
 
                     <button id="plays" class="ui button" style="margin: 0px;"><i class="play icon"></i> 播放
                     </button>
@@ -110,10 +111,8 @@
                             <div class="ui medium image">
                                 <div class="ui card">
                                     <div class="content">
-                                        <div class="ui placeholder">
-                                            <img class="cover-url"
-                                                src="https://semantic-ui.com/images/wireframe/image.png" alt="">
-                                        </div>
+                                        <img class="cover-url" src="https://semantic-ui.com/images/wireframe/image.png"
+                                            alt="">
                                     </div>
                                 </div>
                             </div>
@@ -148,24 +147,29 @@
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
                     let json = JSON.parse(result);
-                    $(".cover-url").attr("src", json.data.vodrow.coverpic);
-                    $(".title").html(json.data.vodrow.title);
-                    $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
-                        json.data.vodrow.episode_statustext);
-                    $(".info-text").html(json.data.vodrow.intro);
-                    let playlist = json.data.vodrow.playlist;
-                    let playlistbtn = "";
-                    for (i = 0; i < playlist.length; i++) {
-                        let j = playlist[i];
-                        let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
-                            "?playindex=" + j.playindex;
-                        playlistbtn +=
-                            '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
-                            url +
-                            '\',' + i + ');" class="ui button play' + i + '">' +
-                            j.play_name + '</button></div>';
+                    function xiaoxiao() {
+                        $("title").html(json.data.vodrow.title + '-小小影视');
+                        fy_bridge_app.setWebTitle(json.data.vodrow.title + "-小小影视");
+                        $(".cover-url").attr("src", json.data.vodrow.coverpic);
+                        $(".title").html(json.data.vodrow.title);
+                        $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
+                            json.data.vodrow.episode_statustext);
+                        $(".info-text").html(json.data.vodrow.intro);
+                        let playlist = json.data.vodrow.playlist;
+                        let playlistbtn = "";
+                        for (i = 0; i < playlist.length; i++) {
+                            let j = playlist[i];
+                            let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
+                                "?playindex=" + j.playindex;
+                            playlistbtn +=
+                                '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
+                                url +
+                                '\',' + i + ');" class="ui button play' + i + '">' +
+                                j.play_name + '</button></div>';
+                        }
+                        $(".playslist").html(playlistbtn);
                     }
-                    $(".playslist").html(playlistbtn);
+                    if (url.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
                 } catch (e) {
                     alert(e);
                 }
