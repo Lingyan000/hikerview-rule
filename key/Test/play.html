@@ -203,7 +203,7 @@
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
                             let url = "";
-                            sharpnesslist = JSON.stringify(j.data).replace(/\"/g,"YongTeng");
+                            sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
                                 sharpnesslist + '\');" class="ui button">' +
@@ -222,12 +222,15 @@
 
         function sharpness(sharpnesslist) {
             console.log(sharpnesslist);
-            sharpnesslist = sharpnesslist.replace(/YongTeng/g,"\"")
+            sharpnesslist = sharpnesslist.replace(/YongTeng/g, "\"")
             console.log(sharpnesslist);
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
-                sharpnesslistbtn += '<button class="ui basic button">' + sharpnesslist[i].displayName + '</button><br><br>';
+                let url = "https://api.365kqzs.cn:4976/api/resource_url?hash=" + sharpnesslist[i].hash;
+                sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
+                    ')" class="ui basic button play' + i +
+                    '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
             $(".centered.content.sharpness").html(sharpnesslistbtn);
             $(".ui.modal.sharpness").modal("show");
@@ -239,11 +242,27 @@
             window.callbackplay = function (key, result) {
                 try {
                     let json = JSON.parse(result);
-                    if (json.retcode == 3)
-                        url = json.data.httpurl_preview.replace("?300", "");
-                    else
-                        url = json.data.httpurl;
-                    fy_bridge_app.playVideo(url);
+
+                    function xiaoxiaoplay() {
+                        if (json.retcode == 3)
+                            url = json.data.httpurl_preview.replace("?300", "");
+                        else
+                            url = json.data.httpurl;
+                        fy_bridge_app.playVideo(url);
+                    }
+
+                    function juhuiplay() {
+                        if (json.success == true) {
+                            url = json.data.url;
+                        } else {
+                            alert(json.message);
+                            url = "https://ipfs8.365kqzs.cn:9081/ipfs/" + hash;
+                        }
+                        fy_bridge_app.playVideo(url);
+                    }
+
+                    if (url.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
+                    else if (url.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhuiplay();
                 } catch (e) {
                     alert(e);
                 }
