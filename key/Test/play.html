@@ -158,7 +158,7 @@
     </div>
     <script>
         var integrityurl = window.location.href;
-        var url = integrityurl.split("#")[1];
+        var integrityurl = integrityurl.split("#")[1];
         $(function () {
             $("#info").on("click", function () {
                 $(".ui.modal.info").modal("show");
@@ -167,8 +167,8 @@
                 $(".ui.modal.plays").modal("show");
             })
             $("#luck").on("click", function () {
-                url = "https://ipfs" + $("#lucknumber").value + ".365kqzs.cn:9081/ipfs/" + $(
-                    "#lucknumber").hash;
+                let url = "https://ipfs" + $(".lucknumber").value + ".365kqzs.cn:9081/ipfs/" + $(
+                    ".lucknumber").hash;
                 fy_bridge_app.playVideo(url);
             })
         })
@@ -232,13 +232,13 @@
                         }
                         $(".playslist").html(playlistbtn);
                     }
-                    if (url.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
-                    else if (url.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
+                    if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
+                    else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
                 } catch (e) {
                     alert(e);
                 }
             }
-            requestAsync(url, callback);
+            requestAsync(integrityurl, callback);
         });
 
         function sharpness(sharpnesslist) {
@@ -248,7 +248,7 @@
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
-                $("#lucknumber").attr("hash", sharpnesslist[i].hash);
+                $(".lucknumber").attr("hash", sharpnesslist[i].hash);
                 let url = "https://api.365kqzs.cn:4976/api/resource_url?hash=" + sharpnesslist[i].hash;
                 sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
                     ')" class="ui basic button play' + i +
