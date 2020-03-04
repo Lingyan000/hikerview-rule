@@ -221,7 +221,9 @@
         });
 
         function sharpness(sharpnesslist) {
+            console.log(sharpnesslist);
             sharpnesslist = sharpnesslist.replace(/YongTeng/g,"\"")
+            console.log(sharpnesslist);
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
