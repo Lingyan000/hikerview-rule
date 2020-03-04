@@ -206,8 +206,8 @@
                             sharpnesslist = j.data;
                             sharpnesslist = JSON.stringify(sharpnesslist);
                             playlistbtn +=
-                                '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
-                                sharpnesslist + '\');" class="ui button">' +
+                                '<div class="four wide mobile two wide computer column"><button onclick=\'sharpness(\'' +
+                                sharpnesslist + '\');\' class=\'ui button\'>' +
                                 j.episode + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
