@@ -95,6 +95,22 @@
 
                     <button id="plays" class="ui button" style="margin: 0px;"><i class="play icon"></i> 播放
                     </button>
+                    <div class="ui modal textselect">
+                        <i class="close icon"></i>
+                        <div class="header">试试运气</div>
+                        <div class="centered">
+                            <p id="cw"></p>
+                            <div class="ui labeled input">
+                                <div class="ui label">https://ipfs</div>
+                                <input class="lucknumber" type="text" placeholder="数字">
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <div class="ui negative button">关闭</div>
+                            <div id="luck" class="ui positive right labeled icon button">确认<i
+                                    class="checkmark icon"></i> </div>
+                        </div>
+                    </div>
                     <div class="ui modal sharpness">
                         <i class="close icon"></i>
                         <div class="header">清晰度</div>
@@ -149,6 +165,11 @@
             })
             $("#plays").on("click", function () {
                 $(".ui.modal.plays").modal("show");
+            })
+            $("#luck").on("click", function () {
+                url = "https://ipfs" + $("#lucknumber").value + ".365kqzs.cn:9081/ipfs/" + $(
+                    "#lucknumber").hash;
+                fy_bridge_app.playVideo(url);
             })
         })
 
@@ -227,6 +248,7 @@
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
+                $("#lucknumber").attr("hash", sharpnesslist[i].hash);
                 let url = "https://api.365kqzs.cn:4976/api/resource_url?hash=" + sharpnesslist[i].hash;
                 sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
                     ')" class="ui basic button play' + i +
@@ -255,8 +277,8 @@
                         if (json.success == true) {
                             url = json.data.url;
                         } else {
-                            alert(json.message);
-                            url = "https://ipfs8.365kqzs.cn:9081/ipfs/" + hash;
+                            $("#cw").html(json.message);
+                            $(".ui.modal.textselect").modal("show");
                         }
                         fy_bridge_app.playVideo(url);
                     }
