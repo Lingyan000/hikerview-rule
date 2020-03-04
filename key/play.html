@@ -98,8 +98,8 @@
                     <div class="ui modal textselect">
                         <i class="close icon"></i>
                         <div class="header">试试运气</div>
-                        <div class="centered">
-                            <p id="cw"></p>
+                        <div class="centered" style="text-align: center;">
+                            <p id="cw" style="color: black;"></p>
                             <div class="ui labeled input">
                                 <div class="ui label">https://ipfs</div>
                                 <input class="lucknumber" type="text" placeholder="数字">
@@ -167,7 +167,7 @@
                 $(".ui.modal.plays").modal("show");
             })
             $("#luck").on("click", function () {
-                let url = "https://ipfs" + $(".lucknumber").attr("value") + ".365kqzs.cn:9081/ipfs/" +
+                let url = "https://ipfs" + $(".lucknumber").val() + ".365kqzs.cn:9081/ipfs/" +
                     $(
                         ".lucknumber").attr("hash");
                 fy_bridge_app.playVideo(url);
@@ -275,11 +275,11 @@
                     function juhuiplay() {
                         if (json.success == true) {
                             url = json.data.url;
+                            fy_bridge_app.playVideo(url);
                         } else {
                             $("#cw").html(json.message);
                             $(".ui.modal.textselect").modal("show");
                         }
-                        fy_bridge_app.playVideo(url);
                     }
 
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
