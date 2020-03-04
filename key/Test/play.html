@@ -142,17 +142,20 @@
             })
         })
 
-        window.onload = function () {
+
+        $(document).ready(function () {
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
                     let json = JSON.parse(result);
+
                     function xiaoxiao() {
                         $("title").html(json.data.vodrow.title + '-小小影视');
                         fy_bridge_app.setWebTitle(json.data.vodrow.title + "-小小影视");
                         $(".cover-url").attr("src", json.data.vodrow.coverpic);
                         $(".title").html(json.data.vodrow.title);
-                        $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename + "•" +
+                        $(".desc").html(json.data.vodrow.langvoicename + "•" + json.data.vodrow.catename +
+                            "•" +
                             json.data.vodrow.episode_statustext);
                         $(".info-text").html(json.data.vodrow.intro);
                         let playlist = json.data.vodrow.playlist;
@@ -175,6 +178,9 @@
                 }
             }
             requestAsync(url, callback);
+        });
+        window.onload = function () {
+
         }
 
         function play(url, playbtn) {
