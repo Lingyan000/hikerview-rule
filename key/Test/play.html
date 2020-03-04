@@ -227,7 +227,7 @@
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
-                sharpnesslistbtn += '<br><button class="ui basic button">' + sharpnesslist[i].displayName + '</button><br>';
+                sharpnesslistbtn += '<button class="ui basic button">' + sharpnesslist[i].displayName + '</button><br>';
             }
             $(".centered.content.sharpness").html(sharpnesslistbtn);
             $(".ui.modal.sharpness").modal("show");
