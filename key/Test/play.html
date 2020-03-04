@@ -131,8 +131,6 @@
         </div>
     </div>
     <script>
-        var integrityurl = window.location.href;
-        var url = integrityurl.split("#")[1];
         $(function () {
             $("#info").on("click", function () {
                 $(".ui.modal.info").modal("show");
@@ -140,10 +138,6 @@
             $("#plays").on("click", function () {
                 $(".ui.modal.plays").modal("show");
             })
-        })
-
-
-        $(document).ready(function () {
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
@@ -178,10 +172,7 @@
                 }
             }
             requestAsync(url, callback);
-        });
-        window.onload = function () {
-
-        }
+        })
 
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
