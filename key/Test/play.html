@@ -205,8 +205,8 @@
                             let url = "";
                             sharpnesslist = j.data;
                             playlistbtn +=
-                                '<div class="four wide mobile two wide computer column"><button onclick="sharpness('+sharpnesslist+');" class="ui button play' +
-                                i + '">' +
+                                '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
+                                sharpnesslist + '\');" class="ui button">' +
                                 j.episode + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -221,12 +221,12 @@
         });
 
         function sharpness(sharpnesslist) {
-            $(".ui.modal.sharpness").modal("show");
             let sharpnesslistbtn = "";
-            for (i = 0; i < sharpnesslist.length; i++)
-            {
-                sharpnesslistbtn += '<button class="ui basic button">'+sharpnesslist.displayName+'</button>';
+            for (i = 0; i < sharpnesslist.length; i++) {
+                sharpnesslistbtn += '<button class="ui basic button">' + sharpnesslist.displayName + '</button>';
             }
+            $(".centered.content.sharpness").html(sharpnesslistbtn);
+            $(".ui.modal.sharpness").modal("show");
         }
 
         function play(url, playbtn) {
