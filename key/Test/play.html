@@ -138,6 +138,10 @@
             $("#plays").on("click", function () {
                 $(".ui.modal.plays").modal("show");
             })
+        })
+
+
+        $(function () {
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
@@ -172,7 +176,7 @@
                 }
             }
             requestAsync(url, callback);
-        })
+        });
 
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
