@@ -236,7 +236,7 @@
             $(".ui.modal.sharpness").modal("show");
         }
 
-        function play(urlplay, playbtn) {
+        function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
@@ -245,30 +245,30 @@
 
                     function xiaoxiaoplay() {
                         if (json.retcode == 3)
-                            urlplay = json.data.httpurl_preview.replace("?300", "");
+                            url = json.data.httpurl_preview.replace("?300", "");
                         else
-                            urlplay = json.data.httpurl;
-                        fy_bridge_app.playVideo(urlplay);
+                            url = json.data.httpurl;
+                        fy_bridge_app.playVideo(url);
                     }
 
                     function juhuiplay() {
                         if (json.success == true) {
-                            urlplay = json.data.url;
+                            url = json.data.url;
                         } else {
                             alert(json.message);
-                            urlplay = "https://ipfs8.365kqzs.cn:9081/ipfs/" + hash;
+                            url = "https://ipfs8.365kqzs.cn:9081/ipfs/" + hash;
                         }
-                        fy_bridge_app.playVideo(urlplay);
+                        fy_bridge_app.playVideo(url);
                     }
 
-                    if (url.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
-                    else if (url.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhuiplay();
+                    if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
+                    else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhuiplay();
                 } catch (e) {
                     alert(e);
                 }
                 $(".loading").removeClass("loading");
             }
-            requestAsync(urlplay, callbackplay);
+            requestAsync(url, callbackplay);
         }
     </script>
 </body>
