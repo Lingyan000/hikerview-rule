@@ -203,11 +203,10 @@
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
                             let url = "";
-                            sharpnesslist = j.data;
-                            sharpnesslist = JSON.stringify(sharpnesslist);
+                            sharpnesslist = JSON.stringify(j.data).replace(/\"/g,"YongTeng");
                             playlistbtn +=
-                                '<div class="four wide mobile two wide computer column"><button onclick="sharpness(`' +
-                                sharpnesslist + '`);" class="ui button">' +
+                                '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
+                                sharpnesslist + '\');" class="ui button">' +
                                 j.episode + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -222,6 +221,7 @@
         });
 
         function sharpness(sharpnesslist) {
+            sharpnesslist = sharpnesslist.replace(/YongTeng/g,"\"")
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
