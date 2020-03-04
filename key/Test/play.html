@@ -204,7 +204,7 @@
                             let j = playlist[i];
                             let url = "";
                             sharpnesslist = j.data;
-                            sharpnesslist = sharpnesslist.toJSONString();
+                            sharpnesslist = JSON.stringify(sharpnesslist);
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
                                 sharpnesslist + '\');" class="ui button">' +
