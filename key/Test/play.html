@@ -236,7 +236,7 @@
             $(".ui.modal.sharpness").modal("show");
         }
 
-        function play(url, playbtn) {
+        function play(urlplay, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
@@ -245,20 +245,20 @@
 
                     function xiaoxiaoplay() {
                         if (json.retcode == 3)
-                            url = json.data.httpurl_preview.replace("?300", "");
+                            urlplay = json.data.httpurl_preview.replace("?300", "");
                         else
-                            url = json.data.httpurl;
-                        fy_bridge_app.playVideo(url);
+                            urlplay = json.data.httpurl;
+                        fy_bridge_app.playVideo(urlplay);
                     }
 
                     function juhuiplay() {
                         if (json.success == true) {
-                            url = json.data.url;
+                            urlplay = json.data.url;
                         } else {
                             alert(json.message);
-                            url = "https://ipfs8.365kqzs.cn:9081/ipfs/" + hash;
+                            urlplay = "https://ipfs8.365kqzs.cn:9081/ipfs/" + hash;
                         }
-                        fy_bridge_app.playVideo(url);
+                        fy_bridge_app.playVideo(urlplay);
                     }
 
                     if (url.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
@@ -268,7 +268,7 @@
                 }
                 $(".loading").removeClass("loading");
             }
-            requestAsync(url, callbackplay);
+            requestAsync(urlplay, callbackplay);
         }
     </script>
 </body>
