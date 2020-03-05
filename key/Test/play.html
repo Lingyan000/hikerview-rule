@@ -172,19 +172,16 @@
         $(function () {
             $('.modal')
                 .modal({
-                    allowMultiple: false,
+                    allowMultiple: true,
                     blurring: true
                 });
             $("#info").on("click", function () {
-                $(".modal").modal("hide");
                 $(".ui.modal.info").modal("show");
             })
             $("#plays").on("click", function () {
-                $(".modal").modal("hide");
                 $(".ui.modal.plays").modal("show");
             })
             $(".luck").on("click", function () {
-                $(".modal").modal("hide");
                 let url = "https://ipfs" + $(".lucknumber").val() + ".365kqzs.cn:9081/ipfs/" +
                     $(
                         ".lucknumber").attr("hash");
@@ -198,6 +195,7 @@
                 try {
                     let json = JSON.parse(result);
 
+                    /*小小影视的布局添加*/
                     function xiaoxiao() {
                         $("title").html(json.data.vodrow.title + '-小小影视');
                         fy_bridge_app.setWebTitle(json.data.vodrow.title + "-小小影视");
@@ -222,6 +220,7 @@
                         $(".playslist").html(playlistbtn);
                     }
 
+                    /*剧汇TV的布局添加*/
                     function juhui() {
                         $("title").html(json.data.programme.title + '-剧汇TV');
                         fy_bridge_app.setWebTitle(json.data.programme.title + "-剧汇TV");
@@ -272,10 +271,9 @@
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
             $(".centered.content.sharpness").html(sharpnesslistbtn);
-            $(".modal").modal("hide");
             $(".ui.modal.sharpness").modal("show");
         }
-
+        
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
@@ -283,6 +281,7 @@
                 try {
                     let json = JSON.parse(result);
 
+                    /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         if (json.retcode == 3)
                             url = json.data.httpurl_preview.replace("?300", "");
@@ -291,6 +290,7 @@
                         fy_bridge_app.playVideo(url);
                     }
 
+                    /*剧汇TV的视频播放*/
                     function juhuiplay() {
                         if (json.success == true) {
                             url = json.data.url;
