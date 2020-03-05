@@ -43,7 +43,7 @@
             text-align: center;
         }
 
-        .playslist .button {
+        .four.wide.mobile.two.wide.computer.column .button {
             height: 40px;
             padding: 2px;
             font-size: 14px;
@@ -105,13 +105,16 @@
                                 <input class="lucknumber" type="text" placeholder="数字">
                                 <button class="ui icon button luck">
                                     <i class="arrow right icon"></i>
-                                  </button>
+                                </button>
+                            </div>
+                            <div class="ui divider"></div>
+                            <div class="ui grid lucklist">
                             </div>
                         </div>
                         <div class="actions">
                             <div class="ui negative button">关闭</div>
-                            <div class="ui positive right labeled icon button luck">确认<i
-                                    class="checkmark icon"></i> </div>
+                            <div class="ui positive right labeled icon button luck">确认<i class="checkmark icon"></i>
+                            </div>
                         </div>
                     </div>
                     <div class="ui modal sharpness">
@@ -291,6 +294,23 @@
                         } else {
                             $("#cw").html(json.message);
                             $(".ui.modal.textselect").modal("show");
+                            for (let i = 1; i < 30; i++) {
+                                $.ajax({
+                                    type: 'HEAD',
+                                    url: 'https://ipfs' + i +
+                                        '.365kqzs.cn:9081/ipfs/SnXh8po4sFr2XN93cFUMZktPH8YU7WgWPWUDZ7pBKe9a7BxZM',
+                                    complete: function (xhr, data) {
+                                        if (xhr.readyState == 4 && xhr.status == 200)
+                                            $(".lucklist").append(
+                                                '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'https://ipfs' +
+                                                i +
+                                                '.365kqzs.cn:9081/ipfs/SnXh8po4sFr2XN93cFUMZktPH8YU7WgWPWUDZ7pBKe9a7BxZM\');" class="ui button">' +
+                                                i + '</button></div>'
+                                            );
+                                    }
+                                });
+
+                            }
                         }
                     }
 
