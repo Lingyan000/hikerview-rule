@@ -100,14 +100,17 @@
                         <div class="header">试试运气</div>
                         <div class="centered" style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
                             <h3 id="cw" style="color: black;"></h3>
-                            <div class="ui labeled input">
+                            <div class="ui action labeled input">
                                 <div class="ui label">https://ipfs</div>
                                 <input class="lucknumber" type="text" placeholder="数字">
+                                <button class="ui icon button luck">
+                                    <i class="arrow right icon"></i>
+                                  </button>
                             </div>
                         </div>
                         <div class="actions">
                             <div class="ui negative button">关闭</div>
-                            <div id="luck" class="ui positive right labeled icon button">确认<i
+                            <div class="ui positive right labeled icon button luck">确认<i
                                     class="checkmark icon"></i> </div>
                         </div>
                     </div>
@@ -160,13 +163,18 @@
         var integrityurl = window.location.href;
         var integrityurl = integrityurl.split("#")[1];
         $(function () {
+            $('.modal')
+                .modal({
+                    allowMultiple: true,
+                    blurring: true
+                });
             $("#info").on("click", function () {
                 $(".ui.modal.info").modal("show");
             })
             $("#plays").on("click", function () {
                 $(".ui.modal.plays").modal("show");
             })
-            $("#luck").on("click", function () {
+            $(".luck").on("click", function () {
                 let url = "https://ipfs" + $(".lucknumber").val() + ".365kqzs.cn:9081/ipfs/" +
                     $(
                         ".lucknumber").attr("hash");
