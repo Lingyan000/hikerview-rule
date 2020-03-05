@@ -170,15 +170,12 @@
         var integrityurl = window.location.href;
         var integrityurl = integrityurl.split("#")[1];
         $(function () {
-            $('.modal')
-                .modal({
-                    allowMultiple: true,
-                    blurring: true
-                });
             $("#info").on("click", function () {
+                $(".modal").modal("hide");
                 $(".ui.modal.info").modal("show");
             })
             $("#plays").on("click", function () {
+                $(".modal").modal("hide");
                 $(".ui.modal.plays").modal("show");
             })
             $(".luck").on("click", function () {
@@ -271,9 +268,10 @@
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
             $(".centered.content.sharpness").html(sharpnesslistbtn);
+            $(".modal").modal("hide");
             $(".ui.modal.sharpness").modal("show");
         }
-
+        
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
@@ -297,6 +295,7 @@
                             fy_bridge_app.playVideo(url);
                         } else {
                             $("#cw").html(json.message);
+                            $(".modal").modal("hide");
                             $(".ui.modal.textselect").modal("show");
                             $(".lucklist").html("");
                             for (let i = 1; i < 30; i++) {
