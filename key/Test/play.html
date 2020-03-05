@@ -298,6 +298,7 @@
                         } else {
                             $("#cw").html(json.message);
                             $(".ui.modal.textselect").modal("show");
+                            $(".lucklist").html("");
                             for (let i = 1; i < 30; i++) {
                                 $.ajax({
                                     type: 'HEAD',
