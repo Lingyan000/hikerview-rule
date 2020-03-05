@@ -165,16 +165,19 @@
         $(function () {
             $('.modal')
                 .modal({
-                    allowMultiple: true,
+                    allowMultiple: false,
                     blurring: true
                 });
             $("#info").on("click", function () {
+                $(".modal").modal("hide");
                 $(".ui.modal.info").modal("show");
             })
             $("#plays").on("click", function () {
+                $(".modal").modal("hide");
                 $(".ui.modal.plays").modal("show");
             })
             $(".luck").on("click", function () {
+                $(".modal").modal("hide");
                 let url = "https://ipfs" + $(".lucknumber").val() + ".365kqzs.cn:9081/ipfs/" +
                     $(
                         ".lucknumber").attr("hash");
@@ -262,6 +265,7 @@
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
             $(".centered.content.sharpness").html(sharpnesslistbtn);
+            $(".modal").modal("hide");
             $(".ui.modal.sharpness").modal("show");
         }
 
