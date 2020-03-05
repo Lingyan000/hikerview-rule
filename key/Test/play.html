@@ -98,16 +98,19 @@
                     <div class="ui modal textselect">
                         <i class="close icon"></i>
                         <div class="header">试试运气</div>
-                        <div class="centered">
-                            <p id="cw"></p>
-                            <div class="ui labeled input">
+                        <div class="centered" style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+                            <h3 id="cw" style="color: black;"></h3>
+                            <div class="ui action labeled input">
                                 <div class="ui label">https://ipfs</div>
                                 <input class="lucknumber" type="text" placeholder="数字">
+                                <button class="ui icon button luck">
+                                    <i class="arrow right icon"></i>
+                                  </button>
                             </div>
                         </div>
                         <div class="actions">
                             <div class="ui negative button">关闭</div>
-                            <div id="luck" class="ui positive right labeled icon button">确认<i
+                            <div class="ui positive right labeled icon button luck">确认<i
                                     class="checkmark icon"></i> </div>
                         </div>
                     </div>
@@ -160,15 +163,24 @@
         var integrityurl = window.location.href;
         var integrityurl = integrityurl.split("#")[1];
         $(function () {
+            $('.modal')
+                .modal({
+                    allowMultiple: false,
+                    blurring: true
+                });
             $("#info").on("click", function () {
+                $(".modal").modal("hide");
                 $(".ui.modal.info").modal("show");
             })
             $("#plays").on("click", function () {
+                $(".modal").modal("hide");
                 $(".ui.modal.plays").modal("show");
             })
-            $("#luck").on("click", function () {
-                let url = "https://ipfs" + $(".lucknumber").value + ".365kqzs.cn:9081/ipfs/" + $(
-                    ".lucknumber").hash;
+            $(".luck").on("click", function () {
+                $(".modal").modal("hide");
+                let url = "https://ipfs" + $(".lucknumber").val() + ".365kqzs.cn:9081/ipfs/" +
+                    $(
+                        ".lucknumber").attr("hash");
                 fy_bridge_app.playVideo(url);
             })
         })
@@ -242,9 +254,7 @@
         });
 
         function sharpness(sharpnesslist) {
-            console.log(sharpnesslist);
             sharpnesslist = sharpnesslist.replace(/YongTeng/g, "\"")
-            console.log(sharpnesslist);
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
@@ -255,6 +265,7 @@
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
             $(".centered.content.sharpness").html(sharpnesslistbtn);
+            $(".modal").modal("hide");
             $(".ui.modal.sharpness").modal("show");
         }
 
@@ -276,11 +287,11 @@
                     function juhuiplay() {
                         if (json.success == true) {
                             url = json.data.url;
+                            fy_bridge_app.playVideo(url);
                         } else {
                             $("#cw").html(json.message);
                             $(".ui.modal.textselect").modal("show");
                         }
-                        fy_bridge_app.playVideo(url);
                     }
 
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
