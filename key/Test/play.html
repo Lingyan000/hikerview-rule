@@ -238,7 +238,6 @@
                         let playlistbtn = "";
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
-                            let url = "";
                             sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
@@ -260,6 +259,31 @@
                             "•" +
                             json.data.updateText);
                         $(".info-text").html(json.data.introduction);
+                        /*由于卧龙的集数需要再请求一个接口，所以另写一个方法*/
+                        wolongEpisode(json.data.videoId);
+                    }
+
+                    /*卧龙集数*/
+                    function wolongEpisode(id) {
+                        requestAsync("http://v2.tgmmvip.com/wolong/gae/video/plays?videoId=" + id,
+                            function (key, result) {
+                                try {
+                                    let json = JSON.parse(result);
+                                    let playlist = json.data.plays;
+                                    for (let i = 0; i < playlist; i++) {
+                                        let j = playlist[i];
+                                        let url = "";
+                                        sharpnesslist = JSON.stringify(j.data).replace(/\"/g,
+                                            "YongTeng");
+                                        playlistbtn +=
+                                            '<div class="four wide mobile two wide computer column"><button class="ui button">' +
+                                            i + '</button></div>';
+                                    }
+                                    $(".playslist").html(playlistbtn);
+                                } catch (e) {
+                                    alert(e);
+                                }
+                            });
                     }
 
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
@@ -272,6 +296,7 @@
             requestAsync(integrityurl, callback);
         });
 
+        /*清晰度对话框*/
         function sharpness(sharpnesslist) {
             sharpnesslist = sharpnesslist.replace(/YongTeng/g, "\"")
             sharpnesslist = JSON.parse(sharpnesslist);
@@ -288,6 +313,7 @@
             $(".ui.modal.sharpness").modal("show");
         }
 
+        /*播放*/
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
