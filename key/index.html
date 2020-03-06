@@ -204,7 +204,7 @@
                                     </div>
                                 </div>
                                 <div class="item" id="cbhzm">
-                                    <i class="language icon"></i>
+                                    <i class="closed captioning icon"></i>
                                     <div class="content">
                                         <div class="header">字幕</div>
                                     </div>
@@ -257,6 +257,46 @@
                 </div>
             </div>
         </div>
+        <div class="ui raised very padded text container segment">
+            <h2 class="ui header">
+                <i class="hand peace icon"></i>
+                <div class="content">新奇 <div class="sub header">新奇规则</div>
+                </div>
+            </h2>
+            <div class="ui divider"></div>
+            <div class="ui middle aligned animated list">
+                <div class="item" id="dps">
+                    <img class="ui avatar image" src="https://www.dupanso.com/favicon.ico"
+                        onerror=src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg">
+                    <div class="content">
+                        <div class="header">度盘搜</div>
+                    </div>
+                </div>
+                <div class="ui modal dps">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        度盘搜
+                    </div>
+                    <div class="content">
+                        <div class="description">
+                            <div class="ui header">输入密钥获取规则</div>
+                            <div class="ui input">
+                                <a href="https://www.dupanso.com/" class="ui button"> 获取密钥 </a>
+                                <input class="lucknumber dpswxkey" type="text" placeholder="密钥">
+                            </div>
+                            <div class="ui yellow message">
+                                <p>注意：获取密钥后要搜索一次获取Cookie</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <div class="ui negative button">关闭</div>
+                        <div id="dpsOK" class="ui positive right labeled icon button luck">确认<i class="checkmark icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         var lxkey =
@@ -295,8 +335,9 @@
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"五号站·下载","find_rule":".s-box&&ul,1&&.m_list;a&&Text;a&&href;span&&Text","search_url":"http://www.baike567.com/s/**/","titleColor":"#4CAF50","group":"⑤下载"}`;
         var fkkey =
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"疯狂影视","find_rule":"body&&li;span,1&&Text;a&&href;span&&Text","search_url":"http://ifkdy.com/?p=fypage&q=**;get;utf-8;{User-Agent@Windows}","titleColor":"","group":"②影搜"}`;
-
-        window.onload = function () {
+        var fkkey =
+            `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"度盘搜","find_rule":"js: var json = getResCode();\\r\\neval('resJson=' + json);\\r\\nvar res = {};\\r\\nvar list = resJson.data;\\r\\nvar items = list.map(data => ({\\r\\n    title: data.title,\\r\\n    url: 'https://m.dupanso.com/#/detail?id=' + data.id + '&title=' + data.title,\\r\\n    desc: data.type\\r\\n}));\\r\\nres.data = items;\\r\\nsetSearchResult(res);","search_url":"https://api.nidhsd.top/search?keyword=%E7%88%B1%E6%83%85&page=fypage&invitecode=需要获取的密钥","titleColor":"#4CAF50","group":"⑤下载"}`;
+        $(function () {
             document.getElementById("lx").onclick = function () {
                 fy_bridge_app.importRule(lxkey);
             }
@@ -351,7 +392,10 @@
             document.getElementById("fk").onclick = function () {
                 fy_bridge_app.importRule(fkkey);
             }
-        }
+            document.getElementById("dpsOK").onclick = function () {
+                fy_bridge_app.importRule(dpskey.replace("需要获取的密钥",$(".dpswxkey").val()));
+            }
+        })
         $(function () {
             $("#wl").on("click", function () {
                 $(".ui.modal.wllist").modal("show");
@@ -375,6 +419,11 @@
         $(function () {
             $("#whz").on("click", function () {
                 $(".ui.modal.whz").modal("show");
+            })
+        })
+        $(function () {
+            $("#dps").on("click", function () {
+                $(".ui.modal.dps").modal("show");
             })
         })
     </script>
