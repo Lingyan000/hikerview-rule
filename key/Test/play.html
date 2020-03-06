@@ -279,12 +279,12 @@
                                             '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
                                             j.playUrl +
                                             '\')" class="ui button">' +
-                                            i + 1 + '</button></div>';
+                                            (i + 1) + '</button></div>';
                                         else
                                             playlistbtn +=
                                             '<div class="four wide mobile two wide computer column"><button onclick="sharpnessPost(\'' +
                                             j.playUrl + '\',' + j.source + ')" class="ui button">' +
-                                            i + 1 + '</button></div>';
+                                            (i + 1) + '</button></div>';
                                     }
                                     $(".playslist").html(playlistbtn);
                                 } catch (e) {
@@ -308,7 +308,7 @@
             requestAsync(url, {
                 headers: {},
                 body: 'timestamp=' + Math.round(new Date() / 1000) + '&sign=852772226371378&source=' + source +
-                    '&deviceid=852772226371378&url=' + encodeURIComponent(playUrl.replace("amp;", "")),
+                    '&deviceid=852772226371378&url=' + encodeURIComponent(playurl.replace("amp;", "")),
                 method: 'POST'
             }, function (key, result) {
                 console.log(result);
