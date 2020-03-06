@@ -247,8 +247,24 @@
                         }
                         $(".playslist").html(playlistbtn);
                     }
+
+                    /*卧龙的布局添加*/
+                    function wolong() {
+                        $("title").html(json.data.title + '-卧龙影视');
+                        fy_bridge_app.setWebTitle(json.data.title + "-卧龙影视");
+                        $(".cover-url").attr("src", json.data.imgUrl.replace(
+                            /.*\:\/\/img.*\.doubanio\.com/g,
+                            "https://images.weserv.nl/?url=img9.doubanio.com/"));
+                        $(".title").html(json.data.title);
+                        $(".desc").html(json.data.area + "•" + json.data.year +
+                            "•" +
+                            json.data.updateText);
+                        $(".info-text").html(json.data.introduction);
+                    }
+
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
                     else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
+                    else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                 } catch (e) {
                     alert(e);
                 }
@@ -271,7 +287,7 @@
             $(".modal").modal("hide");
             $(".ui.modal.sharpness").modal("show");
         }
-        
+
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
