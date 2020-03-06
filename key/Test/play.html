@@ -285,9 +285,9 @@
                                                 '<div class="four wide mobile two wide computer column play' +
                                                 i + '"><button class="ui button">' +
                                                 (i + 1) + '</button></div>';
-                                            $(".play" + i).on("click", function () {
-                                                sharpnessPost(j.playUrl, j.source)
-                                                $('.play' + i).addClass("loading");
+                                            $(".play" + i + "").on("click", function () {
+                                                sharpnessPost(j.playUrl, j.source);
+                                                $(".play" + i + "").addClass("loading");
                                             })
                                         }
                                     }
