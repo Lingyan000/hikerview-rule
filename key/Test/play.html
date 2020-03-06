@@ -278,7 +278,8 @@
                                             playlistbtn +=
                                             '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
                                             j.playUrl +
-                                            '\')" class="ui button">' +
+                                            '\');$(\'.play' + id +
+                                            '\').addClass("loading");" class="ui button">' +
                                             (i + 1) + '</button></div>';
                                         else
                                             playlistbtn +=
@@ -306,8 +307,7 @@
         });
 
         /*POST请求获取清晰度与播放链接（主要用于卧龙影视）*/
-        function sharpnessPost(playurl, source, id) {
-            $('.play' + id).addClass("loading");
+        function sharpnessPost(playurl, source) {
             requestAsync('http://v2.tgmmvip.com/wolong/parse/video/play', {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
