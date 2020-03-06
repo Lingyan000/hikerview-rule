@@ -278,15 +278,15 @@
                                             playlistbtn +=
                                             '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
                                             j.playUrl +
-                                            '\');$(\'.play' + i +
-                                            '\').addClass("loading");" class="ui button">' +
+                                            '\')" class="ui button">' +
                                             (i + 1) + '</button></div>';
                                         else
                                             playlistbtn +=
                                             '<div class="four wide mobile two wide computer column play' +
                                             i + '"><button onclick="sharpnessPost(\'' +
                                             j.playUrl + '\',' + j.source + ',' + i +
-                                            ');" class="ui button">' +
+                                            ');$(\'.play' + id +
+                                            '\').addClass("loading");" class="ui button">' +
                                             (i + 1) + '</button></div>';
                                     }
                                     $(".playslist").html(playlistbtn);
