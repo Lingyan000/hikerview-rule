@@ -268,17 +268,23 @@
                         requestAsync("http://v2.tgmmvip.com/wolong/gae/video/plays?videoId=" + id,
                             function (key, result) {
                                 try {
-                                    console.log(result);
                                     let json = JSON.parse(result);
                                     let playlist = json.data.plays;
                                     let playlistbtn = "";
                                     for (let i = 0; i < playlist.length; i++) {
                                         let j = playlist[i];
-                                        console.log(i);
                                         let url = "";
-                                        playlistbtn +=
-                                            '<div class="four wide mobile two wide computer column"><button class="ui button">' +
-                                            i + '</button></div>';
+                                        if (j.source == 0)
+                                            playlistbtn +=
+                                            '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
+                                            j.playUrl +
+                                            '\')" class="ui button">' +
+                                            i + 1 + '</button></div>';
+                                        else
+                                            playlistbtn +=
+                                            '<div class="four wide mobile two wide computer column"><button onclick="sharpnessPost(\'' +
+                                            j.playUrl + '\',' + j.source + ')" class="ui button">' +
+                                            i + 1 + '</button></div>';
                                     }
                                     $(".playslist").html(playlistbtn);
                                 } catch (e) {
@@ -297,7 +303,19 @@
             requestAsync(integrityurl, callback);
         });
 
-        /*清晰度对话框*/
+        /*POST请求获取清晰度与播放链接（主要用于卧龙影视）*/
+        function sharpnessPost(playurl, source) {
+            requestAsync(url, {
+                headers: {},
+                body: 'timestamp=' + Math.round(new Date() / 1000) + '&sign=852772226371378&source=' + source +
+                    '&deviceid=852772226371378&url=' + encodeURIComponent(playUrl.replace("amp;", "")),
+                method: 'POST'
+            }, function (key, result) {
+                console.log(result);
+            });
+        }
+
+        /*清晰度*/
         function sharpness(sharpnesslist) {
             sharpnesslist = sharpnesslist.replace(/YongTeng/g, "\"")
             sharpnesslist = JSON.parse(sharpnesslist);
