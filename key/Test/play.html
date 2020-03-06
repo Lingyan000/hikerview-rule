@@ -306,12 +306,26 @@
         /*POST请求获取清晰度与播放链接（主要用于卧龙影视）*/
         function sharpnessPost(playurl, source) {
             requestAsync('http://v2.tgmmvip.com/wolong/parse/video/play', {
-                headers: {},
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
                 body: 'timestamp=' + Math.round(new Date() / 1000) + '&sign=852772226371378&source=' + source +
-                    '&deviceid=852772226371378&url=' + encodeURIComponent(playurl.replace("amp;", "")),
+                    '&deviceid=852772226371378&url=' + playurl,
                 method: 'POST'
             }, function (key, result) {
                 console.log(result);
+                let json = JSON.parse(result);
+                sharpnesslist = json.data.items;
+                let sharpnesslistbtn = "";
+                for (i = 0; i < sharpnesslist.length; i++) {
+                    let j = sharpnesslist[i];
+                    sharpnesslistbtn += '<button onclick="fy_bridge_app.playVideo(\'' +
+                        j.mediaUrl +
+                        '\')" class="ui basic button">' + j.mediaName + '</button><br><br>';
+                }
+                $(".centered.content.sharpness").html(sharpnesslistbtn);
+                $(".modal").modal("hide");
+                $(".ui.modal.sharpness").modal("show");
             });
         }
 
