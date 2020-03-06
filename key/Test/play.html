@@ -316,7 +316,7 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 body: 'timestamp=' + Math.round(new Date() / 1000) + '&sign=852772226371378&source=' + source +
-                    '&deviceid=852772226371378&url=' + playurl.replace("&",""),
+                    '&deviceid=852772226371378&url=' + playurl.replace("&","\&"),
                 method: 'POST'
             }, function (key, result) {
                 try {
