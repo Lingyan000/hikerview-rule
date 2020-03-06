@@ -291,7 +291,7 @@
                     </div>
                     <div class="actions">
                         <div class="ui negative button">关闭</div>
-                        <div id="dpsOK" class="ui positive right labeled icon button luck">确认<i
+                        <div id="dpsOK" class="ui green right labeled icon button">确认<i
                                 class="checkmark icon"></i>
                         </div>
                     </div>
@@ -395,7 +395,6 @@
             }
             $("#dpsOK").on("click", function () {
                 let sdpwxkey = $(".dpswxkey").val();
-                $(".modal").modal("hide");
                 fy_bridge_app.importRule(dpskey.replace("需要获取的密钥", sdpwxkey));
             })
         })
