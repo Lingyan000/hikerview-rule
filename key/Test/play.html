@@ -282,8 +282,10 @@
                                             (i + 1) + '</button></div>';
                                         else
                                             playlistbtn +=
-                                            '<div class="four wide mobile two wide computer column"><button onclick="sharpnessPost(\'' +
-                                            j.playUrl + '\',' + j.source + ')" class="ui button">' +
+                                            '<div class="four wide mobile two wide computer column play' +
+                                            i + '"><button onclick="sharpnessPost(\'' +
+                                            j.playUrl + '\',' + j.source + ');$(.play' + i +
+                                            ').addClass("loading");" class="ui button">' +
                                             (i + 1) + '</button></div>';
                                     }
                                     $(".playslist").html(playlistbtn);
@@ -313,7 +315,6 @@
                     '&deviceid=852772226371378&url=' + playurl,
                 method: 'POST'
             }, function (key, result) {
-                console.log(result);
                 let json = JSON.parse(result);
                 sharpnesslist = json.data.items;
                 let sharpnesslistbtn = "";
