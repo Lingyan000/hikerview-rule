@@ -321,14 +321,13 @@
             }, function (key, result) {
                 try {
                     let json = JSON.parse(result);
-                    sharpnesslist = json.data.items;
+                    let sharpnesslist = json.data.items;
                     let sharpnesslistbtn = "";
                     for (i = 0; i < sharpnesslist.length; i++) {
                         let j = sharpnesslist[i];
                         sharpnesslistbtn += '<button onclick="fy_bridge_app.playVideo(\'' +
                             j.mediaUrl +
                             '\')" class="ui basic button">' + j.mediaName + '</button><br><br>';
-                            
                     }
                     $(".centered.content.sharpness").html(sharpnesslistbtn);
                     $(".loading").removeClass("loading");
