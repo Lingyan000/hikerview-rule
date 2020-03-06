@@ -280,16 +280,14 @@
                                             j.playUrl +
                                             '\')" class="ui button">' +
                                             (i + 1) + '</button></div>';
-                                        else {
+                                        else
                                             playlistbtn +=
-                                                '<div class="four wide mobile two wide computer column play' +
-                                                i + '"><button class="ui button">' +
-                                                (i + 1) + '</button></div>';
-                                            $(".play" + i + "").on("click", function () {
-                                                sharpnessPost(j.playUrl, j.source);
-                                                $(".play" + i + "").addClass("loading");
-                                            })
-                                        }
+                                            '<div class="four wide mobile two wide computer column play' +
+                                            i + '"><button onclick="sharpnessPost(\'' +
+                                            j.playUrl + '\',' + j.source + ',' + i +
+                                            ');$(\'.play' + i +
+                                            '\').addClass(\'loading\');" class="ui button">' +
+                                            (i + 1) + '</button></div>';
                                     }
                                     $(".playslist").html(playlistbtn);
                                 } catch (e) {
