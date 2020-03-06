@@ -270,6 +270,7 @@
                                 try {
                                     let json = JSON.parse(result);
                                     let playlist = json.data.plays;
+                                    let playlistbtn = "";
                                     for (let i = 0; i < playlist; i++) {
                                         let j = playlist[i];
                                         let url = "";
