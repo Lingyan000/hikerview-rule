@@ -320,6 +320,7 @@
                 method: 'POST'
             }, function (key, result) {
                 try {
+                    console.log(result);
                     let json = JSON.parse(result);
                     let sharpnesslist = json.data.items;
                     let sharpnesslistbtn = "";
