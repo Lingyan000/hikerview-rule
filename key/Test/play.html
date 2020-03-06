@@ -272,7 +272,7 @@
                                     let json = JSON.parse(result);
                                     let playlist = json.data.plays;
                                     let playlistbtn = "";
-                                    for (let i = 0; i < playlist; i++) {
+                                    for (let i = 0; i < playlist.length; i++) {
                                         let j = playlist[i];
                                         console.log(i);
                                         let url = "";
