@@ -284,8 +284,8 @@
                                             playlistbtn +=
                                             '<div class="four wide mobile two wide computer column play' +
                                             i + '"><button onclick="sharpnessPost(\'' +
-                                            j.playUrl + '\',' + j.source + ');$(.play' + i +
-                                            ').addClass("loading");" class="ui button">' +
+                                            j.playUrl + '\',' + j.source + ',' + i +
+                                            ');" class="ui button">' +
                                             (i + 1) + '</button></div>';
                                     }
                                     $(".playslist").html(playlistbtn);
@@ -306,7 +306,8 @@
         });
 
         /*POST请求获取清晰度与播放链接（主要用于卧龙影视）*/
-        function sharpnessPost(playurl, source) {
+        function sharpnessPost(playurl, source, id) {
+            $('.play' + id).addClass("loading");
             requestAsync('http://v2.tgmmvip.com/wolong/parse/video/play', {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
@@ -325,6 +326,7 @@
                         '\')" class="ui basic button">' + j.mediaName + '</button><br><br>';
                 }
                 $(".centered.content.sharpness").html(sharpnesslistbtn);
+                $(".loading").removeClass("loading");
                 $(".modal").modal("hide");
                 $(".ui.modal.sharpness").modal("show");
             });
