@@ -395,6 +395,7 @@
             }
             $("#dpsOK").on("click", function () {
                 let sdpwxkey = $(".dpswxkey").val();
+                $(".modal").modal("hide");
                 fy_bridge_app.importRule(dpskey.replace("需要获取的密钥", sdpwxkey));
             })
         })
