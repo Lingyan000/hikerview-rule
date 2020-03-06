@@ -291,7 +291,8 @@
                     </div>
                     <div class="actions">
                         <div class="ui negative button">关闭</div>
-                        <div id="dpsOK" class="ui positive right labeled icon button luck">确认<i class="checkmark icon"></i>
+                        <div id="dpsOK" class="ui positive right labeled icon button luck">确认<i
+                                class="checkmark icon"></i>
                         </div>
                     </div>
                 </div>
@@ -392,9 +393,10 @@
             document.getElementById("fk").onclick = function () {
                 fy_bridge_app.importRule(fkkey);
             }
-            document.getElementById("dpsOK").onclick = function () {
-                fy_bridge_app.importRule(dpskey.replace("需要获取的密钥",$(".dpswxkey").val()));
-            }
+            $("#dpsOK").on("click", function () {
+                let sdpwxkey = $(".dpswxkey").val();
+                fy_bridge_app.importRule(dpskey.replace("需要获取的密钥", sdpwxkey));
+            })
         })
         $(function () {
             $("#wl").on("click", function () {
