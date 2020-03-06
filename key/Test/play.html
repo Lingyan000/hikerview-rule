@@ -323,8 +323,8 @@
                     let json = JSON.parse(result);
                     let sharpnesslist = json.data.items;
                     let sharpnesslistbtn = "";
-                    for (let i = 0; i < sharpnesslist.length; i++) {
-                        let j = sharpnesslist[i];
+                    for (let i = 0; i < json.data.items.length; i++) {
+                        let j = json.data.items[i];
                         sharpnesslistbtn += '<button onclick="fy_bridge_app.playVideo(\'' +
                             j.mediaUrl +
                             '\')" class="ui basic button">' + j.mediaName + '</button><br><br>';
