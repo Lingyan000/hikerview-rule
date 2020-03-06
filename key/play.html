@@ -238,7 +238,6 @@
                         let playlistbtn = "";
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
-                            let url = "";
                             sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
@@ -247,8 +246,62 @@
                         }
                         $(".playslist").html(playlistbtn);
                     }
+
+                    /*卧龙的布局添加*/
+                    function wolong() {
+                        $("title").html(json.data.title + '-卧龙影视');
+                        fy_bridge_app.setWebTitle(json.data.title + "-卧龙影视");
+                        $(".cover-url").attr("src", json.data.imgUrl.replace(
+                            /.*\:\/\/img.*\.doubanio\.com/g,
+                            "https://images.weserv.nl/?url=img9.doubanio.com/"));
+                        $(".title").html(json.data.title);
+                        if (json.data.updateText !== null && json.data.updateText !== undefined && json.data
+                            .updateText !== '')
+                            $(".desc").html(json.data.area + "•" + json.data.year +
+                                "•" +
+                                json.data.updateText);
+                        else
+                            $(".desc").html(json.data.area + "•" + json.data.year);
+                        $(".info-text").html(json.data.introduction);
+                        /*由于卧龙的集数需要再请求一个接口，所以另写一个方法*/
+                        wolongEpisode(json.data.videoId);
+                    }
+
+                    /*卧龙集数*/
+                    function wolongEpisode(id) {
+                        requestAsync("http://v2.tgmmvip.com/wolong/gae/video/plays?videoId=" + id,
+                            function (key, result) {
+                                try {
+                                    let json = JSON.parse(result);
+                                    let playlist = json.data.plays;
+                                    let playlistbtn = "";
+                                    for (let i = 0; i < playlist.length; i++) {
+                                        let j = playlist[i];
+                                        let url = "";
+                                        if (j.source == 0)
+                                            playlistbtn +=
+                                            '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
+                                            j.playUrl +
+                                            '\')" class="ui button">' +
+                                            (i + 1) + '</button></div>';
+                                        else
+                                            playlistbtn +=
+                                            '<div class="four wide mobile two wide computer column play' +
+                                            i + '"><button onclick="sharpnessPost(\'' +
+                                            j.playUrl + '\',' + j.source + ',' + i +
+                                            ');$(this).addClass(\'loading\');" class="ui button">' +
+                                            (i + 1) + '</button></div>';
+                                    }
+                                    $(".playslist").html(playlistbtn);
+                                } catch (e) {
+                                    alert(e);
+                                }
+                            });
+                    }
+
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
                     else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
+                    else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                 } catch (e) {
                     alert(e);
                 }
@@ -256,6 +309,33 @@
             requestAsync(integrityurl, callback);
         });
 
+        /*POST请求获取清晰度与播放链接（主要用于卧龙影视）*/
+        function sharpnessPost(playurl, source) {
+            requestAsync('http://v2.tgmmvip.com/wolong/parse/video/play', {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: 'timestamp=' + Math.round(new Date() / 1000) + '&sign=852772226371378&source=' + source +
+                    '&deviceid=852772226371378&url=' + playurl,
+                method: 'POST'
+            }, function (key, result) {
+                let json = JSON.parse(result);
+                sharpnesslist = json.data.items;
+                let sharpnesslistbtn = "";
+                for (i = 0; i < sharpnesslist.length; i++) {
+                    let j = sharpnesslist[i];
+                    sharpnesslistbtn += '<button onclick="fy_bridge_app.playVideo(\'' +
+                        j.mediaUrl +
+                        '\')" class="ui basic button">' + j.mediaName + '</button><br><br>';
+                }
+                $(".centered.content.sharpness").html(sharpnesslistbtn);
+                $(".loading").removeClass("loading");
+                $(".modal").modal("hide");
+                $(".ui.modal.sharpness").modal("show");
+            });
+        }
+
+        /*清晰度*/
         function sharpness(sharpnesslist) {
             sharpnesslist = sharpnesslist.replace(/YongTeng/g, "\"")
             sharpnesslist = JSON.parse(sharpnesslist);
@@ -272,6 +352,7 @@
             $(".ui.modal.sharpness").modal("show");
         }
 
+        /*播放*/
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");

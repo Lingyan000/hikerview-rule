@@ -255,9 +255,13 @@
                             /.*\:\/\/img.*\.doubanio\.com/g,
                             "https://images.weserv.nl/?url=img9.doubanio.com/"));
                         $(".title").html(json.data.title);
-                        $(".desc").html(json.data.area + "•" + json.data.year +
-                            "•" +
-                            json.data.updateText);
+                        if (json.data.updateText !== null && json.data.updateText !== undefined && json.data
+                            .updateText !== '')
+                            $(".desc").html(json.data.area + "•" + json.data.year +
+                                "•" +
+                                json.data.updateText);
+                        else
+                            $(".desc").html(json.data.area + "•" + json.data.year);
                         $(".info-text").html(json.data.introduction);
                         /*由于卧龙的集数需要再请求一个接口，所以另写一个方法*/
                         wolongEpisode(json.data.videoId);
