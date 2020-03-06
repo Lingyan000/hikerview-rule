@@ -288,7 +288,7 @@
                                             playlistbtn +=
                                             '<div class="four wide mobile two wide computer column play' +
                                             i + '"><button onclick="sharpnessPost(\'' +
-                                            j.playUrl + '\',' + j.source + ',' + i +
+                                            j.playUrl + '\',' + j.source +
                                             ');$(this).addClass(\'loading\');" class="ui button">' +
                                             (i + 1) + '</button></div>';
                                     }
@@ -316,22 +316,27 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 body: 'timestamp=' + Math.round(new Date() / 1000) + '&sign=852772226371378&source=' + source +
-                    '&deviceid=852772226371378&url=' + encodeURIComponent(playurl.replace("amp;", "")),
+                    '&deviceid=852772226371378&url=' + playurl,
                 method: 'POST'
             }, function (key, result) {
-                let json = JSON.parse(result);
-                sharpnesslist = json.data.items;
-                let sharpnesslistbtn = "";
-                for (i = 0; i < sharpnesslist.length; i++) {
-                    let j = sharpnesslist[i];
-                    sharpnesslistbtn += '<button onclick="fy_bridge_app.playVideo(\'' +
-                        j.mediaUrl +
-                        '\')" class="ui basic button">' + j.mediaName + '</button><br><br>';
+                try {
+                    let json = JSON.parse(result);
+                    let sharpnesslist = json.data.items;
+                    let sharpnesslistbtn = "";
+                    for (let i = 0; i < sharpnesslist.length; i++) {
+                        let j = sharpnesslist[i];
+                        sharpnesslistbtn += '<button onclick="fy_bridge_app.playVideo(\'' +
+                            j.mediaUrl +
+                            '\')" class="ui basic button">' + j.mediaName + '</button><br><br>';
+                    }
+                    $(".centered.content.sharpness").html(sharpnesslistbtn);
+                    $(".loading").removeClass("loading");
+                    $(".modal").modal("hide");
+                    $(".ui.modal.sharpness").modal("show");
+                } catch (e) {
+                    alert(e);
                 }
-                $(".centered.content.sharpness").html(sharpnesslistbtn);
-                $(".loading").removeClass("loading");
-                $(".modal").modal("hide");
-                $(".ui.modal.sharpness").modal("show");
+
             });
         }
 
