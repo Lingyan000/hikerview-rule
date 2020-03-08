@@ -310,7 +310,15 @@
                     alert(e);
                 }
             }
-
+            if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
+                requestAsync(integrityurl.split('?')[0], {
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: '1=1',
+                    method: 'POST'
+                }, callback);
+        else
             requestAsync(integrityurl, callback);
         });
 
