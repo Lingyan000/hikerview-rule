@@ -311,11 +311,11 @@
                 }
             }
             if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
-                requestAsync("http://api.chunqiu.tv/api/vod/detail.html", {
+                requestAsync(integrityurl.split('?')[0], {
                     headers: {
                         "content-type": "application/json"
                     },
-                    body: '{"id": 172}',
+                    body: '{"id": '+integrityurl.split('?')[1]+'}',
                     method: 'POST'
                 }, callback);
             else
