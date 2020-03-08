@@ -190,8 +190,8 @@
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
+                    console.log(result);
                     let json = JSON.parse(result);
-
                     /*小小影视的布局添加*/
                     function xiaoxiao() {
                         $("title").html(json.data.vodrow.title + '-小小影视');
@@ -267,6 +267,9 @@
                         wolongEpisode(json.data.videoId);
                     }
 
+                    /*春秋影视的布局添加*/
+                    function chunqiu() {}
+
                     /*卧龙集数*/
                     function wolongEpisode(id) {
                         requestAsync("http://v2.tgmmvip.com/wolong/gae/video/plays?videoId=" + id,
@@ -302,10 +305,20 @@
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
                     else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
+                    else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
                 } catch (e) {
                     alert(e);
                 }
             }
+            if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
+                requestAsync(integrityurl.split('?')[0], {
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: '{"id": '+integrityurl.split('?')[1]+'}',
+                    method: 'POST'
+                }, callback);
+        else
             requestAsync(integrityurl, callback);
         });
 
@@ -316,7 +329,7 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 body: 'timestamp=' + Math.round(new Date() / 1000) + '&sign=852772226371378&source=' + source +
-                    '&deviceid=852772226371378&url=' + playurl.replace("&","＆＆"),
+                    '&deviceid=852772226371378&url=' + playurl.replace("&", "＆＆"),
                 method: 'POST'
             }, function (key, result) {
                 try {
