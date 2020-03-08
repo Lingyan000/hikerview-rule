@@ -310,7 +310,8 @@
                     alert(e);
                 }
             }
-            if ("http://api.chunqiu.tv/api/vod/detail.html", {
+            if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
+                requestAsync("http://api.chunqiu.tv/api/vod/detail.html", {
                     headers: {
                         "Content-Type": "application/json"
                     },
