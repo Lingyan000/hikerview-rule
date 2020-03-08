@@ -312,14 +312,14 @@
             }
             if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
                 requestAsync(integrityurl.split('?')[0], {
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: '1=1',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: 'JsonBody=true&id=172',
                     method: 'POST'
                 }, callback);
-        else
-            requestAsync(integrityurl, callback);
+            else
+                requestAsync(integrityurl, callback);
         });
 
         /*POST请求获取清晰度与播放链接（主要用于卧龙影视）*/
