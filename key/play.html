@@ -191,7 +191,6 @@
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
                     let json = JSON.parse(result);
-
                     /*小小影视的布局添加*/
                     function xiaoxiao() {
                         $("title").html(json.data.vodrow.title + '-小小影视');
@@ -267,6 +266,30 @@
                         wolongEpisode(json.data.videoId);
                     }
 
+                    /*春秋影视的布局添加*/
+                    function chunqiu() {
+                        $("title").html(json.data.vod.vod_name + '-春秋影视');
+                        fy_bridge_app.setWebTitle(json.data.vod.vod_name + "-春秋影视");
+                        $(".cover-url").attr("src", json.data.vod.vod_pic);
+                        $(".title").html(json.data.vod.vod_name);
+                        $(".desc").html(json.data.vod.vod_area + "•" + json.data.vod.vod_year +
+                            "•" +
+                            json.data.vod.remarks);
+                        $(".info-text").html(json.data.vod.vod_content);
+                        let playlist = json.data.vod.vod_url;
+                        let playlistbtn = "";
+                        for (i = 0; i < playlist.length; i++) {
+                            let j = playlist[i];
+                            let url = j.url;
+                            playlistbtn +=
+                                '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
+                                url +
+                                '\');" class="ui button play' + i + '">' +
+                                j.name + '</button></div>';
+                        }
+                        $(".playslist").html(playlistbtn);
+                    }
+
                     /*卧龙集数*/
                     function wolongEpisode(id) {
                         requestAsync("http://v2.tgmmvip.com/wolong/gae/video/plays?videoId=" + id,
@@ -302,11 +325,21 @@
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
                     else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
+                    else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
                 } catch (e) {
                     alert(e);
                 }
             }
-            requestAsync(integrityurl, callback);
+            if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
+                requestAsync(integrityurl.split('?')[0], {
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: '{"id": ' + integrityurl.split('?')[1] + '}',
+                    method: 'POST'
+                }, callback);
+            else
+                requestAsync(integrityurl, callback);
         });
 
         /*POST请求获取清晰度与播放链接（主要用于卧龙影视）*/
@@ -316,10 +349,11 @@
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 body: 'timestamp=' + Math.round(new Date() / 1000) + '&sign=852772226371378&source=' + source +
-                    '&deviceid=852772226371378&url=' + playurl.replace("&","＆＆"),
+                    '&deviceid=852772226371378&url=' + playurl.replace("&", "＆＆"),
                 method: 'POST'
             }, function (key, result) {
                 try {
+                    console.log(result);
                     let json = JSON.parse(result);
                     let sharpnesslist = json.data.items;
                     let sharpnesslistbtn = "";
