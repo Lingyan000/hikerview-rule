@@ -22,16 +22,23 @@
 </head>
 
 <body>
-    <div class="ui container">
+    <div class="ui main container">
         <h1 class="ui center aligned icon header"><i class="circular icon"><img
-                    src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg" style="width: 50%;"></i> 🙊视界规则分享 <div
-                class="content">
-                <div class="sub header">打开视界点击即可导入</div>
+                    src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg" style="width: 50%;"></i> 🙊视界规则分享
+            <div class="content">
+            </div>
         </h1>
+        <div class="ui icon message">
+            <i class="bell icon prompt"></i>
+            <div class="content">
+                <div class="header">链接必须用视界打开，点击即可快速导入 </div>
+                <p>如果遇到视界无法导入的情况，检查网页是否完全加载。若没有，可双开视界测试能否完全加载，能打开便自己找找自己视界的设置问题。实在没办法再联系我...</p>
+            </div>
+        </div>
         <div class="ui divider"></div>
         <div class="ui raised very padded text container segment">
             <h2 class="ui header">
-                <i class="bookmark outline icon"></i>
+                <i class="bookmark icon"></i>
                 <div class="content">导航 <div class="sub header">一些关于导航的视界首页规则</div>
                 </div>
             </h2>
@@ -69,8 +76,8 @@
         </div>
         <div class="ui raised very padded text container segment">
             <h2 class="ui header">
-                <i class="file code outline icon"></i>
-                <div class="content">😊影视首页 <div class="sub header">由本人定制的影视首页</div>
+                <i class="android icon"></i>
+                <div class="content">APP影视首页 <div class="sub header">由本人定制的APP影视首页</div>
                 </div>
             </h2>
             <div class="ui divider"></div>
@@ -290,11 +297,20 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <div id="dpsOK" class="ui green right labeled icon button">确认<i
-                                class="checkmark icon"></i>
+                        <div id="dpsOK" class="ui green right labeled icon button">确认<i class="checkmark icon"></i>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+            <img src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg" class="ui centered mini image">
+            <div class="ui horizontal inverted small divided link list">
+                <a class="item" href="http://bbs.fy-sys.cn/member/1562">视界</a>
+                <a class="item" href="http://www.coolapk.com/u/908907">酷安</a>
+                <a class="item" href="#">博客</a>
             </div>
         </div>
     </div>
@@ -336,8 +352,10 @@
         var fkkey =
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"疯狂影视","find_rule":"body&&li;span,1&&Text;a&&href;span&&Text","search_url":"http://ifkdy.com/?p=fypage&q=**;get;utf-8;{User-Agent@Windows}","titleColor":"","group":"②影搜"}`;
         var dpskey =
-            `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"度盘搜","find_rule":"js: var json = getResCode();\\r\\neval('resJson=' + json);\\r\\nvar res = {};\\r\\nvar list = resJson.data;\\r\\nvar items = list.map(data => ({\\r\\n    title: data.title,\\r\\n    url: 'https://m.dupanso.com/#/detail?id=' + data.id + '&title=' + data.title,\\r\\n    desc: data.type\\r\\n}));\\r\\nres.data = items;\\r\\nsetSearchResult(res);","search_url":"https://api.nidhsd.top/search?keyword=%E7%88%B1%E6%83%85&page=fypage&invitecode=需要获取的密钥","titleColor":"#4CAF50","group":"⑤下载"}`;
+            `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"度盘搜","find_rule":"js: var json = getResCode();\\r\\neval('resJson=' + json);\\r\\nvar res = {};\\r\\nvar list = resJson.data;\\r\\nvar items = list.map(data => ({\\r\\n    title: data.title,\\r\\n    url: 'https://m.dupanso.com/#/detail?id=' + data.id + '&title=' + data.title,\\r\\n    desc: data.type\\r\\n}));\\r\\nres.data = items;\\r\\nsetSearchResult(res);","search_url":"https://api.nidhsd.top/search?keyword=**&page=fypage&invitecode=需要获取的密钥","titleColor":"#4CAF50","group":"⑤下载"}`;
         $(function () {
+            $('.prompt')
+                .transition('shake');
             document.getElementById("lx").onclick = function () {
                 fy_bridge_app.importRule(lxkey);
             }
