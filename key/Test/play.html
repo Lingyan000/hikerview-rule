@@ -190,7 +190,6 @@
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
-                    console.log(result);
                     let json = JSON.parse(result);
                     /*小小影视的布局添加*/
                     function xiaoxiao() {
@@ -268,7 +267,28 @@
                     }
 
                     /*春秋影视的布局添加*/
-                    function chunqiu() {}
+                    function chunqiu() {
+                        $("title").html(json.data.vod.vod_name + '-春秋影视');
+                        fy_bridge_app.setWebTitle(json.data.vod.vod_name + "-春秋影视");
+                        $(".cover-url").attr("src", json.data.vod.vod_pic);
+                        $(".title").html(json.data.vod.vod_name);
+                        $(".desc").html(json.data.vod.vod_area + "•" + json.data.vod.vod_year +
+                            "•" +
+                            json.data.vod.remarks);
+                        $(".info-text").html(json.data.vod.vod_content);
+                        let playlist = json.data.vod.vod_url;
+                        let playlistbtn = "";
+                        for (i = 0; i < playlist.length; i++) {
+                            let j = playlist[i];
+                            let url = j.url;
+                            playlistbtn +=
+                                '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
+                                url +
+                                '\',' + i + ');" class="ui button play' + i + '">' +
+                                j.name + '</button></div>';
+                        }
+                        $(".playslist").html(playlistbtn);
+                    }
 
                     /*卧龙集数*/
                     function wolongEpisode(id) {
