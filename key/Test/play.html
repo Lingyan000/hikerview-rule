@@ -272,9 +272,13 @@
                         fy_bridge_app.setWebTitle(json.data.vod.vod_name + "-春秋影视");
                         $(".cover-url").attr("src", json.data.vod.vod_pic);
                         $(".title").html(json.data.vod.vod_name);
-                        $(".desc").html(json.data.vod.vod_area + "•" + json.data.vod.vod_year +
-                            "•" +
-                            json.data.vod.remarks);
+                        if (json.data.vod.remarks !== null && json.data.vod.remarks !== undefined && json
+                            .data.vod.remarks !== '')
+                            $(".desc").html(json.data.vod.vod_area + "•" + json.data.vod.vod_year +
+                                "•" +
+                                json.data.vod.remarks);
+                        else
+                            $(".desc").html(json.data.vod.vod_area + "•" + json.data.vod.vod_year);
                         $(".info-text").html(json.data.vod.vod_content);
                         let playlist = json.data.vod.vod_url;
                         let playlistbtn = "";
