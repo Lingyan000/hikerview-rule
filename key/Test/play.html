@@ -282,9 +282,9 @@
                             let j = playlist[i];
                             let url = j.url;
                             playlistbtn +=
-                                '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
+                                '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
                                 url +
-                                '\',' + i + ');" class="ui button play' + i + '">' +
+                                '\');" class="ui button play' + i + '">' +
                                 j.name + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -335,7 +335,7 @@
                     headers: {
                         "content-type": "application/json"
                     },
-                    body: '{"id": '+integrityurl.split('?')[1]+'}',
+                    body: '{"id": ' + integrityurl.split('?')[1] + '}',
                     method: 'POST'
                 }, callback);
             else
