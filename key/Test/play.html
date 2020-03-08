@@ -313,9 +313,9 @@
             if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
                 requestAsync("http://api.chunqiu.tv/api/vod/detail.html", {
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/x-www-form-urlencoded"
                     },
-                    body: '{"id":172}',
+                    body: 'JsonBody=true&id=172',
                     method: 'POST'
                 }, callback);
             else
