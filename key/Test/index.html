@@ -27,6 +27,20 @@
             padding-bottom: 5em;
         }
     </style>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/2bc84ebe.js", "daovoice")
+    </script>
 </head>
 
 <body>
@@ -444,6 +458,11 @@
         </div>
     </div>
     <script>
+        daovoice('init', {
+            app_id: "2bc84ebe"
+        });
+        daovoice('update');
+
         var lxkey =
             `海阔视界规则分享，当前分享的是：首页频道￥home_rule￥{"title":"龙轩导航","url":"http://api.ilxdh.com/navig/classify/list?fid=fyclass;post","col_type":"text_3","class_name":"生活&影视&搜索&软件工具&设计素材&音乐读物&学习提升","class_url":"167&171&172&173&174&176&177","area_name":"","area_url":"","year_name":"","year_url":"","find_rule":"js: var json = JSON.parse(getResCode());\\r\\nvar list = json.data;\\r\\nvar res = {};\\r\\nvar d = [];\\r\\nfor (var i = 0; i < list.length; i++) {\\r\\n    try {\\r\\n        var r = {};\\r\\n        var j = list[i];\\r\\n        r.title = j.name;\\r\\n        r.col_type = 'text_1';\\r\\n        d.push(r);\\r\\n        var items = j.web.map(data => ({\\r\\n            title: data.name,\\r\\n            url: data.url\\r\\n        }));\\r\\n        d.push.apply(d,items);\\r\\n    } catch (e) {}\\r\\n}\\r\\nres.data = d;\\r\\nsetHomeResult(res);","search_url":"","titleColor":"","group":"①常用","searchFind":""}`;
         var jbtkey =
@@ -500,10 +519,91 @@
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"疯狂影视","find_rule":"body&&li;span,1&&Text;a&&href;span&&Text","search_url":"http://ifkdy.com/?p=fypage&q=**;get;utf-8;{User-Agent@Windows}","titleColor":"","group":"②影搜"}`;
         var dpskey =
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"度盘搜","find_rule":"js: var json = getResCode();\\r\\neval('resJson=' + json);\\r\\nvar res = {};\\r\\nvar list = resJson.data;\\r\\nvar items = list.map(data => ({\\r\\n    title: data.title,\\r\\n    url: 'https://m.dupanso.com/#/detail?id=' + data.id + '&title=' + data.title,\\r\\n    desc: data.type\\r\\n}));\\r\\nres.data = items;\\r\\nsetSearchResult(res);","search_url":"https://api.nidhsd.top/search?keyword=**&page=fypage&invitecode=需要获取的密钥","titleColor":"#4CAF50","group":"⑤下载"}`;
+        document.getElementById("lx").onclick = function () {
+            fy_bridge_app.importRule(lxkey);
+        }
+        document.getElementById("jbt").onclick = function () {
+            fy_bridge_app.importRule(jbtkey);
+        }
+        document.getElementById("lm").onclick = function () {
+            fy_bridge_app.importRule(lmkey);
+        }
+        document.getElementById("xkz").onclick = function () {
+            fy_bridge_app.importRule(xkzkey);
+        }
+        document.getElementById("wlhome").onclick = function () {
+            fy_bridge_app.importRule(wlhomekey);
+        }
+        document.getElementById("wlmod").onclick = function () {
+            fy_bridge_app.importRule(wlmodkey);
+        }
+        document.getElementById("wlweb").onclick = function () {
+            fy_bridge_app.importRule(wlwebkey);
+        }
+        document.getElementById("wlfile").onclick = function () {
+            fy_bridge_app.importRule(wlfilekey);
+        }
+        document.getElementById("k365home").onclick = function () {
+            fy_bridge_app.importRule(k365homekey);
+        }
+        document.getElementById("k365mod").onclick = function () {
+            fy_bridge_app.importRule(k365modkey);
+        }
+        document.getElementById("k365web").onclick = function () {
+            fy_bridge_app.importRule(k365webkey);
+        }
+        document.getElementById("k365file").onclick = function () {
+            fy_bridge_app.importRule(k365filekey);
+        }
+        document.getElementById("xxhome").onclick = function () {
+            fy_bridge_app.importRule(xxhomekey);
+        }
+        document.getElementById("xxfl").onclick = function () {
+            fy_bridge_app.importRule(xxflkey);
+        }
+        document.getElementById("xxmod").onclick = function () {
+            fy_bridge_app.importRule(xxmodkey);
+        }
+        document.getElementById("xxweb").onclick = function () {
+            fy_bridge_app.importRule(xxwebkey);
+        }
+        document.getElementById("xxfile").onclick = function () {
+            fy_bridge_app.importRule(xxfilekey);
+        }
+        document.getElementById("cqweb").onclick = function () {
+            fy_bridge_app.importRule(cqwebkey);
+        }
+        document.getElementById("cqfile").onclick = function () {
+            fy_bridge_app.importRule(cqfilekey);
+        }
+        document.getElementById("filerule").onclick = function () {
+            fy_bridge_app.importRule(filerulekey);
+        }
+        document.getElementById("cbhzx").onclick = function () {
+            fy_bridge_app.importRule(cbhzxkey);
+        }
+        document.getElementById("cbhxz").onclick = function () {
+            fy_bridge_app.importRule(cbhxzkey);
+        }
+        document.getElementById("cbhzm").onclick = function () {
+            fy_bridge_app.importRule(cbhzmkey);
+        }
+        document.getElementById("whzzh").onclick = function () {
+            fy_bridge_app.importRule(whzzhkey);
+        }
+        document.getElementById("whzzx").onclick = function () {
+            fy_bridge_app.importRule(whzzxkey);
+        }
+        document.getElementById("whzxz").onclick = function () {
+            fy_bridge_app.importRule(whzxzkey);
+        }
+        document.getElementById("fk").onclick = function () {
+            fy_bridge_app.importRule(fkkey);
+        }
         $(function () {
             $('.prompt')
                 .transition('shake');
-            
+
             $("#dpsOK").on("click", function () {
                 let sdpwxkey = $(".dpswxkey").val();
                 fy_bridge_app.importRule(dpskey.replace("需要获取的密钥", sdpwxkey));
