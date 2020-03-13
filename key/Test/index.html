@@ -16,6 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     <title>YongTeng</title>
     <style>
         h2 {
@@ -25,6 +26,44 @@
         .ui.container {
             padding-top: 5em;
             padding-bottom: 5em;
+        }
+
+        .alert {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            min-width: 300px;
+            max-width: 600px;
+            transform: translate(-50%, -50%);
+            z-index: 99999;
+            text-align: center;
+            padding: 15px;
+            border-radius: 3px;
+        }
+
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+
+        .alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
         }
     </style>
     <script>
@@ -49,6 +88,10 @@
                     src="https://i.loli.net/2020/02/26/iSHg7IvYQnz1GRK.jpg" style="width: 50%;"></i> pyteng's hikerview
             rule
             <div class="content">
+                <div class="ui toggle checkbox">
+                    <input id="cbCopy" type="checkbox" name="public" οnclick="rule()">
+                    <label>开启后即可快速导入，否则复制！</label>
+                </div>
             </div>
         </h1>
         <div class="ui icon message">
@@ -454,7 +497,7 @@
             </div>
         </div>
     </div>
-    <div class="ui inverted vertical footer segment">
+    <div class="ui inverted vertical footer segment" id="fuzhi">
         <div class="ui center aligned container">
             <img src="https://i.loli.net/2020/03/09/Sf76reOmVHdWqtU.png" class="ui centered mini image">
             <div class="ui horizontal inverted small divided link list">
@@ -465,10 +508,49 @@
         </div>
     </div>
     <script>
-        daovoice('init', {
-            app_id: "2bc84ebe"
+        /**
+         * 弹出式提示框，默认1.2秒自动消失
+         * @param message 提示信息
+         * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+         * @param time 消失时间
+         */
+        var prompt = function (message, style, time) {
+            style = (style === undefined) ? 'alert-success' : style;
+            time = (time === undefined) ? 1200 : time;
+            $('<div>')
+                .appendTo('body')
+                .addClass('alert ' + style)
+                .html(message)
+                .show()
+                .delay(time)
+                .fadeOut();
+        };
+
+        // 成功提示
+        var success_prompt = function (message, time) {
+            prompt(message, 'alert-success', time);
+        };
+
+        // 失败提示
+        var fail_prompt = function (message, time) {
+            prompt(message, 'alert-danger', time);
+        };
+
+        // 提醒
+        var warning_prompt = function (message, time) {
+            prompt(message, 'alert-warning', time);
+        };
+
+        // 信息提示
+        var info_prompt = function (message, time) {
+            prompt(message, 'alert-info', time);
+        };
+    </script>
+    <script>
+        rule();
+        $("#cbCopy").change(function () {
+            rule();
         });
-        daovoice('update');
 
         var lxkey =
             `海阔视界规则分享，当前分享的是：首页频道￥home_rule￥{"title":"龙轩导航","url":"http://api.ilxdh.com/navig/classify/list?fid=fyclass;post","col_type":"text_3","class_name":"生活&影视&搜索&软件工具&设计素材&音乐读物&学习提升","class_url":"167&171&172&173&174&176&177","area_name":"","area_url":"","year_name":"","year_url":"","find_rule":"js: var json = JSON.parse(getResCode());\\r\\nvar list = json.data;\\r\\nvar res = {};\\r\\nvar d = [];\\r\\nfor (var i = 0; i < list.length; i++) {\\r\\n    try {\\r\\n        var r = {};\\r\\n        var j = list[i];\\r\\n        r.title = j.name;\\r\\n        r.col_type = 'text_1';\\r\\n        d.push(r);\\r\\n        var items = j.web.map(data => ({\\r\\n            title: data.name,\\r\\n            url: data.url\\r\\n        }));\\r\\n        d.push.apply(d,items);\\r\\n    } catch (e) {}\\r\\n}\\r\\nres.data = d;\\r\\nsetHomeResult(res);","search_url":"","titleColor":"","group":"①常用","searchFind":""}`;
@@ -526,86 +608,188 @@
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"疯狂影视","find_rule":"body&&li;span,1&&Text;a&&href;span&&Text","search_url":"http://ifkdy.com/?p=fypage&q=**;get;utf-8;{User-Agent@Windows}","titleColor":"","group":"②影搜"}`;
         var dpskey =
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"度盘搜","find_rule":"js: var json = getResCode();\\r\\neval('resJson=' + json);\\r\\nvar res = {};\\r\\nvar list = resJson.data;\\r\\nvar items = list.map(data => ({\\r\\n    title: data.title,\\r\\n    url: 'https://m.dupanso.com/#/detail?id=' + data.id + '&title=' + data.title,\\r\\n    desc: data.type\\r\\n}));\\r\\nres.data = items;\\r\\nsetSearchResult(res);","search_url":"https://api.nidhsd.top/search?keyword=**&page=fypage&invitecode=需要获取的密钥","titleColor":"#4CAF50","group":"⑤下载"}`;
-        document.getElementById("lx").onclick = function () {
-            fy_bridge_app.importRule(lxkey);
-        }
-        document.getElementById("jbt").onclick = function () {
-            fy_bridge_app.importRule(jbtkey);
-        }
-        document.getElementById("lm").onclick = function () {
-            fy_bridge_app.importRule(lmkey);
-        }
-        document.getElementById("xkz").onclick = function () {
-            fy_bridge_app.importRule(xkzkey);
-        }
-        document.getElementById("wlhome").onclick = function () {
-            fy_bridge_app.importRule(wlhomekey);
-        }
-        document.getElementById("wlmod").onclick = function () {
-            fy_bridge_app.importRule(wlmodkey);
-        }
-        document.getElementById("wlweb").onclick = function () {
-            fy_bridge_app.importRule(wlwebkey);
-        }
-        document.getElementById("wlfile").onclick = function () {
-            fy_bridge_app.importRule(wlfilekey);
-        }
-        document.getElementById("k365home").onclick = function () {
-            fy_bridge_app.importRule(k365homekey);
-        }
-        document.getElementById("k365mod").onclick = function () {
-            fy_bridge_app.importRule(k365modkey);
-        }
-        document.getElementById("k365web").onclick = function () {
-            fy_bridge_app.importRule(k365webkey);
-        }
-        document.getElementById("k365file").onclick = function () {
-            fy_bridge_app.importRule(k365filekey);
-        }
-        document.getElementById("xxhome").onclick = function () {
-            fy_bridge_app.importRule(xxhomekey);
-        }
-        document.getElementById("xxfl").onclick = function () {
-            fy_bridge_app.importRule(xxflkey);
-        }
-        document.getElementById("xxmod").onclick = function () {
-            fy_bridge_app.importRule(xxmodkey);
-        }
-        document.getElementById("xxweb").onclick = function () {
-            fy_bridge_app.importRule(xxwebkey);
-        }
-        document.getElementById("xxfile").onclick = function () {
-            fy_bridge_app.importRule(xxfilekey);
-        }
-        document.getElementById("cqweb").onclick = function () {
-            fy_bridge_app.importRule(cqwebkey);
-        }
-        document.getElementById("cqfile").onclick = function () {
-            fy_bridge_app.importRule(cqfilekey);
-        }
-        document.getElementById("filerule").onclick = function () {
-            fy_bridge_app.importRule(filerulekey);
-        }
-        document.getElementById("cbhzx").onclick = function () {
-            fy_bridge_app.importRule(cbhzxkey);
-        }
-        document.getElementById("cbhxz").onclick = function () {
-            fy_bridge_app.importRule(cbhxzkey);
-        }
-        document.getElementById("cbhzm").onclick = function () {
-            fy_bridge_app.importRule(cbhzmkey);
-        }
-        document.getElementById("whzzh").onclick = function () {
-            fy_bridge_app.importRule(whzzhkey);
-        }
-        document.getElementById("whzzx").onclick = function () {
-            fy_bridge_app.importRule(whzzxkey);
-        }
-        document.getElementById("whzxz").onclick = function () {
-            fy_bridge_app.importRule(whzxzkey);
-        }
-        document.getElementById("fk").onclick = function () {
-            fy_bridge_app.importRule(fkkey);
+
+        function rule() {
+            if (document.getElementById("cbCopy").checked == true) {
+                document.getElementById("lx").onclick = function () {
+                    fy_bridge_app.importRule(lxkey);
+                }
+                document.getElementById("jbt").onclick = function () {
+                    fy_bridge_app.importRule(jbtkey);
+                }
+                document.getElementById("lm").onclick = function () {
+                    fy_bridge_app.importRule(lmkey);
+                }
+                document.getElementById("xkz").onclick = function () {
+                    fy_bridge_app.importRule(xkzkey);
+                }
+                document.getElementById("wlhome").onclick = function () {
+                    fy_bridge_app.importRule(wlhomekey);
+                }
+                document.getElementById("wlmod").onclick = function () {
+                    fy_bridge_app.importRule(wlmodkey);
+                }
+                document.getElementById("wlweb").onclick = function () {
+                    fy_bridge_app.importRule(wlwebkey);
+                }
+                document.getElementById("wlfile").onclick = function () {
+                    fy_bridge_app.importRule(wlfilekey);
+                }
+                document.getElementById("k365home").onclick = function () {
+                    fy_bridge_app.importRule(k365homekey);
+                }
+                document.getElementById("k365mod").onclick = function () {
+                    fy_bridge_app.importRule(k365modkey);
+                }
+                document.getElementById("k365web").onclick = function () {
+                    fy_bridge_app.importRule(k365webkey);
+                }
+                document.getElementById("k365file").onclick = function () {
+                    fy_bridge_app.importRule(k365filekey);
+                }
+                document.getElementById("xxhome").onclick = function () {
+                    fy_bridge_app.importRule(xxhomekey);
+                }
+                document.getElementById("xxfl").onclick = function () {
+                    fy_bridge_app.importRule(xxflkey);
+                }
+                document.getElementById("xxmod").onclick = function () {
+                    fy_bridge_app.importRule(xxmodkey);
+                }
+                document.getElementById("xxweb").onclick = function () {
+                    fy_bridge_app.importRule(xxwebkey);
+                }
+                document.getElementById("xxfile").onclick = function () {
+                    fy_bridge_app.importRule(xxfilekey);
+                }
+                document.getElementById("cqweb").onclick = function () {
+                    fy_bridge_app.importRule(cqwebkey);
+                }
+                document.getElementById("cqfile").onclick = function () {
+                    fy_bridge_app.importRule(cqfilekey);
+                }
+                document.getElementById("filerule").onclick = function () {
+                    fy_bridge_app.importRule(filerulekey);
+                }
+                document.getElementById("cbhzx").onclick = function () {
+                    fy_bridge_app.importRule(cbhzxkey);
+                }
+                document.getElementById("cbhxz").onclick = function () {
+                    fy_bridge_app.importRule(cbhxzkey);
+                }
+                document.getElementById("cbhzm").onclick = function () {
+                    fy_bridge_app.importRule(cbhzmkey);
+                }
+                document.getElementById("whzzh").onclick = function () {
+                    fy_bridge_app.importRule(whzzhkey);
+                }
+                document.getElementById("whzzx").onclick = function () {
+                    fy_bridge_app.importRule(whzzxkey);
+                }
+                document.getElementById("whzxz").onclick = function () {
+                    fy_bridge_app.importRule(whzxzkey);
+                }
+                document.getElementById("fk").onclick = function () {
+                    fy_bridge_app.importRule(fkkey);
+                }
+            } else if (document.getElementById("cbCopy").checked == false) {
+                document.getElementById("lx").onclick = function () {
+                    Copy("lx", lxkey);
+                }
+                document.getElementById("jbt").onclick = function () {
+                    Copy("jbt", jbtkey);
+                }
+                document.getElementById("lm").onclick = function () {
+                    Copy("lm", lmkey);
+                }
+                document.getElementById("xkz").onclick = function () {
+                    Copy("xkz", xkzkey);
+                }
+                document.getElementById("wlhome").onclick = function () {
+                    Copy("wl", wlzkey);
+                }
+                document.getElementById("wlmod").onclick = function () {
+                    Copy("wlmod", wlmodkey);
+                }
+                document.getElementById("wlweb").onclick = function () {
+                    Copy("wlweb", wlwebkey);
+                }
+                document.getElementById("wlfile").onclick = function () {
+                    Copy("wlfile", wlfilekey);
+                }
+                document.getElementById("k365home").onclick = function () {
+                    Copy("k365home", k365homekey);
+                }
+                document.getElementById("k365mod").onclick = function () {
+                    Copy("k365mod", k365modkey);
+                }
+                document.getElementById("k365web").onclick = function () {
+                    Copy("k365web", k365webkey);
+                }
+                document.getElementById("k365file").onclick = function () {
+                    Copy("k365file", k365filekey);
+                }
+                document.getElementById("xxhome").onclick = function () {
+                    Copy("xxhome", xxhomekey);
+                }
+                document.getElementById("xxfl").onclick = function () {
+                    Copy("xxfl", xxflkey);
+                }
+                document.getElementById("xxmod").onclick = function () {
+                    Copy("xxmod", xxmodkey);
+                }
+                document.getElementById("xxweb").onclick = function () {
+                    Copy("xxweb", xxwebkey);
+                }
+                document.getElementById("xxfile").onclick = function () {
+                    Copy("xxfile", xxfilekey);
+                }
+                document.getElementById("cqweb").onclick = function () {
+                    Copy("cqweb", cqwebkey);
+                }
+                document.getElementById("cqfile").onclick = function () {
+                    Copy("cqfile", cqfilekey);
+                }
+                document.getElementById("filerule").onclick = function () {
+                    Copy("filerule", filerulekey);
+                }
+                document.getElementById("cbhzx").onclick = function () {
+                    Copy("cbhzx", cbhzxkey);
+                }
+                document.getElementById("cbhxz").onclick = function () {
+                    Copy("cbhxz", cbhxzkey);
+                }
+                document.getElementById("cbhzm").onclick = function () {
+                    Copy("cbhzm", cbhzmkey);
+                }
+                document.getElementById("whzzh").onclick = function () {
+                    Copy("whzzh", whzzhkey);
+                }
+                document.getElementById("whzzx").onclick = function () {
+                    Copy("whzzx", whzzxkey);
+                }
+                document.getElementById("whzxz").onclick = function () {
+                    Copy("whzxz", whzxzkey);
+                }
+                document.getElementById("fk").onclick = function () {
+                    Copy("fk", fkkey);
+                }
+            }
+
+            function Copy(id, key) {
+                var clipboard = new ClipboardJS('#' + id, {
+                    text: function () {
+                        return key;
+                    }
+                });
+                clipboard.on('success', function () {
+                    prompt("😋复制成功", "alert-success", 1500);
+                });
+
+                clipboard.on('error', function () {
+                    prompt("😥复制失败", "alert-danger", 1500);
+                });
+            }
         }
         $(function () {
             $('.prompt')
