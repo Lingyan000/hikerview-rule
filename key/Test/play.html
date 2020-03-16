@@ -336,7 +336,7 @@
                             console.log(title);
                             let url = j.split('<id>')[1].split('</id>')[0];
                             playlistbtn +=
-                                '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
+                                '<div class="four wide mobile two wide computer column"><button onclick="nanguaplay(\'' +
                                 url +
                                 '\',' + i + ');" class="ui button play' + i + '">' +
                                 title + '</button></div>';
@@ -448,6 +448,20 @@
             $(".ui.modal.sharpness").modal("show");
         }
 
+        /*南瓜影视的视频播放*/
+        function nanguaplay(url, playbtn) {
+            var playbtnclass = ".play" + playbtn;
+            $(playbtnclass).addClass("loading");
+            console.log(result);
+            let html = result;
+            $.ajax({
+                type: 'HEAD',
+                url: url,
+                complete: function (xhr, data) {}
+            });
+            $(".loading").removeClass("loading");
+        }
+
         /*播放*/
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
@@ -496,16 +510,8 @@
                         }
                     }
 
-                    /*南瓜影视的视频播放*/
-                    function nanguaplay() {
-                        console.log(result);
-                        let html = result;
-                        fy_bridge_app.playVideo(html.split('<pre class="detail-text">')[1].split('</pre>')[0]);
-                    }
-
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
                     else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhuiplay();
-                    else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) nanguaplay();
                 } catch (e) {
                     alert(e);
                 }
