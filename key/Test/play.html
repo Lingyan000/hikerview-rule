@@ -326,14 +326,11 @@
                     function nangua() {
                         doupan(integrityurl.split("yongteng")[1]);
                         let html = result;
-                        console.log(html);
                         let playlist = html.split('<table>')[1].split('</table>')[0].split('</tr>');
-                        console.log(playlist);
                         let playlistbtn = "";
                         for (i = 0; i < playlist.length - 1; i++) {
                             let j = playlist[i];
                             let title = j.split('<title>')[1].split('</title>')[0];
-                            console.log(title);
                             let url = j.split('<id>')[1].split('</id>')[0];
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="nanguaplay(\'' +
@@ -410,7 +407,6 @@
                 method: 'POST'
             }, function (key, result) {
                 try {
-                    console.log(result);
                     let json = JSON.parse(result);
                     let sharpnesslist = json.data.items;
                     let sharpnesslistbtn = "";
@@ -455,7 +451,9 @@
             $.ajax({
                 type: 'HEAD',
                 url: url,
-                complete: function (xhr, data) {}
+                complete: function (xhr, data) {
+                    console.log(fy_bridge_app.getNetworkRecords());
+                }
             });
             $(".loading").removeClass("loading");
         }
