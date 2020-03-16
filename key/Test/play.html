@@ -452,8 +452,6 @@
         function nanguaplay(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
-            console.log(result);
-            let html = result;
             $.ajax({
                 type: 'HEAD',
                 url: url,
