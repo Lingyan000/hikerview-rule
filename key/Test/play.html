@@ -327,10 +327,10 @@
                         doupan(integrityurl.split("yongteng")[1]);
                         let html = result;
                         console.log(html);
-                        let playlist = html.match(/<tr>.*<\/tr>/g).split('</tr>');
+                        let playlist = html.split('<table>')[1].split('</table>')[0].split('</tr>');
                         console.log(playlist);
                         let playlistbtn = "";
-                        for (i = 0; i < playlist.length; i++) {
+                        for (i = 0; i < playlist.length - 1; i++) {
                             let j = playlist[i];
                             let title = j.split('<title>')[1].split('</title>')[0];
                             console.log(title);
