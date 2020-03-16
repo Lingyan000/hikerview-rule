@@ -152,7 +152,9 @@ $(function () {
             function nangua() {
                 doupan(integrityurl.split("yongteng")[1]);
                 let html = result;
+                console.log(html);
                 let playlist = html.split('<table>')[1].split('</table>')[0].split('</tr>');
+                console.log(playlist);
                 let playlistbtn = "";
                 for (i = 0; i < playlist.length; i++) {
                     let j = playlist[i];
