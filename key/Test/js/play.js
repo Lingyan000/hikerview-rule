@@ -159,6 +159,7 @@ $(function () {
                 for (i = 0; i < playlist.length; i++) {
                     let j = playlist[i];
                     let title = j.split('<title>')[1].split('</title>')[0];
+                    console.log(title);
                     let url = j.split('<id>')[1].split('</id>')[0];
                     playlistbtn +=
                         '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
