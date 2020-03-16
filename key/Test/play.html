@@ -393,7 +393,9 @@
                     body: '{"id": ' + integrityurl.split('?')[1] + '}',
                     method: 'POST'
                 }, callback);
-            else
+            else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) {
+                requestAsync(integrityurl.split("yongteng")[0], callback);
+            } else
                 requestAsync(integrityurl, callback);
         });
 
