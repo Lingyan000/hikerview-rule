@@ -166,6 +166,7 @@
             </div>
         </div>
     </div>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Lingyan000/hikerview-rule/key/Test/js/play.min.js"></script> -->\
     <script>
         var integrityurl = window.location.href;
         var integrityurl = integrityurl.split("#")[1];
@@ -186,13 +187,35 @@
             })
         })
 
+        /*豆瓣信息拉取*/
+        function doupan(keyword) {
+            requestAsync('https://www.douban.com/search?q=' + keyword, function (key, result) {
+                try {
+                    let html = result;
+                    let li = html.split('class="result"')[1];
+                    $("title").html(li.split('class="nbg"')[1].split('</a>')[0].split('title="')[1].split('"')[
+                        0] + "-南瓜影视");
+                    fy_bridge_app.setWebTitle(li.split('class="nbg"')[1].split('</a>')[0].split('title="')[1]
+                        .split('"')[0] + "-南瓜影视");
+                    $(".cover-url").attr("src", 'https://images.weserv.nl/?url=' + li.split('img src="')[1]
+                        .split('"')[0]);
+                    $(".title").html(li.split('class="nbg"')[1].split('</a>')[0].split('title="')[1].split('"')[
+                        0]);
+                    $(".desc").html(li.split('"subject-cast">')[1].split('</span>')[0].replace(' / ', '•'));
+                    $(".info-text").html(li.split('<p>')[1].split('</p>')[0]);
+                } catch (e) {
+                    alert(e);
+                }
+            });
+        }
+
         $(function () {
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
-                    let json = JSON.parse(result);
                     /*小小影视的布局添加*/
                     function xiaoxiao() {
+                        let json = JSON.parse(result);
                         $("title").html(json.data.vodrow.title + '-小小影视');
                         fy_bridge_app.setWebTitle(json.data.vodrow.title + "-小小影视");
                         $(".cover-url").attr("src", json.data.vodrow.coverpic);
@@ -218,6 +241,7 @@
 
                     /*剧汇TV的布局添加*/
                     function juhui() {
+                        let json = JSON.parse(result);
                         $("title").html(json.data.programme.title + '-剧汇TV');
                         fy_bridge_app.setWebTitle(json.data.programme.title + "-剧汇TV");
                         $(".cover-url").attr("src", json.data.programme.verticalCover);
@@ -248,11 +272,14 @@
 
                     /*卧龙的布局添加*/
                     function wolong() {
+                        let json = JSON.parse(result);
                         $("title").html(json.data.title + '-卧龙影视');
                         fy_bridge_app.setWebTitle(json.data.title + "-卧龙影视");
-                        $(".cover-url").attr("src", json.data.imgUrl.replace(
-                            /.*\:\/\/img.*\.doubanio\.com/g,
-                            "https://images.weserv.nl/?url=img9.doubanio.com/"));
+                        let imgUrl = json.data.imgUrl;
+                        if (json.data.imgUrl.indexOf("doubanio") != -1) {
+                            imgUrl = "https://images.weserv.nl/?url=" + imgUrl;
+                        }
+                        $(".cover-url").attr("src", imgUrl);
                         $(".title").html(json.data.title);
                         if (json.data.updateText !== null && json.data.updateText !== undefined && json.data
                             .updateText !== '')
@@ -268,6 +295,7 @@
 
                     /*春秋影视的布局添加*/
                     function chunqiu() {
+                        let json = JSON.parse(result);
                         $("title").html(json.data.vod.vod_name + '-春秋影视');
                         fy_bridge_app.setWebTitle(json.data.vod.vod_name + "-春秋影视");
                         $(".cover-url").attr("src", json.data.vod.vod_pic);
@@ -290,6 +318,25 @@
                                 url +
                                 '\');" class="ui button play' + i + '">' +
                                 j.name + '</button></div>';
+                        }
+                        $(".playslist").html(playlistbtn);
+                    }
+
+                    /*南瓜影视的布局添加*/
+                    function nangua() {
+                        doupan(integrityurl.split("yongteng")[1]);
+                        let html = result;
+                        let playlist = html.split('<table>')[1].split('</table>')[0].split('</tr>');
+                        let playlistbtn = "";
+                        for (i = 0; i < playlist.length - 1; i++) {
+                            let j = playlist[i];
+                            let title = j.split('<title>')[1].split('</title>')[0];
+                            let url = j.split('<id>')[1].split('</id>')[0];
+                            playlistbtn +=
+                                '<div class="four wide mobile two wide computer column"><button onclick="nanguaplay(\'' +
+                                url +
+                                '\',' + i + ');" class="ui button play' + i + '">' +
+                                title + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
                     }
@@ -330,6 +377,7 @@
                     else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                     else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
+                    else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) nangua();
                 } catch (e) {
                     alert(e);
                 }
@@ -357,7 +405,6 @@
                 method: 'POST'
             }, function (key, result) {
                 try {
-                    console.log(result);
                     let json = JSON.parse(result);
                     let sharpnesslist = json.data.items;
                     let sharpnesslistbtn = "";
@@ -395,16 +442,29 @@
             $(".ui.modal.sharpness").modal("show");
         }
 
+        /*南瓜影视的视频播放*/
+        function nanguaplay(url, playbtn) {
+            var playbtnclass = ".play" + playbtn;
+            $(playbtnclass).addClass("loading");
+            $.ajax({
+                type: 'HEAD',
+                url: url,
+                complete: function (xhr, data) {
+                    $(".loading").removeClass("loading");
+                }
+            });
+        }
+
         /*播放*/
         function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-                    let json = JSON.parse(result);
 
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
+                        let json = JSON.parse(result);
                         if (json.retcode == 3)
                             url = json.data.httpurl_preview.replace("?300", "");
                         else
@@ -414,6 +474,7 @@
 
                     /*剧汇TV的视频播放*/
                     function juhuiplay() {
+                        let json = JSON.parse(result);
                         if (json.success == true) {
                             url = json.data.url;
                             fy_bridge_app.playVideo(url);
