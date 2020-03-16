@@ -498,6 +498,7 @@
 
                     /*南瓜影视的视频播放*/
                     function nanguaplay() {
+                        console.log(result);
                         let html = result;
                         fy_bridge_app.playVideo(html.split('<pre class="detail-text">')[1].split('</pre>')[0]);
                     }
