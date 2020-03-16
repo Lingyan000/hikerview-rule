@@ -150,7 +150,7 @@ $(function () {
 
             /*南瓜影视的布局添加*/
             function nangua() {
-                doupan(integrityurl.split("?")[1]);
+                doupan(integrityurl.split("yongteng")[1]);
                 let html = result;
                 let playlist = html.split('<table>')[1].split('</table>')[0].split('</tr>');
                 let playlistbtn = "";
