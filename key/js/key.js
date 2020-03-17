@@ -56,7 +56,7 @@ rule();
         var whzxzkey =
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"五号站·下载","find_rule":".s-box&&ul,1&&.m_list;a&&Text;a&&href;span&&Text","search_url":"http://www.baike567.com/s/**/","titleColor":"#4CAF50","group":"⑤下载"}`;
         var fkkey =
-            `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"疯狂影视","find_rule":"body&&li;span,1&&Text;a&&href;span&&Text","search_url":"http://ifkdy.com/?p=fypage&q=**;get;utf-8;{User-Agent@Windows}","titleColor":"","group":"②影搜"}`;
+            `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"疯狂影视","find_rule":".has-results-container&&.results-item;.m-name&&Text;a&&href;.m-source&&Text","search_url":"http://ifkdy.com/search?key=**&page=fypage","titleColor":"","group":"②影搜"}`;
         var dpskey =
             `海阔视界规则分享，当前分享的是：搜索引擎￥search_engine_v2￥{"title":"度盘搜","find_rule":"js: var json = getResCode();\\r\\neval('resJson=' + json);\\r\\nvar res = {};\\r\\nvar list = resJson.data;\\r\\nvar items = list.map(data => ({\\r\\n    title: data.title,\\r\\n    url: 'https://m.dupanso.com/#/detail?id=' + data.id + '&title=' + data.title,\\r\\n    desc: data.type\\r\\n}));\\r\\nres.data = items;\\r\\nsetSearchResult(res);","search_url":"https://api.nidhsd.top/search?keyword=**&page=fypage&invitecode=需要获取的密钥","titleColor":"#4CAF50","group":"⑤下载"}`;
 
