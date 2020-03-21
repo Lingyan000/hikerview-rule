@@ -374,7 +374,7 @@
                     }
 
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
-                    else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
+                    else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhui();
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                     else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
                     else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) nangua();
@@ -392,6 +392,14 @@
                 }, callback);
             else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) {
                 requestAsync(integrityurl.split("yongteng")[0], callback);
+            } else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) {
+                requestAsync(integrityurl, {
+                    headers: {
+                        "content-type": "application/x-www-form-urlencoded",
+                        "Device-ID": "10"
+                    },
+                    method: 'GET'
+                }, callback);
             } else
                 requestAsync(integrityurl, callback);
         });
