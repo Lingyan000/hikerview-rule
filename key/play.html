@@ -516,13 +516,22 @@
                     }
 
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
-                    else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhuiplay();
+                    else if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1) juhuiplay();
                 } catch (e) {
                     alert(e);
                 }
                 $(".loading").removeClass("loading");
             }
-            requestAsync(url, callbackplay);
+            if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1)
+                requestAsync(url, {
+                    headers: {
+                        "content-type": "application/x-www-form-urlencoded",
+                        "Device-ID": "10"
+                    },
+                    method: 'GET'
+                }, callbackplay);
+            else
+                requestAsync(url, callbackplay);
         }
     </script>
 </body>
