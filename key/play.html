@@ -384,6 +384,14 @@
                 }
             }
             console.log(integrityurl);
+            if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1)
+                requestAsync(integrityurl, {
+                    headers: {
+                        "content-type": "application/x-www-form-urlencoded",
+                        "Device-ID": "10"
+                    },
+                    method: 'GET'
+                }, callback);
             if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
                 requestAsync(integrityurl.split('?')[0], {
                     headers: {
@@ -394,16 +402,6 @@
                 }, callback);
             if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1)
                 requestAsync(integrityurl.split("yongteng")[0], callback);
-            if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1)
-                requestAsync(integrityurl, {
-                    headers: {
-                        "content-type": "application/x-www-form-urlencoded",
-                        "Device-ID": "10"
-                    },
-                    method: 'GET'
-                }, function (key, result) {
-                    console.log(result);
-                });
             else
                 requestAsync(integrityurl, callback);
         });
