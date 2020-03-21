@@ -241,6 +241,7 @@
 
                     /*剧汇TV的布局添加*/
                     function juhui() {
+                        console.log(result);
                         let json = JSON.parse(result);
                         $("title").html(json.data.programme.title + '-剧汇TV');
                         fy_bridge_app.setWebTitle(json.data.programme.title + "-剧汇TV");
@@ -374,14 +375,21 @@
                     }
 
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
-                    else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhui();
+                    else if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1) juhui();
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                     else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
                     else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) nangua();
-                } catch (e) {
-                    alert(e);
-                }
+                } catch (e) {}
             }
+            if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1)
+                requestAsync(integrityurl, {
+                    headers: {
+                        "content-type": "application/x-www-form-urlencoded",
+                        "Device-ID": "10",
+                        "User-Agent": "Viewer/1.2.25 Android/5.1.1 Phone/samsung-SM-N9760"
+                    },
+                    method: 'GET'
+                }, callback);
             if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1)
                 requestAsync(integrityurl.split('?')[0], {
                     headers: {
@@ -390,9 +398,9 @@
                     body: '{"id": ' + integrityurl.split('?')[1] + '}',
                     method: 'POST'
                 }, callback);
-            else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) {
+            if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1)
                 requestAsync(integrityurl.split("yongteng")[0], callback);
-            } else
+            else
                 requestAsync(integrityurl, callback);
         });
 
@@ -434,7 +442,7 @@
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
                 $(".lucknumber").attr("hash", sharpnesslist[i].hash);
-                let url = "https://api.365kqzs.cn:4976/api/resource_url?hash=" + sharpnesslist[i].hash;
+                let url = "https://apis.365kqzs.cn/api/resource_url?hash=" + sharpnesslist[i].hash;
                 sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
                     ')" class="ui basic button play' + i +
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
@@ -476,6 +484,7 @@
 
                     /*剧汇TV的视频播放*/
                     function juhuiplay() {
+                        console.log($(".lucknumber").attr("hash"));
                         let json = JSON.parse(result);
                         if (json.success == true) {
                             url = json.data.url;
@@ -489,13 +498,14 @@
                                 $.ajax({
                                     type: 'HEAD',
                                     url: 'https://ipfs' + i +
-                                        '.365kqzs.cn:9081/ipfs/SnXh8po4sFr2XN93cFUMZktPH8YU7WgWPWUDZ7pBKe9a7BxZM',
+                                        '.365kqzs.cn:9081/ipfs/' + $(".lucknumber").attr("hash"),
                                     complete: function (xhr, data) {
                                         if (xhr.readyState == 4 && xhr.status == 200)
                                             $(".lucklist").append(
                                                 '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'https://ipfs' +
                                                 i +
-                                                '.365kqzs.cn:9081/ipfs/SnXh8po4sFr2XN93cFUMZktPH8YU7WgWPWUDZ7pBKe9a7BxZM\');" class="ui button">' +
+                                                '.365kqzs.cn:9081/ipfs/' + $(".lucknumber").attr(
+                                                "hash") + '\');" class="ui button">' +
                                                 i + '</button></div>'
                                             );
                                     }
@@ -506,13 +516,23 @@
                     }
 
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
-                    else if (integrityurl.indexOf("api.365kqzs.cn:4976/api/programmes") != -1) juhuiplay();
+                    else if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1) juhuiplay();
                 } catch (e) {
                     alert(e);
                 }
                 $(".loading").removeClass("loading");
             }
-            requestAsync(url, callbackplay);
+            if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1)
+                requestAsync(url, {
+                    headers: {
+                        "content-type": "application/x-www-form-urlencoded",
+                        "Device-ID": "10",
+                        "User-Agent": "Viewer/1.2.25 Android/5.1.1 Phone/samsung-SM-N9760"
+                    },
+                    method: 'GET'
+                }, callbackplay);
+            else
+                requestAsync(url, callbackplay);
         }
     </script>
 </body>
