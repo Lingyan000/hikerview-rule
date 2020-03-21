@@ -241,6 +241,7 @@
 
                     /*剧汇TV的布局添加*/
                     function juhui() {
+                        console.log(result);
                         let json = JSON.parse(result);
                         $("title").html(json.data.programme.title + '-剧汇TV');
                         fy_bridge_app.setWebTitle(json.data.programme.title + "-剧汇TV");
@@ -390,9 +391,9 @@
                     body: '{"id": ' + integrityurl.split('?')[1] + '}',
                     method: 'POST'
                 }, callback);
-            else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) {
+            else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1)
                 requestAsync(integrityurl.split("yongteng")[0], callback);
-            } else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) {
+            else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1)
                 requestAsync(integrityurl, {
                     headers: {
                         "content-type": "application/x-www-form-urlencoded",
@@ -400,7 +401,7 @@
                     },
                     method: 'GET'
                 }, callback);
-            } else
+            else
                 requestAsync(integrityurl, callback);
         });
 
