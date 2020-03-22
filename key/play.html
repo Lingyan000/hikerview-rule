@@ -442,7 +442,8 @@
             for (i = 0; i < sharpnesslist.length; i++) {
                 let url = "https://apis.365kqzs.cn/api/resource_url?hash=" + sharpnesslist[i].hash;
                 sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
-                    ')" class="ui basic button play' + i +
+                    ');$(\'.lucknumber\').attr(\'hash\', \'' + sharpnesslist[i].hash +
+                    '\');" class="ui basic button play' + i +
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
             $(".centered.content.sharpness").html(sharpnesslistbtn);
@@ -491,24 +492,24 @@
                             $(".modal").modal("hide");
                             $(".ui.modal.textselect").modal("show");
                             $(".lucklist").html("");
-                            let hash = url.split("hash=")[1];
                             for (let i = 1; i < 30; i++) {
-                                $.ajax({
+                                var xhr = $.ajax({
                                     type: 'HEAD',
                                     url: 'https://ipfs' + i +
-                                        '.365kqzs.cn:9081/ipfs/' + hash,
+                                        '.365kqzs.cn:9081/ipfs/' + $(".lucknumber").attr("hash"),
+                                    timeout: 5000,
                                     complete: function (xhr, data) {
                                         if (xhr.readyState == 4 && xhr.status == 200)
                                             $(".lucklist").append(
                                                 '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'https://ipfs' +
                                                 i +
-                                                '.365kqzs.cn:9081/ipfs/' + hash +
+                                                '.365kqzs.cn:9081/ipfs/' + $(".lucknumber").attr(
+                                                    "hash") +
                                                 '\');" class="ui button">' +
                                                 i + '</button></div>'
                                             );
                                     }
                                 });
-
                             }
                         }
                     }
