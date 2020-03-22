@@ -378,7 +378,9 @@
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                     else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
                     else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) nangua();
-                } catch (e) {}
+                } catch (e) {
+                    alert(e);
+                }
             }
             if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1)
                 requestAsync(integrityurl, {
