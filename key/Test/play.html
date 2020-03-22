@@ -440,10 +440,10 @@
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
-                $(".lucknumber").attr("hash", sharpnesslist[i].hash);
                 let url = "https://apis.365kqzs.cn/api/resource_url?hash=" + sharpnesslist[i].hash;
                 sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
-                    ')" class="ui basic button play' + i +
+                    ');$(\'.lucknumber\').attr(\'hash\', \'' + sharpnesslist[i].hash +
+                    '\');" class="ui basic button play' + i +
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
             $(".centered.content.sharpness").html(sharpnesslistbtn);
@@ -506,7 +506,7 @@
                                                 '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'https://ipfs' +
                                                 i +
                                                 '.365kqzs.cn:9081/ipfs/' + $(".lucknumber").attr(
-                                                "hash") +
+                                                    "hash") +
                                                 '\');" class="ui button">' +
                                                 i + '</button></div>'
                                             );
