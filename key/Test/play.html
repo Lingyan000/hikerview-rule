@@ -482,7 +482,9 @@
 
                     /*剧汇TV的视频播放*/
                     function juhuiplay() {
+                        console.log(url.split("hash=")[1]);
                         if (typeof (xhr) != "undefined") {
+                            console.log("OK");
                             xhr.abort();
                         }
                         let json = JSON.parse(result);
@@ -501,6 +503,7 @@
                                         '.365kqzs.cn:9081/ipfs/' + url.split("hash=")[1],
                                     timeout: 5000,
                                     complete: function (xhr, data) {
+                                        console.log('AJAX' + url.split("hash=")[1]);
                                         if (xhr.readyState == 4 && xhr.status == 200)
                                             $(".lucklist").append(
                                                 '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'https://ipfs' +
