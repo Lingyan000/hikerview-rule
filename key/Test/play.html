@@ -440,6 +440,7 @@
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
+                $(".lucknumber").attr("hash", sharpnesslist[i].hash);
                 let url = "https://apis.365kqzs.cn/api/resource_url?hash=" + sharpnesslist[i].hash;
                 sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
                     ')" class="ui basic button play' + i +
@@ -482,11 +483,7 @@
 
                     /*剧汇TV的视频播放*/
                     function juhuiplay() {
-                        console.log(url.split("hash=")[1]);
-                        if (typeof (xhr) != "undefined") {
-                            console.log("OK");
-                            xhr.abort();
-                        }
+                        console.log($(".lucknumber").attr("hash"));
                         let json = JSON.parse(result);
                         if (json.success == true) {
                             url = json.data.url;
@@ -500,15 +497,16 @@
                                 var xhr = $.ajax({
                                     type: 'HEAD',
                                     url: 'https://ipfs' + i +
-                                        '.365kqzs.cn:9081/ipfs/' + url.split("hash=")[1],
+                                        '.365kqzs.cn:9081/ipfs/' + $(".lucknumber").attr("hash"),
                                     timeout: 5000,
                                     complete: function (xhr, data) {
-                                        console.log('AJAX' + url.split("hash=")[1]);
+                                        console.log($(".lucknumber").attr("hash") + 'AJAX');
                                         if (xhr.readyState == 4 && xhr.status == 200)
                                             $(".lucklist").append(
                                                 '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'https://ipfs' +
                                                 i +
-                                                '.365kqzs.cn:9081/ipfs/' + url.split("hash=")[1] +
+                                                '.365kqzs.cn:9081/ipfs/' + $(".lucknumber").attr(
+                                                "hash") +
                                                 '\');" class="ui button">' +
                                                 i + '</button></div>'
                                             );
