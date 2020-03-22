@@ -482,7 +482,6 @@
 
                     /*剧汇TV的视频播放*/
                     function juhuiplay() {
-                        xhr.abort();
                         let json = JSON.parse(result);
                         if (json.success == true) {
                             url = json.data.url;
@@ -509,7 +508,7 @@
                                             );
                                     }
                                 });
-
+                                var setTimeout= setTimeout(function(){alert('ok');xhr.abort()},2000);
                             }
                         }
                     }
