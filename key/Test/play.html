@@ -482,6 +482,9 @@
 
                     /*剧汇TV的视频播放*/
                     function juhuiplay() {
+                        if (typeof (xhr) != "undefined") {
+                            xhr.abort();
+                        }
                         let json = JSON.parse(result);
                         if (json.success == true) {
                             url = json.data.url;
@@ -492,7 +495,7 @@
                             $(".ui.modal.textselect").modal("show");
                             $(".lucklist").html("");
                             for (let i = 1; i < 30; i++) {
-                                var xhr =  $.ajax({
+                                var xhr = $.ajax({
                                     type: 'HEAD',
                                     url: 'https://ipfs' + i +
                                         '.365kqzs.cn:9081/ipfs/' + url.split("hash=")[1],
@@ -508,7 +511,6 @@
                                             );
                                     }
                                 });
-                                var setTimeout= setTimeout(function(){alert('ok');xhr.abort()},2000);
                             }
                         }
                     }
