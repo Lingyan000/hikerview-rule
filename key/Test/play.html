@@ -491,12 +491,12 @@
                             $(".modal").modal("hide");
                             $(".ui.modal.textselect").modal("show");
                             $(".lucklist").html("");
-                            let hash = url.split("hash=")[1];
                             for (let i = 1; i < 30; i++) {
                                 $.ajax({
                                     type: 'HEAD',
                                     url: 'https://ipfs' + i +
-                                        '.365kqzs.cn:9081/ipfs/' + hash,
+                                        '.365kqzs.cn:9081/ipfs/' + url.split("hash=")[1],
+                                    timeout: 5000,
                                     complete: function (xhr, data) {
                                         if (xhr.readyState == 4 && xhr.status == 200)
                                             $(".lucklist").append(
