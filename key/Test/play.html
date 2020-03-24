@@ -241,11 +241,33 @@
 
                     /*剧汇TV的布局添加*/
                     function juhui() {
-                        console.log(result);
-                        let json2 = {};
-                        console.log(eval("json2=" + result));
-
-                        // let json = JSON.parse(result);
+                        let json = JSON.parse(result);
+                        $("title").html(json.data.programme.title + '-剧汇TV');
+                        fy_bridge_app.setWebTitle(json.data.programme.title + "-剧汇TV");
+                        $(".cover-url").attr("src", json.data.programme.verticalCover);
+                        $(".title").html(json.data.programme.title);
+                        let episodes = '';
+                        if (json.data.programme.episodesCount != json.data.programme.resourceCount)
+                            episodes = "更新至" + json.data.programme.resourceCount + "集/共" + json.data
+                            .programme.episodesCount + "集";
+                        else
+                            episodes = "全" + json.data.programme.episodesCount + "集";
+                        $(".desc").html(json.data.programme.location + "•" + json.data.programme.category
+                            .name +
+                            "•" +
+                            episodes);
+                        $(".info-text").html(json.data.programme.summary);
+                        let playlist = json.data.programme.resources;
+                        let playlistbtn = "";
+                        for (i = 0; i < playlist.length; i++) {
+                            let j = playlist[i];
+                            sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
+                            playlistbtn +=
+                                '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
+                                sharpnesslist + '\');" class="ui button">' +
+                                j.episode + '</button></div>';
+                        }
+                        $(".playslist").html(playlistbtn);
                     }
 
                     /*卧龙的布局添加*/
@@ -346,21 +368,21 @@
                                     }
                                     $(".playslist").html(playlistbtn);
                                 } catch (e) {
-                                    console.log(e);
+                                    alert(e);
                                 }
                             });
                     }
 
                     if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
-                    else if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1) juhui();
+                    else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhui();
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                     else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
                     else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) nangua();
                 } catch (e) {
-                    alert(e);
+                    console.log(e);
                 }
             }
-            if (integrityurl.indexOf("api.365kqzs.cn/api/programmes") != -1)
+            if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1)
                 requestAsync(integrityurl, {
                     headers: {
                         "content-type": "application/x-www-form-urlencoded",
@@ -463,7 +485,6 @@
 
                     /*剧汇TV的视频播放*/
                     function juhuiplay() {
-                        console.log($(".lucknumber").attr("hash"));
                         let json = JSON.parse(result);
                         if (json.success == true) {
                             url = json.data.url;
@@ -480,7 +501,6 @@
                                         '.365kqzs.cn:9081/ipfs/' + $(".lucknumber").attr("hash"),
                                     timeout: 5000,
                                     complete: function (xhr, data) {
-                                        console.log($(".lucknumber").attr("hash") + 'AJAX');
                                         if (xhr.readyState == 4 && xhr.status == 200)
                                             $(".lucklist").append(
                                                 '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'https://ipfs' +
