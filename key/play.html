@@ -490,7 +490,7 @@
                             url = json.data.url;
                             fy_bridge_app.playVideo(url);
                         } else {
-                            $("#cw").html(json.message);
+                            $("#cw").html('尽管“' + json.message + '"\n但是你可以试试输入数字或者点击下面的按钮，顺序按照访问速度排列。');
                             $(".modal").modal("hide");
                             $(".ui.modal.textselect").modal("show");
                             $(".lucklist").html("");
