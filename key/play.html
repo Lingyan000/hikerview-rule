@@ -228,7 +228,7 @@
                         let playlistbtn = "";
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
-                            let url = "https://ios.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
+                            let url = "https://ios.xiaoxiaoapps.com/vod/reqplay/" + json.data.vodrow.vodid +
                                 "?playindex=" + j.playindex;
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
@@ -373,7 +373,7 @@
                             });
                     }
 
-                    if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
+                    if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1) xiaoxiao();
                     else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhui();
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                     else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
@@ -516,7 +516,7 @@
                         }
                     }
 
-                    if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
+                    if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1) xiaoxiaoplay();
                     else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhuiplay();
                 } catch (e) {
                     alert(e);
