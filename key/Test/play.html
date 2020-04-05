@@ -169,7 +169,7 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/Lingyan000/hikerview-rule/key/Test/js/play.min.js"></script> -->\
     <script>
         var integrityurl = window.location.href;
-        var integrityurl = integrityurl.split("#")[1];
+        var integrityurl = integrityurl.split("?￥yongteng￥")[1];
         $(function () {
             $("#info").on("click", function () {
                 $(".modal").modal("hide");
@@ -228,7 +228,7 @@
                         let playlistbtn = "";
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
-                            let url = "https://android.leleapps.com/vod/reqplay/" + json.data.vodrow.vodid +
+                            let url = "https://ios.xiaoxiaoapps.com/vod/reqplay/" + json.data.vodrow.vodid +
                                 "?playindex=" + j.playindex;
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
@@ -373,7 +373,7 @@
                             });
                     }
 
-                    if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiao();
+                    if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1) xiaoxiao();
                     else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhui();
                     else if (integrityurl.indexOf("v2.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
                     else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
@@ -490,7 +490,7 @@
                             url = json.data.url;
                             fy_bridge_app.playVideo(url);
                         } else {
-                            $("#cw").html(json.message);
+                            $("#cw").html('尽管“' + json.message + '"<br/>但是你可以试试输入数字或者点击下面的按钮，顺序按照访问速度排列。');
                             $(".modal").modal("hide");
                             $(".ui.modal.textselect").modal("show");
                             $(".lucklist").html("");
@@ -516,7 +516,7 @@
                         }
                     }
 
-                    if (integrityurl.indexOf("leleapps.com/vod/show") != -1) xiaoxiaoplay();
+                    if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1) xiaoxiaoplay();
                     else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhuiplay();
                 } catch (e) {
                     alert(e);
