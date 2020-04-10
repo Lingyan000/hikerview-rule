@@ -148,16 +148,16 @@
             // alert($('#ismnmmovie').prop('checked'));
             var data = `{
     "wallpapervalue": ` + $('#wallpapervalue').val() + `,
-    "istimestamp": ` + $('#istimestamp').prop('checked') ? 1 : 0 + `,
+    "istimestamp": ` + $('#istimestamp').prop('checked') ? "1" : "0" + `,
     "userwallpaperurl": "` + $('#userwallpaperurl').val() + `",
-    "hitokotovalue": ` + $('#hitokotovalue').prop('checked') ? 1 : 0 + `,
+    "hitokotovalue": ` + $('#hitokotovalue').prop('checked') ? "1" : "0" + `,
     "hitokototype": "` + $('#hitokototype').val() + `",
-    "ismnmmovie":` + $('#ismnmmovie').prop('checked') ? 1 : 0 + `,
-    "islxmovie": ` + $('#islxmovie').prop('checked') ? 1 : 0 + `,
-    "isjbtmovie": ` + $('#isjbtmovie').prop('checked') ? 1 : 0 + `,
+    "ismnmmovie":` + $('#ismnmmovie').prop('checked') ? "1" : "0" + `,
+    "islxmovie": ` + $('#islxmovie').prop('checked') ? "1" : "0" + `,
+    "isjbtmovie": ` + $('#isjbtmovie').prop('checked') ? "1" : "0" + `,
     "jbturl": "` + $('#jbturl').val() + `",
-    "ismnmtools": ` + $('#ismnmtools').prop('checked') ? 1 : 0 + `,
-    "islxtools": ` + $('#islxtools').prop('checked') ? 1 : 0 + `
+    "ismnmtools": ` + $('#ismnmtools').prop('checked') ? "1" : "0" + `,
+    "islxtools": ` + $('#islxtools').prop('checked') ? "1" : "0" + `
 }`;
             try {
                 if (isExitsFunction("fy_bridge_app.writeFile")) {
