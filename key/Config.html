@@ -14,13 +14,6 @@
             background-color: #DADADA;
         }
 
-        body>.grid {
-            height: 100%;
-        }
-
-        .column {
-            max-width: 450px;
-        }
 
         .ui.form {
             text-align: left;
@@ -29,118 +22,115 @@
 </head>
 
 <body>
-    <div class="ui middle aligned center aligned grid">
-        <div class="column">
-            <div class="ui raised very padded text container segment">
-                <div class="ui form">
-                    <h4 class="ui dividing header">主页图</h4>
+    <div class="ui middle aligned center">
+        <div class="ui raised very padded text container segment" style="margin: 10px;">
+            <div class="ui form">
+                <h4 class="ui dividing header">主页图</h4>
+                <div class="field">
+                    <label>开启与类型选择(自定义随便选一除不开启的项开启就好)</label>
+                    <select id="wallpapervalue" class="ui fluid dropdown">
+                        <option value="0">不开启</option>
+                        <option value="1">必应壁纸</option>
+                        <option value="2">随机图</option>
+                        <option value="3">必应随机</option>
+                        <option value="4">动漫一</option>
+                        <option value="5">动漫二</option>
+                        <option value="6">动漫三</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>自定义主页图接口(确定接口正确再填)</label>
+                    <input type="text" id="userwallpaperurl" placeholder="主页图接口">
+                </div>
+                <div class="ui segment">
                     <div class="field">
-                        <label>开启与类型选择(自定义随便选一除不开启的项开启就好)</label>
-                        <select id="wallpapervalue" class="ui fluid dropdown">
-                            <option value="0">不开启</option>
-                            <option value="1">必应壁纸</option>
-                            <option value="2">随机图</option>
-                            <option value="3">必应随机</option>
-                            <option value="4">动漫一</option>
-                            <option value="5">动漫二</option>
-                            <option value="6">动漫三</option>
-                        </select>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="istimestamp" tabindex="0" class="hidden">
+                            <label>主页图刷新切换</label>
+                        </div>
                     </div>
+                </div>
+                <h4 class="ui dividing header">一言</h4>
+                <div class="ui segment">
                     <div class="field">
-                        <label>自定义主页图接口(确定接口正确再填)</label>
-                        <input type="text" id="userwallpaperurl" placeholder="主页图接口">
-                    </div>
-                    <div class="ui segment">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" id="istimestamp" tabindex="0" class="hidden">
-                                <label>主页图刷新切换</label>
-                            </div>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="hitokotovalue" tabindex="0" class="hidden">
+                            <label>开启</label>
                         </div>
                     </div>
-                    <h4 class="ui dividing header">一言</h4>
-                    <div class="ui segment">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" id="hitokotovalue" tabindex="0" class="hidden">
-                                <label>开启</label>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="field">
+                    <label>类型选择</label>
+                    <select id="hitokototype" class="ui fluid dropdown">
+                        <option value="">全部</option>
+                        <option value="a">动画</option>
+                        <option value="b">漫画</option>
+                        <option value="c">游戏</option>
+                        <option value="d">文学</option>
+                        <option value="e">原创</option>
+                        <option value="f">来自网络</option>
+                        <option value="g">其他</option>
+                        <option value="h">影视</option>
+                        <option value="i">诗词</option>
+                        <option value="j">网易云</option>
+                        <option value="k">哲学</option>
+                        <option value="l">抖机灵</option>
+                    </select>
+                </div>
+                <h4 class="ui dividing header">🌐看片</h4>
+                <div class="ui segment">
                     <div class="field">
-                        <label>类型选择</label>
-                        <select id="hitokototype" class="ui fluid dropdown">
-                            <option value="">全部</option>
-                            <option value="a">动画</option>
-                            <option value="b">漫画</option>
-                            <option value="c">游戏</option>
-                            <option value="d">文学</option>
-                            <option value="e">原创</option>
-                            <option value="f">来自网络</option>
-                            <option value="g">其他</option>
-                            <option value="h">影视</option>
-                            <option value="i">诗词</option>
-                            <option value="j">网易云</option>
-                            <option value="k">哲学</option>
-                            <option value="l">抖机灵</option>
-                        </select>
-                    </div>
-                    <h4 class="ui dividing header">🌐看片</h4>
-                    <div class="ui segment">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" id="ismnmmovie" tabindex="0" class="hidden" checked="checked">
-                                <label>某柠檬</label>
-                            </div>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="ismnmmovie" tabindex="0" class="hidden" checked="checked">
+                            <label>某柠檬</label>
                         </div>
                     </div>
-                    <div class="ui segment">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" id="islxmovie" tabindex="0" class="hidden" checked="checked">
-                                <label>龙轩导航</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui segment">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" id="isjbtmovie" tabindex="0" class="hidden">
-                                <label>聚BT</label>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="ui segment">
                     <div class="field">
-                        <label>聚BT网址 <a href="https://jubt.gitlab.io/home/">发布站</a> </label>
-                        <input type="text" id="jbturl" placeholder="网址" value="https://jubt.gq/">
-                    </div>
-                    <h4 class="ui dividing header">🌐工具</h4>
-                    <div class="ui segment">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" id="ismnmtools" tabindex="0" class="hidden" checked="checked">
-                                <label>某柠檬</label>
-                            </div>
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="islxmovie" tabindex="0" class="hidden" checked="checked">
+                            <label>龙轩导航</label>
                         </div>
                     </div>
-                    <div class="ui segment">
-                        <div class="field">
-                            <div class="ui toggle checkbox">
-                                <input type="checkbox" id="islxtools" tabindex="0" class="hidden" checked="checked">
-                                <label>龙轩导航</label>
-                            </div>
+                </div>
+                <div class="ui segment">
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="isjbtmovie" tabindex="0" class="hidden">
+                            <label>聚BT</label>
                         </div>
                     </div>
-                    <div style="width: 100%;text-align: right;">
-                        <button id="save" class="ui blue button" type="button"><i class="save icon"></i> 保存到视界
-                        </button>
+                </div>
+                <div class="field">
+                    <label>聚BT网址 <a href="https://jubt.gitlab.io/home/">发布站</a> </label>
+                    <input type="text" id="jbturl" placeholder="网址" value="https://jubt.gq/">
+                </div>
+                <h4 class="ui dividing header">🌐工具</h4>
+                <div class="ui segment">
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="ismnmtools" tabindex="0" class="hidden" checked="checked">
+                            <label>某柠檬</label>
+                        </div>
                     </div>
+                </div>
+                <div class="ui segment">
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input type="checkbox" id="islxtools" tabindex="0" class="hidden" checked="checked">
+                            <label>龙轩导航</label>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%;text-align: right;">
+                    <button id="save" class="ui blue button" type="button"><i class="save icon"></i> 保存到视界
+                    </button>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        $('#hitokotovalue').prop('checked') ? console.log(1) : console.log(0);
         $('.ui.checkbox')
             .checkbox();
         $('select.dropdown')
@@ -149,18 +139,19 @@
             // alert($('#ismnmmovie').prop('checked'));
             var data = `{
     "wallpapervalue": ` + $('#wallpapervalue').val() + `,
-    "istimestamp": ` + $('#istimestamp').prop('checked') ? "1" : "0" + `,
+    "istimestamp": ` + ($('#istimestamp').prop('checked') ? 1 : 0) + `,
     "userwallpaperurl": "` + $('#userwallpaperurl').val() + `",
-    "hitokotovalue": ` + $('#hitokotovalue').prop('checked') ? "1" : "0" + `,
+    "hitokotovalue": ` + ($('#hitokotovalue').prop('checked') ? 1 : 0) + `,
     "hitokototype": "` + $('#hitokototype').val() + `",
-    "ismnmmovie":` + $('#ismnmmovie').prop('checked') ? "1" : "0" + `,
-    "islxmovie": ` + $('#islxmovie').prop('checked') ? "1" : "0" + `,
-    "isjbtmovie": ` + $('#isjbtmovie').prop('checked') ? "1" : "0" + `,
+    "ismnmmovie":` + ($('#ismnmmovie').prop('checked') ? 1 : 0) + `,
+    "islxmovie": ` + ($('#islxmovie').prop('checked') ? 1 : 0) + `,
+    "isjbtmovie": ` + ($('#isjbtmovie').prop('checked') ? 1 : 0) + `,
     "jbturl": "` + $('#jbturl').val() + `",
-    "ismnmtools": ` + $('#ismnmtools').prop('checked') ? "1" : "0" + `,
-    "islxtools": ` + $('#islxtools').prop('checked') ? "1" : "0" + `
+    "ismnmtools": ` + ($('#ismnmtools').prop('checked') ? 1 : 0) + `,
+    "islxtools": ` + ($('#islxtools').prop('checked') ? 1 : 0) + `
 }`;
             try {
+                console.log(data);
                 if (isExitsFunction("fy_bridge_app.writeFile")) {
                     fy_bridge_app.writeFile('hiker://files/Config.json', data);
                     alert("保存成功");
