@@ -36,7 +36,7 @@
                     <h4 class="ui dividing header">主页图</h4>
                     <div class="field">
                         <label>开启与类型选择(自定义随便选一除不开启的项开启就好)</label>
-                        <select id="zyt" class="ui fluid dropdown">
+                        <select id="wallpapervalue" class="ui fluid dropdown">
                             <option value="0">不开启</option>
                             <option value="1">必应壁纸</option>
                             <option value="2">随机图</option>
@@ -48,12 +48,12 @@
                     </div>
                     <div class="field">
                         <label>自定义主页图接口(确定接口正确再填)</label>
-                        <input type="text" name="first-name" placeholder="主页图接口">
+                        <input type="text" id="userwallpaperurl" placeholder="主页图接口">
                     </div>
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="zyt" tabindex="0" class="hidden">
+                                <input type="checkbox" id="istimestamp" tabindex="0" class="hidden">
                                 <label>主页图刷新切换</label>
                             </div>
                         </div>
@@ -62,14 +62,14 @@
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="yy" tabindex="0" class="hidden">
+                                <input type="checkbox" id="hitokotovalue" tabindex="0" class="hidden">
                                 <label>开启</label>
                             </div>
                         </div>
                     </div>
                     <div class="field">
                         <label>类型选择</label>
-                        <select class="ui fluid dropdown">
+                        <select id="hitokototype" class="ui fluid dropdown">
                             <option value="">全部</option>
                             <option value="a">动画</option>
                             <option value="b">漫画</option>
@@ -89,7 +89,7 @@
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="yy" tabindex="0" class="hidden" checked="checked">
+                                <input type="checkbox" id="ismnmmovie" tabindex="0" class="hidden" checked="checked">
                                 <label>某柠檬</label>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="yy" tabindex="0" class="hidden" checked="checked">
+                                <input type="checkbox" id="islxmovie" tabindex="0" class="hidden" checked="checked">
                                 <label>龙轩导航</label>
                             </div>
                         </div>
@@ -105,20 +105,20 @@
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="yy" tabindex="0" class="hidden">
+                                <input type="checkbox" id="isjbtmovie" tabindex="0" class="hidden">
                                 <label>聚BT</label>
                             </div>
                         </div>
                     </div>
                     <div class="field">
                         <label>聚BT网址 <a href="https://jubt.gitlab.io/home/">发布站</a> </label>
-                        <input type="text" name="first-name" placeholder="网址" value="https://jubt.gq/">
+                        <input type="text" id="jbturl" placeholder="网址" value="https://jubt.gq/">
                     </div>
                     <h4 class="ui dividing header">🌐工具</h4>
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="yy" tabindex="0" class="hidden" checked="checked">
+                                <input type="checkbox" id="ismnmtools" tabindex="0" class="hidden" checked="checked">
                                 <label>某柠檬</label>
                             </div>
                         </div>
@@ -126,13 +126,13 @@
                     <div class="ui segment">
                         <div class="field">
                             <div class="ui toggle checkbox">
-                                <input type="checkbox" name="yy" tabindex="0" class="hidden" checked="checked">
+                                <input type="checkbox" id="islxtools" tabindex="0" class="hidden" checked="checked">
                                 <label>龙轩导航</label>
                             </div>
                         </div>
                     </div>
                     <div style="width: 100%;text-align: right;">
-                        <button id="save" class="ui blue active button" type="button"><i class="save icon"></i> 导入到视界
+                        <button id="save" class="ui blue button" type="button"><i class="save icon"></i> 保存到视界
                         </button>
                     </div>
                 </div>
@@ -145,21 +145,39 @@
         $('select.dropdown')
             .dropdown();
         $('#save').on('click', function () {
+            // alert($('#ismnmmovie').prop('checked'));
             var data = `{
-    "wallpapervalue": ` + $('#zyt').val() + `,
-    "istimestamp": 0,
-    "userwallpaperurl": "",
-    "hitokotovalue": 0,
-    "hitokototype": "",
-    "ismnmmovie":1,
-    "islxmovie": 1,
-    "isjbtmovie": 0,
-    "jbturl": "https://jubt.gq/cn/index.html",
-    "ismnmtools": 1,
-    "islxtools": 1
+    "wallpapervalue": ` + $('#wallpapervalue').val() + `,
+    "istimestamp": ` + $('#istimestamp').prop('checked') ? 1 : 0 + `,
+    "userwallpaperurl": "` + $('#userwallpaperurl').val() + `",
+    "hitokotovalue": ` + $('#hitokotovalue').prop('checked') ? 1 : 0 + `,
+    "hitokototype": "` + $('#hitokototype').val() + `",
+    "ismnmmovie":` + $('#ismnmmovie').prop('checked') ? 1 : 0 + `,
+    "islxmovie": ` + $('#islxmovie').prop('checked') ? 1 : 0 + `,
+    "isjbtmovie": ` + $('#isjbtmovie').prop('checked') ? 1 : 0 + `,
+    "jbturl": "` + $('#jbturl').val() + `",
+    "ismnmtools": ` + $('#ismnmtools').prop('checked') ? 1 : 0 + `,
+    "islxtools": ` + $('#islxtools').prop('checked') ? 1 : 0 + `
 }`;
-            fy_bridge_app.writeFile('hiker://files/Config.json', data)
+            try {
+                if (isExitsFunction("fy_bridge_app.writeFile")) {
+                    fy_bridge_app.writeFile('hiker://files/Config.json', data);
+                    alert("保存成功");
+                } else
+                    alert("请在视界软件内保存");
+            } catch (e) {
+                alert(e);
+            }
         });
+
+        function isExitsFunction(funcName) {
+            try {
+                if (typeof (eval(funcName)) == "function") {
+                    return true;
+                }
+            } catch (e) {}
+            return false;
+        }
     </script>
 </body>
 
