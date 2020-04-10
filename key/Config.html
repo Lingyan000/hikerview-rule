@@ -145,19 +145,20 @@
         $('select.dropdown')
             .dropdown();
         $('#save').on('click', function () {
-            var json = `{
-                "wallpapervalue": 0,
-                "istimestamp": 0,
-                "userwallpaperurl": "",
-                "hitokotovalue": 0,
-                "hitokototype": "",
-                "ismnmmovie": 1,
-                "islxmovie": 1,
-                "isjbtmovie": 0,
-                "jbturl": "https://jubt.gq/cn/index.html",
-                "ismnmtools": 1,
-                "islxtools": 1
-            }`;
+            var json = `
+{
+    "wallpapervalue": 0,
+    "istimestamp": 0,
+    "userwallpaperurl": "",
+    "hitokotovalue": 0,
+    "hitokototype": "",
+    "ismnmmovie":1,
+    "islxmovie": 1,
+    "isjbtmovie": 0,
+    "jbturl": "https://jubt.gq/cn/index.html",
+    "ismnmtools": 1,
+    "islxtools": 1
+}`;
             fy_bridge_app.writeFile('hiker://files/Config.json', json)
         });
     </script>
