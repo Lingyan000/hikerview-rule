@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>㊀只推荐自定义配置</title>
+    <link href="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/semantic-ui/2.4.1/semantic.min.js"></script>
+    <style>
+        body {
+            background-color: #DADADA;
+        }
+
+        body>.grid {
+            height: 100%;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+
+        .ui.form {
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <div class="ui raised very padded text container segment">
+                <div class="ui form">
+                    <h4 class="ui dividing header">主页图</h4>
+                    <div class="field">
+                        <label>开启与类型选择(自定义随便选一除不开启的项开启就好)</label>
+                        <select class="ui fluid dropdown">
+                            <option value="0">不开启</option>
+                            <option value="1">必应壁纸</option>
+                            <option value="2">随机图</option>
+                            <option value="3">必应随机</option>
+                            <option value="4">动漫一</option>
+                            <option value="5">动漫二</option>
+                            <option value="6">动漫三</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>自定义主页图接口(确定接口正确再填)</label>
+                        <input type="text" name="first-name" placeholder="主页图接口">
+                    </div>
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="zyt" tabindex="0" class="hidden">
+                                <label>主页图刷新切换</label>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="ui dividing header">一言</h4>
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="yy" tabindex="0" class="hidden">
+                                <label>开启</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>类型选择</label>
+                        <select class="ui fluid dropdown">
+                            <option value="">全部</option>
+                            <option value="a">动画</option>
+                            <option value="b">漫画</option>
+                            <option value="c">游戏</option>
+                            <option value="d">文学</option>
+                            <option value="e">原创</option>
+                            <option value="f">来自网络</option>
+                            <option value="g">其他</option>
+                            <option value="h">影视</option>
+                            <option value="i">诗词</option>
+                            <option value="j">网易云</option>
+                            <option value="k">哲学</option>
+                            <option value="l">抖机灵</option>
+                        </select>
+                    </div>
+                    <h4 class="ui dividing header">🌐看片</h4>
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="yy" tabindex="0" class="hidden" checked="checked">
+                                <label>某柠檬</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="yy" tabindex="0" class="hidden" checked="checked">
+                                <label>龙轩导航</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="yy" tabindex="0" class="hidden">
+                                <label>聚BT</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>聚BT网址 <a href="https://jubt.gitlab.io/home/">发布站</a> </label>
+                        <input type="text" name="first-name" placeholder="网址" value="https://jubt.gq/">
+                    </div>
+                    <h4 class="ui dividing header">🌐工具</h4>
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="yy" tabindex="0" class="hidden" checked="checked">
+                                <label>某柠檬</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui segment">
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="checkbox" name="yy" tabindex="0" class="hidden" checked="checked">
+                                <label>龙轩导航</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%;text-align: right;">
+                        <button id="save" class="ui blue active button" type="button"><i class="save icon"></i> 导入到视界
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.ui.checkbox')
+            .checkbox();
+        $('select.dropdown')
+            .dropdown();
+        $('#save').on('click', function () {
+            var json = `{
+                "wallpapervalue": 0,
+                "istimestamp": 0,
+                "userwallpaperurl": "",
+                "hitokotovalue": 0,
+                "hitokototype": "",
+                "ismnmmovie": 1,
+                "islxmovie": 1,
+                "isjbtmovie": 0,
+                "jbturl": "https://jubt.gq/cn/index.html",
+                "ismnmtools": 1,
+                "islxtools": 1
+            }`;
+            fy_bridge_app.writeFile('hiker://files/Config.json', json)
+        });
+    </script>
+</body>
+
+</html>
