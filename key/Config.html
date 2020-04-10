@@ -36,7 +36,7 @@
                     <h4 class="ui dividing header">主页图</h4>
                     <div class="field">
                         <label>开启与类型选择(自定义随便选一除不开启的项开启就好)</label>
-                        <select class="ui fluid dropdown">
+                        <select id="zyt" class="ui fluid dropdown">
                             <option value="0">不开启</option>
                             <option value="1">必应壁纸</option>
                             <option value="2">随机图</option>
@@ -145,9 +145,9 @@
         $('select.dropdown')
             .dropdown();
         $('#save').on('click', function () {
-            var json = `
+            var data = `
 {
-    "wallpapervalue": 0,
+    "wallpapervalue": `+ $('#zyt').val() +`,
     "istimestamp": 0,
     "userwallpaperurl": "",
     "hitokotovalue": 0,
@@ -159,7 +159,7 @@
     "ismnmtools": 1,
     "islxtools": 1
 }`;
-            fy_bridge_app.writeFile('hiker://files/Config.json', json)
+            fy_bridge_app.writeFile('hiker://files/Config.json', data)
         });
     </script>
 </body>
