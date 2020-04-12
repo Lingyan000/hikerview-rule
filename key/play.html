@@ -262,9 +262,6 @@
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
                             sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
-                            $("title").html(json.data.programme.title + '_' + j.episode + '-剧汇TV');
-                            fy_bridge_app.setWebTitle(json.data.programme.title + '_' + j.episode +
-                            '-剧汇TV');
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
                                 sharpnesslist + '\');" class="ui button">' +
