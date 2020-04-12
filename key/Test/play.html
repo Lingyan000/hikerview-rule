@@ -168,9 +168,9 @@
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/gh/Lingyan000/hikerview-rule/key/Test/js/play.min.js"></script> -->\
     <script>
-        var episode2 = 'ccc';
         var integrityurl = window.location.href;
         var integrityurl = integrityurl.split("#")[1];
+        var episode = '';
         $(function () {
             $("#info").on("click", function () {
                 $(".modal").modal("hide");
@@ -265,7 +265,7 @@
                             sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
-                                sharpnesslist + '\', \'' + j.episode + '\');" class="ui button">' +
+                                sharpnesslist + '\');episode = \'' + j.episode + '\';" class="ui button">' +
                                 j.episode + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -438,14 +438,14 @@
         }
 
         /*清晰度*/
-        function sharpness(sharpnesslist, episode) {
+        function sharpness(sharpnesslist) {
             sharpnesslist = sharpnesslist.replace(/YongTeng/g, "\"")
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
                 let url = "https://apis.365kqzs.cn/api/resource_url?hash=" + sharpnesslist[i].hash;
                 sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
-                    ', \'' + episode + '\');$(\'.lucknumber\').attr(\'hash\', \'' + sharpnesslist[i].hash +
+                    ');$(\'.lucknumber\').attr(\'hash\', \'' + sharpnesslist[i].hash +
                     '\');" class="ui basic button play' + i +
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
@@ -468,12 +468,12 @@
         }
 
         /*播放*/
-        function play(url, playbtn, episode) {
+        function play(url, playbtn) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-                    console.log(episode2);
+                    console.log(episode);
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
