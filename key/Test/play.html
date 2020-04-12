@@ -473,6 +473,10 @@
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
+                    let json = json = [{
+                        url: integrityurl,
+                        episode: episode
+                    }];
                     let data = request('hiker://files/playEpisodes.json');
                     if (data != null && data.length > 0) {
                         try {
