@@ -473,7 +473,8 @@
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-                    console.log(episode);
+                    data = '{' + integrityurl + ',' + episode + '}';
+                    fy_bridge_app.writeFile('hiker://files/playepisode.json', data);
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
