@@ -498,19 +498,19 @@
                         } catch (e) {
                             console.log(e);
                             fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
-                            data = [{
+                            json = [{
                                 url: integrityurl,
                                 episode: episode
                             }];
                         }
 
                     } else {
-                        data = [{
+                        json = [{
                             url: integrityurl,
                             episode: episode
                         }];
                     }
-                    fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(data));
+                    fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(json));
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
