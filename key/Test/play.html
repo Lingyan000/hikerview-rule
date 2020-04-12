@@ -219,15 +219,12 @@
                     for (let i = 0; i < playEpisodes.length; i++) {
                         if (playEpisodes[i].url == integrityurl) {
                             $('#playEpisodes').html('选集 🌸上次观看到' + playEpisodes[i].episode);
-                            return;
                         }
                     }
                 } catch (e) {
                     console.log(e);
                 }
-
             }
-            fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(playEpisodes));
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
