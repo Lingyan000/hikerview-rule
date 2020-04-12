@@ -473,8 +473,43 @@
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-                    var data = request('hiker://files/playEpisodes.json');
-                    data += integrityurl + '@' + episode + '\n';
+                    let data = request('hiker://files/playEpisodes.json');
+                    if (data != null && data.length > 0) {
+                        try {
+                            eval('let json = ' + data);
+                            if (json.length > 50) {
+                                json.splice(0, json.length - 50)
+                            }
+                            var isDuplication = false;
+                            for (let i = 0; i < json.length; i++) {
+                                if (json[i].url == integrityurl) {
+                                    isDuplication = true;
+                                    json[i] = {
+                                        url: integrityurl,
+                                        episode: episode
+                                    };
+                                }
+                            }
+                            if (isDuplication = false)
+                                json.push({
+                                    url: integrityurl,
+                                    episode: episode
+                                });
+                        } catch (e) {
+                            close.log(e);
+                            fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
+                            data = [{
+                                url: integrityurl,
+                                episode: episode
+                            }];
+                        }
+
+                    } else {
+                        data = [{
+                            url: integrityurl,
+                            episode: episode
+                        }];
+                    }
                     fy_bridge_app.writeFile('hiker://files/playEpisodes.json', data);
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
