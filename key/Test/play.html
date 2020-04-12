@@ -479,7 +479,9 @@
                             eval('let json = ' + data);
                             if (json.length > 50) {
                                 json.splice(0, json.length - 50)
+                                console.log("ok0");
                             }
+                            console.log("ok1");
                             var isDuplication = false;
                             for (let i = 0; i < json.length; i++) {
                                 if (json[i].url == integrityurl) {
@@ -488,8 +490,10 @@
                                         url: integrityurl,
                                         episode: episode
                                     };
+                                    console.log("ok2");
                                 }
                             }
+                            console.log("ok3");
                             if (isDuplication = false)
                                 json.push({
                                     url: integrityurl,
