@@ -496,7 +496,7 @@
                                     episode: episode
                                 });
                         } catch (e) {
-                            close.log(e);
+                            console.log(e);
                             fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
                             data = [{
                                 url: integrityurl,
