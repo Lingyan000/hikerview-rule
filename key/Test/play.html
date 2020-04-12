@@ -478,29 +478,29 @@
                         try {
                             console.log("ok-1");
                             eval('let json = ' + data);
-                            if (json.length > 50) {
-                                json.splice(0, json.length - 50)
-                                console.log("ok0");
-                            }
-                            console.log("ok1");
-                            var isDuplication = false;
-                            for (let i = 0; i < json.length; i++) {
-                                if (json[i].url == integrityurl) {
-                                    isDuplication = true;
-                                    json[i] = {
-                                        url: integrityurl,
-                                        episode: episode
-                                    };
-                                    console.log("ok2");
-                                }
-                            }
-                            console.log("ok3");
-                            if (isDuplication == false)
-                                json.push({
-                                    url: integrityurl,
-                                    episode: episode
-                                });
-                            console.log("ok4");
+                            // if (json.length > 50) {
+                            //     json.splice(0, json.length - 50)
+                            //     console.log("ok0");
+                            // }
+                            // console.log("ok1");
+                            // var isDuplication = false;
+                            // for (let i = 0; i < json.length; i++) {
+                            //     if (json[i].url == integrityurl) {
+                            //         isDuplication = true;
+                            //         json[i] = {
+                            //             url: integrityurl,
+                            //             episode: episode
+                            //         };
+                            //         console.log("ok2");
+                            //     }
+                            // }
+                            // console.log("ok3");
+                            // if (isDuplication == false)
+                            //     json.push({
+                            //         url: integrityurl,
+                            //         episode: episode
+                            //     });
+                            // console.log("ok4");
                         } catch (e) {
                             console.log(e);
                             fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
