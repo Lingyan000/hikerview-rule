@@ -218,7 +218,8 @@
                     playEpisodes = JSON.parse(data);
                     for (let i = 0; i < playEpisodes.length; i++) {
                         if (playEpisodes[i].url == integrityurl) {
-                            $('#playEpisodes').html('选集 🌸上次观看到' + playEpisodes[i].episode);
+                            $('#playEpisodes').html('选集 🌸 上次观看到' + playEpisodes[i].episode);
+                            break;
                         }
                     }
                 } catch (e) {
@@ -330,9 +331,9 @@
                             let j = playlist[i];
                             let url = j.url;
                             playlistbtn +=
-                                '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
+                                '<div class="four wide mobile two wide computer column"><button onclick="episode = \'' + j.name + '\';episodeSave();fy_bridge_app.playVideo(\'' +
                                 url +
-                                '\');episode = \'' + j.name + '\';" class="ui button play' + i + '">' +
+                                '\');" class="ui button play' + i + '">' +
                                 j.name + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -438,7 +439,7 @@
                     let sharpnesslistbtn = "";
                     for (let i = 0; i < sharpnesslist.length; i++) {
                         let j = sharpnesslist[i];
-                        sharpnesslistbtn += '<button onclick="fy_bridge_app.playVideo(\'' +
+                        sharpnesslistbtn += '<button onclick="episodeSave();fy_bridge_app.playVideo(\'' +
                             j.mediaUrl +
                             '\')" class="ui basic button">' + j.mediaName + '</button><br><br>';
                     }
@@ -531,47 +532,7 @@
                             }
                         }
                     }
-                    var playEpisodes;
-                    let data = request('hiker://files/playEpisodes.json');
-                    if (data != null && data.length > 0) {
-                        try {
-                            console.log(data);
-                            playEpisodes = JSON.parse(data);
-                            console.log(playEpisodes);
-                            if (playEpisodes.length > 50) {
-                                playEpisodes.splice(0, playEpisodes.length - 50)
-                            }
-                            var isDuplication = false;
-                            for (let i = 0; i < playEpisodes.length; i++) {
-                                if (playEpisodes[i].url == integrityurl) {
-                                    isDuplication = true;
-                                    playEpisodes[i] = {
-                                        url: integrityurl,
-                                        episode: episode
-                                    };
-                                }
-                            }
-                            if (isDuplication == false)
-                                playEpisodes.push({
-                                    url: integrityurl,
-                                    episode: episode
-                                });
-                        } catch (e) {
-                            console.log(e);
-                            fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
-                            playEpisodes = [{
-                                url: integrityurl,
-                                episode: episode
-                            }];
-                        }
-
-                    } else {
-                        playEpisodes = [{
-                            url: integrityurl,
-                            episode: episode
-                        }];
-                    }
-                    fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(playEpisodes));
+                    episodeSave();
 
                     if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1) xiaoxiaoplay();
                     else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhuiplay();
@@ -591,6 +552,50 @@
                 }, callbackplay);
             else
                 requestAsync(url, callbackplay);
+        }
+
+        /*保存集数*/
+        function episodeSave() {
+            var playEpisodes;
+            let data = request('hiker://files/playEpisodes.json');
+            if (data != null && data.length > 0) {
+                try {
+                    playEpisodes = JSON.parse(data);
+                    if (playEpisodes.length > 50) {
+                        playEpisodes.splice(0, playEpisodes.length - 50)
+                    }
+                    var isDuplication = false;
+                    for (let i = 0; i < playEpisodes.length; i++) {
+                        if (playEpisodes[i].url == integrityurl) {
+                            isDuplication = true;
+                            playEpisodes[i] = {
+                                url: integrityurl,
+                                episode: episode
+                            };
+                            break;
+                        }
+                    }
+                    if (isDuplication == false)
+                        playEpisodes.push({
+                            url: integrityurl,
+                            episode: episode
+                        });
+                } catch (e) {
+                    console.log(e);
+                    fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
+                    playEpisodes = [{
+                        url: integrityurl,
+                        episode: episode
+                    }];
+                }
+
+            } else {
+                playEpisodes = [{
+                    url: integrityurl,
+                    episode: episode
+                }];
+            }
+            fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(playEpisodes));
         }
     </script>
 </body>
