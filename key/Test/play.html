@@ -264,9 +264,7 @@
                             sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
-                                sharpnesslist + '\');$(\'title\').html(\'' + json.data.programme.title + '_' +
-                                j.episode + '-剧汇TV\');fy_bridge_app.setWebTitle(\'' + json.data.programme
-                                .title + '_' + j.episode + '-剧汇TV\');" class="ui button">' +
+                                sharpnesslist + '\');" class="ui button">' +
                                 j.episode + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
