@@ -264,7 +264,7 @@
                             sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
-                                sharpnesslist + '\');" class="ui button">' +
+                                sharpnesslist + '\', \'' + j.episode + '\');" class="ui button">' +
                                 j.episode + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -437,14 +437,14 @@
         }
 
         /*清晰度*/
-        function sharpness(sharpnesslist) {
+        function sharpness(sharpnesslist, episode) {
             sharpnesslist = sharpnesslist.replace(/YongTeng/g, "\"")
             sharpnesslist = JSON.parse(sharpnesslist);
             let sharpnesslistbtn = "";
             for (i = 0; i < sharpnesslist.length; i++) {
                 let url = "https://apis.365kqzs.cn/api/resource_url?hash=" + sharpnesslist[i].hash;
                 sharpnesslistbtn += '<button onclick="play(\'' + url + '\',' + i +
-                    ');$(\'.lucknumber\').attr(\'hash\', \'' + sharpnesslist[i].hash +
+                    ', \'' + episode + '\');$(\'.lucknumber\').attr(\'hash\', \'' + sharpnesslist[i].hash +
                     '\');" class="ui basic button play' + i +
                     '">' + sharpnesslist[i].displayName + '</button><br><br>';
             }
@@ -467,7 +467,8 @@
         }
 
         /*播放*/
-        function play(url, playbtn) {
+        function play(url, playbtn, episode) {
+            console.log(episode);
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
