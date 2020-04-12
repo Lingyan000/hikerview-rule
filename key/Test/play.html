@@ -169,8 +169,7 @@
     <!-- <script src="https://cdn.jsdelivr.net/gh/Lingyan000/hikerview-rule/key/Test/js/play.min.js"></script> -->\
     <script>
         var integrityurl = window.location.href;
-        var integrityurl = integrityurl.split("?y?t?")[1];
-        console.log(integrityurl);
+        var integrityurl = integrityurl.split("#")[1];
         $(function () {
             $("#info").on("click", function () {
                 $(".modal").modal("hide");
@@ -265,7 +264,9 @@
                             sharpnesslist = JSON.stringify(j.data).replace(/\"/g, "YongTeng");
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="sharpness(\'' +
-                                sharpnesslist + '\');" class="ui button">' +
+                                sharpnesslist + '\');$("title").html(\'' + json.data.programme.title + '_' +
+                                j.episode + '-剧汇TV\');fy_bridge_app.setWebTitle(\'' + json.data.programme
+                                .title + '_' + j.episode + '-剧汇TV\'" class="ui button">' +
                                 j.episode + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
