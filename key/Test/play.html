@@ -168,6 +168,7 @@
     </div>
     <!-- <script src="https://cdn.jsdelivr.net/gh/Lingyan000/hikerview-rule/key/Test/js/play.min.js"></script> -->\
     <script>
+        var episode2 = 'ccc';
         var integrityurl = window.location.href;
         var integrityurl = integrityurl.split("#")[1];
         $(function () {
@@ -470,9 +471,9 @@
         function play(url, playbtn, episode) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
-            window.callbackplay = function (key, result, episode) {
+            window.callbackplay = function (key, result) {
                 try {
-                    console.log(episode);
+                    console.log(episode2);
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
