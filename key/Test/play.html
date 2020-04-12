@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="ui long modal plays">
-                        <div class="header">选集 </div>
+                        <div class="header" id="playEpisodes">选集 </div>
                         <div class="content">
                             <div class="ui grid playslist">
                             </div>
@@ -211,6 +211,23 @@
         }
 
         $(function () {
+            var playEpisodes;
+            let data = request('hiker://files/playEpisodes.json');
+            if (data != null && data.length > 0) {
+                try {
+                    playEpisodes = JSON.parse(data);
+                    for (let i = 0; i < playEpisodes.length; i++) {
+                        if (playEpisodes[i].url == integrityurl) {
+                            $('#playEpisodes').html('选集 🌸上次观看到' + playEpisodes[i].episode);
+                            return;
+                        }
+                    }
+                } catch (e) {
+                    console.log(e);
+                }
+
+            }
+            fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(playEpisodes));
             window.callback = function (key, result) {
                 $("#pageload").removeClass("active").addClass("disabled");
                 try {
@@ -234,7 +251,8 @@
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
                                 url +
-                                '\',' + i + ');" class="ui button play' + i + '">' +
+                                '\',' + i + ');episode = \'' + j.play_name + '\';" class="ui button play' +
+                                i + '">' +
                                 j.play_name + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -317,7 +335,7 @@
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="fy_bridge_app.playVideo(\'' +
                                 url +
-                                '\');" class="ui button play' + i + '">' +
+                                '\');episode = \'' + j.name + '\';" class="ui button play' + i + '">' +
                                 j.name + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -364,7 +382,8 @@
                                             '<div class="four wide mobile two wide computer column play' +
                                             i + '"><button onclick="sharpnessPost(\'' +
                                             j.playUrl + '\',' + j.source +
-                                            ');$(this).addClass(\'loading\');" class="ui button">' +
+                                            ');$(this).addClass(\'loading\');episode = \'' + (i + 1) +
+                                            '\';" class="ui button">' +
                                             (i + 1) + '</button></div>';
                                     }
                                     $(".playslist").html(playlistbtn);
@@ -473,47 +492,6 @@
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-                    var playEpisodes;
-                    let data = request('hiker://files/playEpisodes.json');
-                    if (data != null && data.length > 0) {
-                        try {
-                            console.log(data);
-                            playEpisodes = JSON.parse(data);
-                            console.log(playEpisodes);
-                            if (playEpisodes.length > 50) {
-                                playEpisodes.splice(0, playEpisodes.length - 50)
-                            }
-                            var isDuplication = false;
-                            for (let i = 0; i < playEpisodes.length; i++) {
-                                if (playEpisodes[i].url == integrityurl) {
-                                    isDuplication = true;
-                                    playEpisodes[i] = {
-                                        url: integrityurl,
-                                        episode: episode
-                                    };
-                                }
-                            }
-                            if (isDuplication == false)
-                                playEpisodes.push({
-                                    url: integrityurl,
-                                    episode: episode
-                                });
-                        } catch (e) {
-                            console.log(e);
-                            fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
-                            playEpisodes = [{
-                                url: integrityurl,
-                                episode: episode
-                            }];
-                        }
-
-                    } else {
-                        playEpisodes = [{
-                            url: integrityurl,
-                            episode: episode
-                        }];
-                    }
-                    fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(playEpisodes));
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
@@ -556,6 +534,47 @@
                             }
                         }
                     }
+                    var playEpisodes;
+                    let data = request('hiker://files/playEpisodes.json');
+                    if (data != null && data.length > 0) {
+                        try {
+                            console.log(data);
+                            playEpisodes = JSON.parse(data);
+                            console.log(playEpisodes);
+                            if (playEpisodes.length > 50) {
+                                playEpisodes.splice(0, playEpisodes.length - 50)
+                            }
+                            var isDuplication = false;
+                            for (let i = 0; i < playEpisodes.length; i++) {
+                                if (playEpisodes[i].url == integrityurl) {
+                                    isDuplication = true;
+                                    playEpisodes[i] = {
+                                        url: integrityurl,
+                                        episode: episode
+                                    };
+                                }
+                            }
+                            if (isDuplication == false)
+                                playEpisodes.push({
+                                    url: integrityurl,
+                                    episode: episode
+                                });
+                        } catch (e) {
+                            console.log(e);
+                            fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
+                            playEpisodes = [{
+                                url: integrityurl,
+                                episode: episode
+                            }];
+                        }
+
+                    } else {
+                        playEpisodes = [{
+                            url: integrityurl,
+                            episode: episode
+                        }];
+                    }
+                    fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(playEpisodes));
 
                     if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1) xiaoxiaoplay();
                     else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhuiplay();
