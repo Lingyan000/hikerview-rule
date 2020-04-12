@@ -473,45 +473,47 @@
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
+                    var playEpisodes;
                     let data = request('hiker://files/playEpisodes.json');
                     if (data != null && data.length > 0) {
                         try {
                             console.log(data);
-                            var json = JSON.parse(data);
-                            if (json.length > 50) {
-                                json.splice(0, json.length - 50)
+                            playEpisodes = JSON.parse(data);
+                            console.log(playEpisodes);
+                            if (playEpisodes.length > 50) {
+                                playEpisodes.splice(0, playEpisodes.length - 50)
                             }
                             var isDuplication = false;
-                            for (let i = 0; i < json.length; i++) {
-                                if (json[i].url == integrityurl) {
+                            for (let i = 0; i < playEpisodes.length; i++) {
+                                if (playEpisodes[i].url == integrityurl) {
                                     isDuplication = true;
-                                    json[i] = {
+                                    playEpisodes[i] = {
                                         url: integrityurl,
                                         episode: episode
                                     };
                                 }
                             }
-                            if (isDuplication = false)
-                                json.push({
+                            if (isDuplication == false)
+                            playEpisodes.push({
                                     url: integrityurl,
                                     episode: episode
                                 });
                         } catch (e) {
                             console.log(e);
                             fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
-                            json = [{
+                            playEpisodes = [{
                                 url: integrityurl,
                                 episode: episode
                             }];
                         }
 
                     } else {
-                        json = [{
+                        playEpisodes = [{
                             url: integrityurl,
                             episode: episode
                         }];
                     }
-                    fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(json));
+                    fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(playEpisodes));
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
