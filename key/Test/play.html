@@ -468,12 +468,11 @@
 
         /*播放*/
         function play(url, playbtn, episode) {
-            console.log(episode);
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
             window.callbackplay = function (key, result) {
                 try {
-
+                    console.log(episode);
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
