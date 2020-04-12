@@ -474,7 +474,7 @@
             window.callbackplay = function (key, result) {
                 try {
                     data = {integrityurl,episode};
-                    fy_bridge_app.writeFile('hiker://files/Config.json', data);
+                    fy_bridge_app.writeFile('hiker://files/Config.json', JSON.parse(data));
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
