@@ -470,7 +470,7 @@
         function play(url, playbtn, episode) {
             var playbtnclass = ".play" + playbtn;
             $(playbtnclass).addClass("loading");
-            window.callbackplay = function (key, result) {
+            window.callbackplay = function (key, result, episode) {
                 try {
                     console.log(episode);
                     /*小小影视的视频播放*/
