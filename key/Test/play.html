@@ -477,8 +477,7 @@
                     if (data != null && data.length > 0) {
                         try {
                             console.log(data);
-                            let json = [];
-                            eval('json = ' + data);
+                            var json = JSON.parse(data);
                             if (json.length > 50) {
                                 json.splice(0, json.length - 50)
                             }
