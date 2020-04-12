@@ -476,6 +476,7 @@
                     let data = request('hiker://files/playEpisodes.json');
                     if (data != null && data.length > 0) {
                         try {
+                            console.log("ok-1");
                             eval('let json = ' + data);
                             if (json.length > 50) {
                                 json.splice(0, json.length - 50)
