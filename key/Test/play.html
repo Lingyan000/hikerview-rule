@@ -569,7 +569,7 @@
                     for (let i = 0; i < playEpisodes.length; i++) {
                         if (playEpisodes[i].url == integrityurl) {
                             isDuplication = true;
-                            playEpisodes.remove(playEpisodes[i]);
+                            playEpisodes.splice(i, 1);
                             playEpisodes.push({
                                 title: $(document).attr("title"),
                                 url: integrityurl,
