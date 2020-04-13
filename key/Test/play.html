@@ -331,7 +331,8 @@
                             let j = playlist[i];
                             let url = j.url;
                             playlistbtn +=
-                                '<div class="four wide mobile two wide computer column"><button onclick="episode = \'' + j.name + '\';episodeSave();fy_bridge_app.playVideo(\'' +
+                                '<div class="four wide mobile two wide computer column"><button onclick="episode = \'' +
+                                j.name + '\';episodeSave();fy_bridge_app.playVideo(\'' +
                                 url +
                                 '\');" class="ui button play' + i + '">' +
                                 j.name + '</button></div>';
@@ -568,11 +569,12 @@
                     for (let i = 0; i < playEpisodes.length; i++) {
                         if (playEpisodes[i].url == integrityurl) {
                             isDuplication = true;
-                            playEpisodes[i] = {
+                            playEpisodes.remove(playEpisodes[i]);
+                            playEpisodes.push({
                                 title: $(document).attr("title"),
                                 url: integrityurl,
                                 episode: episode
-                            };
+                            });
                             break;
                         }
                     }
