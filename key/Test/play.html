@@ -569,6 +569,7 @@
                         if (playEpisodes[i].url == integrityurl) {
                             isDuplication = true;
                             playEpisodes[i] = {
+                                title: $(document).attr("title"),
                                 url: integrityurl,
                                 episode: episode
                             };
@@ -577,6 +578,7 @@
                     }
                     if (isDuplication == false)
                         playEpisodes.push({
+                            title: $(document).attr("title"),
                             url: integrityurl,
                             episode: episode
                         });
@@ -584,6 +586,7 @@
                     console.log(e);
                     fy_bridge_app.writeFile('hiker://files/playEpisodes.json', '');
                     playEpisodes = [{
+                        title: $(document).attr("title"),
                         url: integrityurl,
                         episode: episode
                     }];
@@ -591,6 +594,7 @@
 
             } else {
                 playEpisodes = [{
+                    title: $(document).attr("title"),
                     url: integrityurl,
                     episode: episode
                 }];
