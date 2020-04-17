@@ -494,6 +494,7 @@
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
+                        console.log(result);
                         if (json.retcode == 3)
                             url = json.data.httpurl_preview.replace("?300", "");
                         else
