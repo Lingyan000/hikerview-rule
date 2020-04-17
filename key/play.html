@@ -494,7 +494,9 @@
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
-                        console.log(url);
+                        let playUrl = url;
+                        let ikunXiaoxiao = JSON.parse(request(`http://renwfy.top/itv/video/play?path=${playUrl.split('reqplay/')[0].split('?')[0]}%2F${playUrl.split('playindex=')[1]}&source=xxiao&`));
+                        console.log(ikunXiaoxiao);
                         if (json.retcode == 3)
                             url = json.data.httpurl_preview.replace("?300", "");
                         else
@@ -502,8 +504,7 @@
                         if (url.indexOf('wssecret') > -1)
                             fy_bridge_app.playVideo(url);
                         else {
-                            console.log(url);
-                            // JSON.parse(request())
+                            
                         }
                     }
 
