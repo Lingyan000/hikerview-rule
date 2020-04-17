@@ -495,6 +495,7 @@
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
                         let playUrl = url;
+                        console.log(playUrl);
                         let ikunXiaoxiao = JSON.parse(request(`http://renwfy.top/itv/video/play?path=${playUrl.split('reqplay/')[0].split('?')[0]}%2F${playUrl.split('playindex=')[1]}&source=xxiao&`));
                         console.log(ikunXiaoxiao);
                         if (json.retcode == 3)
