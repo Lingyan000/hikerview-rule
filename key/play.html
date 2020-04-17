@@ -496,7 +496,9 @@
                         let json = JSON.parse(result);
                         let playUrl = url;
                         console.log(playUrl);
-                        let ikunXiaoxiao = JSON.parse(request(`http://renwfy.top/itv/video/play?path=${playUrl.split('reqplay/')[0].split('?')[0]}%2F${playUrl.split('playindex=')[1]}&source=xxiao&`));
+                        playUrl = `http://renwfy.top/itv/video/play?path=${playUrl.split('reqplay/')[0].split('?')[0]}%2F${playUrl.split('playindex=')[1]}&source=xxiao&`;
+                        console.log(playUrl);
+                        let ikunXiaoxiao = JSON.parse(request(playUrl));
                         console.log(ikunXiaoxiao);
                         if (json.retcode == 3)
                             url = json.data.httpurl_preview.replace("?300", "");
