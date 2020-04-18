@@ -500,7 +500,7 @@
                             url = json.data.httpurl_preview.replace("?300", "");
                         else
                             url = json.data.httpurl;
-                        if (url.indexOf('wssecret') > -1)
+                        if (url.indexOf('wssecret') == -1)
                             fy_bridge_app.playVideo(url);
                         else {
                             playUrl =
