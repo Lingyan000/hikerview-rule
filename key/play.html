@@ -495,8 +495,6 @@
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
                         let playUrl = url;
-                        playUrl =
-                            `http://renwfy.top/itv/video/play?path=${playUrl.split('reqplay/')[1].split('?')[0]}%2F${playUrl.split('playindex=')[1]}&source=xxiao&`;
                         if (json.retcode == 3)
                             url = json.data.httpurl_preview.replace("?300", "");
                         else
@@ -504,6 +502,8 @@
                         if (url.indexOf('wssecret') > -1)
                             fy_bridge_app.playVideo(url);
                         else {
+                            playUrl =
+                                `http://renwfy.top/itv/video/play?path=${playUrl.split('reqplay/')[1].split('?')[0]}%2F${playUrl.split('playindex=')[1]}&source=xxiao&`;
                             let ikuXiaoxiao = JSON.parse(request(playUrl));
                             fy_bridge_app.playVideo(ikuXiaoxiao.data.url);
                         }
