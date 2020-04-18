@@ -496,12 +496,11 @@
                         let json = JSON.parse(result);
                         var playUrl = url;
                         let playUrl2;
-                        console.log(playUrl);
                         if (json.retcode == 3)
                             playUrl2 = json.data.httpurl_preview.replace("?300", "");
                         else
                             playUrl2 = json.data.httpurl;
-                        if (playUrl2.indexOf('wssecret') == -1)
+                        if (playUrl2.indexOf('wssecret') > -1)
                             fy_bridge_app.playVideo(playUrl2);
                         else {
                             playUrl =
