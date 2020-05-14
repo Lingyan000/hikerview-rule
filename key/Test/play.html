@@ -330,12 +330,11 @@
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
                             let url = j.url;
-                            let nexturl;
+                            let nexturl,nextname;
                             let name = j.name;
-                            let nextname;
                             if ((i + 1) == playlist.length) {
                                 nexturl = url;
-                                nextname = namel
+                                nextname = name;
                             } else {
                                 nexturl = playlist[i + 1].url;
                                 nextname = playlist[i + 1].name;
