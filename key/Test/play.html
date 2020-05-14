@@ -329,12 +329,12 @@
                         let playlistbtn = "";
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
-                            let url = j.url;
+                            let url2 = j.url;
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="episode = \'' +
                                 j.name + '\';episodeSave();" class="ui button play' + i + '">' +
                                 j.name + '</button></div>';
-                                fy_bridge_app.playVideos([{title: '视频1',url:  url,use: true},{title: '视频2',url: playlist[i+1].url ,use: false}]);
+                                fy_bridge_app.playVideos([{title: '视频1',url: url2,use: true},{title: '视频2',url: playlist[i+1].url ,use: false}]);
                         }
                         $(".playslist").html(playlistbtn);
                     }
