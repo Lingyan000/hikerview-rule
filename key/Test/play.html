@@ -166,7 +166,7 @@
             </div>
         </div>
     </div>
-    <!-- <script src="https://cdn.jsdelivr.net/gh/Lingyan000/hikerview-rule/key/Test/js/play.min.js"></script> -->\
+    <!-- <script src="https://cdn.jsdelivr.net/gh/Lingyan000/hikerview-rule/key/Test/js/play.min.js"></script> -->
     <script>
         var integrityurl = window.location.href;
         var integrityurl = integrityurl.split("#")[1];
@@ -332,9 +332,7 @@
                             let url = j.url;
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="episode = \'' +
-                                j.name + '\';episodeSave();fy_bridge_app.playVideo(\'' +
-                                url +
-                                '\');" class="ui button play' + i + '">' +
+                                j.name + '\';episodeSave();fy_bridge_app.playVodeos([{title: \'视频1\',url: \''+ url +'\',use: true},{title: \'视频2\',url: \''+ playlist[i+1].url +'\',use: flase}])" class="ui button play' + i + '">' +
                                 j.name + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
@@ -494,11 +492,20 @@
                     /*小小影视的视频播放*/
                     function xiaoxiaoplay() {
                         let json = JSON.parse(result);
+                        var playUrl = url;
+                        let playUrl2;
                         if (json.retcode == 3)
-                            url = json.data.httpurl_preview.replace("?300", "");
+                            playUrl2 = json.data.httpurl_preview.replace("?300", "");
                         else
-                            url = json.data.httpurl;
-                        fy_bridge_app.playVideo(url);
+                            playUrl2 = json.data.httpurl;
+                        if (playUrl2.indexOf('wssecret') > -1)
+                            fy_bridge_app.playVideo(playUrl2);
+                        else {
+                            playUrl =
+                                `http://renwfy.top/itv/video/play?path=${playUrl.split('reqplay/')[1].split('?')[0]}%2F${playUrl.split('playindex=')[1]}&source=xxiao&`;
+                            let ikuXiaoxiao = JSON.parse(request(playUrl));
+                            fy_bridge_app.playVideo(ikuXiaoxiao.data.url);
+                        }
                     }
 
                     /*剧汇TV的视频播放*/
@@ -602,6 +609,15 @@
                 }];
             }
             fy_bridge_app.writeFile('hiker://files/playEpisodes.json', JSON.stringify(playEpisodes));
+        }
+
+        function isExitsFunction(funcName) {
+            try {
+                if (typeof (eval(funcName)) == "function") {
+                    return true;
+                }
+            } catch (e) {}
+            return false;
         }
     </script>
 </body>
