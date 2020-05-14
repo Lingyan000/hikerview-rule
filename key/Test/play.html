@@ -335,6 +335,7 @@
                             let nextname = playlist[i + 1].name;
                             playlistbtn +=
                                 `<div class="four wide mobile two wide computer column"><button onclick="episode = '${name}';episodeSave();playVideos('${url}', '${nexturl}', '${name}', '${nextname}');" class="ui button play${i}">${name}</button></div>`;
+                            console.log(playlistbtn);
                         }
                         $(".playslist").html(playlistbtn);
                     }
