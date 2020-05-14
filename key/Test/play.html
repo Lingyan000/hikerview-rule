@@ -333,7 +333,7 @@
                             let playVideos =  `[{title: '视频1',url: ${url},use: true},{title: '视频2',url: ${playlist[i+1].url} ,use: false}]`
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="episode = \'' +
-                                j.name + '\';episodeSave();fy_bridge_app.playVideos('+ playVideos +');" class="ui button play' + i + '">' +
+                                j.name + '\';episodeSave();fy_bridge_app.playVideos(\''+ playVideos +'\');" class="ui button play' + i + '">' +
                                 j.name + '</button></div>';
                         }
                         $(".playslist").html(playlistbtn);
