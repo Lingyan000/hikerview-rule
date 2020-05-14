@@ -332,7 +332,7 @@
                             let url = j.url;
                             let nexturl = playlist[i + 1].url;
                             let name = j.name;
-                            let nexturl = playlist[i + 1].name;
+                            let nextname = playlist[i + 1].name;
                             playlistbtn +=
                                 `<div class="four wide mobile two wide computer column"><button onclick="episode = '${name}'';episodeSave();playVideos('${url}', '${nexturl}'， '${name}', '${nextname}');" class="ui button play${i}">${name}</button></div>`;
                         }
