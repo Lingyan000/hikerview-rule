@@ -330,11 +330,11 @@
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
                             let url = j.url;
-                            let playVideos =  `[{title: '视频1',url: ${url},use: true},{title: '视频2',url: ${playlist[i+1].url} ,use: false}]`
+                            let nexturl = playlist[i + 1].url;
+                            let name = j.name;
+                            let nexturl = playlist[i + 1].name;
                             playlistbtn +=
-                                '<div class="four wide mobile two wide computer column"><button onclick="episode = \'' +
-                                j.name + '\';episodeSave();fy_bridge_app.playVideos(\''+ playVideos +'\');" class="ui button play' + i + '">' +
-                                j.name + '</button></div>';
+                                `<div class="four wide mobile two wide computer column"><button onclick="episode = '${name}'';episodeSave();playVideos('${url}', '${nexturl}'， '${name}', '${nextname}');" class="ui button play${i}">${name}</button></div>`;
                         }
                         $(".playslist").html(playlistbtn);
                     }
@@ -619,6 +619,11 @@
                 }
             } catch (e) {}
             return false;
+        }
+
+        function playVideos(url, nexturl, name, nextname) {
+            let playVideos =  `[{title: ${name},url: ${url},use: true},{title: ${nextname},url: ${nexturl} ,use: false}]`;
+            fy_bridge_app.playVideos(playVideos);
         }
     </script>
 </body>
