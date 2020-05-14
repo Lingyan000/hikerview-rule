@@ -629,10 +629,9 @@
         }
 
         function playVideos(url, nexturl, name, nextname) {
-            let playVideos2 =
-            `[{title: ${name},url: ${url},use: true},{title: ${nextname},url: ${nexturl} ,use: false}]`;
-            console.log(playVideo2);
-            // fy_bridge_app.playVideos(playVideos);
+            let playVideos =
+            `[{title: '${name}',url: '${url}',use: true},{title: '${nextname}',url: '${nexturl}' ,use: false}]`;
+            fy_bridge_app.playVideos(playVideos);
         }
     </script>
 </body>
