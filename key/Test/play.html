@@ -330,7 +330,7 @@
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
                             let url = j.url;
-                            let nexturl,nextname;
+                            let nexturl, nextname;
                             let name = j.name;
                             if ((i + 1) == playlist.length) {
                                 nexturl = url;
@@ -629,9 +629,13 @@
         }
 
         function playVideos(url, nexturl, name, nextname) {
-            let playVideos =
-            `[{title: '${name}',url: '${url}',use: true},{title: '${nextname}',url: '${nexturl}' ,use: false}]`;
-            fy_bridge_app.playVideos(playVideos);
+            if (isExitsFunction("fy_bridge_app.playVideos") && url != nexturl) {
+                let playVideos =
+                    `[{title: '${name}',url: '${url}',use: true},{title: '${nextname}',url: '${nexturl}' ,use: false}]`;
+                fy_bridge_app.playVideos(playVideos);
+            } else {
+                fy_bridge_app.playVideo(url);
+            }
         }
     </script>
 </body>
