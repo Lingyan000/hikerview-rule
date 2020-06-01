@@ -382,7 +382,8 @@
                         let playlistbtn = "";
                         for (i = 0; i < playlist.length; i++) {
                             let j = playlist[i];
-                            let url = "https://www.mengmiandaxia.com/api/app/play/" + integrityurl.split("view/")[1].split('/')[0] + "/" + j.id;
+                            let url = "https://www.mengmiandaxia.com/api/app/play/" + integrityurl.split(
+                                "view/")[1].split('/')[0] + "/" + j.id;
                             playlistbtn +=
                                 '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
                                 url +
@@ -589,6 +590,13 @@
                             }
                         }
                     }
+
+                    /*蒙面大侠的视频播放*/
+                    function xiaoxiaoplay() {
+                        let json = JSON.parse(result);
+                        fy_bridge_app.playVideo(json.url);
+                    }
+
                     episodeSave();
 
                     if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1 || integrityurl.indexOf(
@@ -608,7 +616,17 @@
                     },
                     method: 'GET'
                 }, callbackplay);
-            else
+            else if (integrityurl.indexOf("www.mengmiandaxia.com/api/app/view") != -1) {
+                let MTime = Math.round(new Date() / 1000).toString();
+                requestAsync(url, {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "MTime": MTime,
+                        "MToken": md5('meng#mian#da#xia#.com' + MTime).toString()
+                    },
+                    method: 'GET'
+                }, callback);
+            } else
                 requestAsync(url, callbackplay);
         }
 
