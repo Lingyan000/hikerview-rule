@@ -365,6 +365,32 @@
                         $(".playslist").html(playlistbtn);
                     }
 
+                    /*蒙面大侠的布局添加*/
+                    function xiaoxiao() {
+                        let json = JSON.parse(result);
+                        $("title").html(json.data.name + '-蒙面大侠');
+                        fy_bridge_app.setWebTitle(json.data.name + "-蒙面大侠");
+                        $(".cover-url").attr("src", json.data.cover);
+                        $(".title").html(json.data.name);
+                        $(".desc").html(json.data.area + "•" + json.data.year +
+                            "•" +
+                            json.data.title);
+                        $(".info-text").html(json.data.describe);
+                        let playlist = json.data.list[0].value;
+                        let playlistbtn = "";
+                        for (i = 0; i < playlist.length; i++) {
+                            let j = playlist[i];
+                            let url = "https://www.mengmiandaxia.com/api/app/play/" + integrityurl.split("view/")[1].split('/')[0] + "/" + j.id;
+                            playlistbtn +=
+                                '<div class="four wide mobile two wide computer column"><button onclick="play(\'' +
+                                url +
+                                '\',' + i + ');episode = \'' + j.title + '\';" class="ui button play' +
+                                i + '">' +
+                                j.title + '</button></div>';
+                        }
+                        $(".playslist").html(playlistbtn);
+                    }
+
                     /*卧龙集数*/
                     function wolongEpisode(id) {
                         requestAsync("http://wl.tgmmvip.com/wolong/gae/video/plays?videoId=" + id,
@@ -398,11 +424,14 @@
                             });
                     }
 
-                    if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1 || integrityurl.indexOf("xiaoxiaoimg.com/vod/show") != -1) xiaoxiao();
+                    if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1 || integrityurl.indexOf(
+                            "xiaoxiaoimg.com/vod/show") != -1) xiaoxiao();
                     else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhui();
-                    else if (integrityurl.indexOf("api.tgmmvip.com/wolong/gae/video/detail") != -1) wolong();
+                    else if (integrityurl.indexOf("api.tgmmvip.com/wolong/gae/video/detail") != -1)
+                        wolong();
                     else if (integrityurl.indexOf("api.chunqiu.tv/api/vod/detail.html") != -1) chunqiu();
                     else if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1) nangua();
+                    else if (integrityurl.indexOf("www.mengmiandaxia.com/api/app/view") != -1) mengmian();
                 } catch (e) {
                     console.log(e);
                 }
@@ -426,7 +455,18 @@
                 }, callback);
             if (integrityurl.indexOf("47.107.130.93:443/play/ng.php?id=") != -1)
                 requestAsync(integrityurl.split("yongteng")[0], callback);
-            else
+            if (integrityurl.indexOf("www.mengmiandaxia.com/api/app/view") != -1) {
+                eval(getCryptoJS());
+                let MTime = Math.round(new Date() / 1000).toString();
+                requestAsync(integrityurl, {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "MTime": MTime,
+                        "MToken": CryptoJS.MD5('meng#mian#da#xia#.com' + MTime).toString()
+                    },
+                    method: 'GET'
+                }, callback);
+            } else
                 requestAsync(integrityurl, callback);
         });
 
@@ -550,7 +590,8 @@
                     }
                     episodeSave();
 
-                    if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1 || integrityurl.indexOf("xiaoxiaoimg.com/vod/show") != -1) xiaoxiaoplay();
+                    if (integrityurl.indexOf("xiaoxiaoapps.com/vod/show") != -1 || integrityurl.indexOf(
+                            "xiaoxiaoimg.com/vod/show") != -1) xiaoxiaoplay();
                     else if (integrityurl.indexOf("apis.365kqzs.cn/api/programmes") != -1) juhuiplay();
                 } catch (e) {
                     alert(e);
