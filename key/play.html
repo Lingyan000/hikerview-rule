@@ -593,7 +593,10 @@
                     /*蒙面大侠的视频播放*/
                     function mengmianplay() {
                         let json = JSON.parse(result);
-                        fy_bridge_app.playVideo(json.url);
+                        if (json.ftn5 != undefined)
+                            fy_bridge_app.playVideo(json.url + ';{Coolie@FTN5K=' + json.ftn5 + '}');
+                        else
+                            fy_bridge_app.playVideo(json.url);
                     }
 
                     episodeSave();
