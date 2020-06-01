@@ -371,7 +371,6 @@
                         let json = JSON.parse(result);
                         $("title").html(json.data.name + '-蒙面大侠');
                         fy_bridge_app.setWebTitle(json.data.name + "-蒙面大侠");
-                        $(".cover-url").attr("src", json.data.cover);
                         $(".title").html(json.data.name);
                         $(".desc").html(json.data.area + "•" + json.data.year +
                             "•" +
