@@ -368,6 +368,13 @@
 
                     /*蒙面大侠的布局添加*/
                     function mengmian() {
+                        request("https://www.mengmiandaxia.com/api/statistic", {
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded"
+                            },
+                            body: "ssid=94C24A0BC4FB8D342F0DB892A5D39B4A&brand=Android&info=android_id&ver=2.21",
+                            method: "POST"
+                        });
                         let json = JSON.parse(result);
                         $("title").html(json.data.name + '-蒙面大侠');
                         fy_bridge_app.setWebTitle(json.data.name + "-蒙面大侠");
