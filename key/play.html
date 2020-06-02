@@ -372,7 +372,7 @@
                             headers: {
                                 "Content-Type": "application/x-www-form-urlencoded"
                             },
-                            body: "ssid=94C24A0BC4FB8D342F0DB892A5D39B4A&brand=Android&info=android_id&ver=2.21",
+                            body: "ssid=" + md5("519b12682b78f881").toUpperCase() + "&brand=Android&info=519b12682b78f881&ver=2.21",
                             method: "POST"
                         });
                         let json = JSON.parse(result);
