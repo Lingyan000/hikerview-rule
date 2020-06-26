@@ -402,7 +402,7 @@
 
                     /*卧龙集数*/
                     function wolongEpisode(id) {
-                        requestAsync("http://wl.tgmmvip.com/wolong/gae/video/plays?videoId=" + id,
+                        requestAsync("http://app.tgmmvip.com/wolong/gae/video/plays?videoId=" + id,
                             function (key, result) {
                                 try {
                                     let json = JSON.parse(result);
@@ -480,7 +480,7 @@
 
         /*POST请求获取清晰度与播放链接（主要用于卧龙影视）*/
         function sharpnessPost(playurl, source) {
-            requestAsync('http://wl.tgmmvip.com/wolong/parse/video/play', {
+            requestAsync('http://app.tgmmvip.com/wolong/parse/video/play', {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
